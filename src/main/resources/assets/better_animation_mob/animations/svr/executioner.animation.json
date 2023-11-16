@@ -622,7 +622,7 @@
 		"raider.attack": {
 			"animation_length": 2.83333,
 			"bones": {
-				"head": {
+				"Head": {
 					"rotation": {
 						"0.0": {
 							"vector": [-7.17379, -0.00706, 2.4786]

@@ -297,7 +297,7 @@
 						"vector": [0, "math.clamp(-math.cos(query.anim_time*180)*2,0,3)", 0]
 					}
 				},
-				"head": {
+				"Head": {
 					"position": {
 						"vector": [0, -0.5, 0]
 					}
@@ -425,7 +425,7 @@
 						"vector": [0, "math.clamp(-math.cos(query.anim_time*180)*2,0,3)", 0]
 					}
 				},
-				"head": {
+				"Head": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 2.5]
@@ -620,7 +620,7 @@
 						}
 					}
 				},
-				"head": {
+				"Head": {
 					"rotation": {
 						"0.0": {
 							"vector": [-5, 0, 0]

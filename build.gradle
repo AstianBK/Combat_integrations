@@ -17,7 +17,6 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'maven-publish'
-apply plugin: 'eclipse'
 
 mixin{
     add sourceSets.main, 'better_animation_mob.refmap.json'
@@ -25,7 +24,7 @@ mixin{
 
 
 version = '1.19.2'
-group = 'net.sangrebk.better_animation_mob'
+group = 'com.TBK.better_animation_mob'
 archivesBaseName = 'better_animation_mob'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -44,6 +43,11 @@ minecraft {
 
             property 'forge.enabledGameTestNamespaces', 'better_animation_mob'
 
+            property "mixin.env.remapRefMap", "true"
+
+            arg "-mixin.config=better_animation_mob.mixins.json"
+
+
             mods {
                 better_animation_mob {
                     source sourceSets.main
@@ -59,6 +63,11 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             property 'forge.enabledGameTestNamespaces', 'better_animation_mob'
+
+            property "mixin.env.remapRefMap", "true"
+
+            arg "-mixin.config=better_animation_mob.mixins.json"
+
 
             mods {
                 better_animation_mob {
@@ -105,9 +114,6 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    maven{
-        url = "https://maven.resourcefulbees.com/repository/maven-public/"
-    }
     maven {
         url "https://cursemaven.com"
         content {
@@ -121,13 +127,11 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.19.2-43.3.0'
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19:3.1.40')
-    implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-1.19.2:1.1.24")
     implementation fg.deobf("curse.maven:savage-and-ravage-381736:4429231")
     implementation fg.deobf("curse.maven:blueprint-382216:4442628")
 
 }
 
-// Example for how to get properties into the manifest for reading at runtime.
 jar {
     manifest {
         attributes([

@@ -1,6 +1,5 @@
 package com.TBK.better_animation_mob.client.layers;
 
-import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
 import com.google.common.collect.Maps;
 import com.mojang.authlib.GameProfile;
@@ -243,7 +242,7 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
                 }
                 else if (armorStack.getItem() instanceof ArmorItem) {
                     prepModelPartForRender(poseStack,bone,modelPart);
-                    renderVanillaArmorPiece(poseStack, animatable, bone, slot, armorStack, modelPart, bufferSource, partialTick, getPackedOverlay(animatable,partialTick), packedOverlay);
+                    renderVanillaArmorPiece(poseStack, animatable, bone, slot, armorStack, modelPart, bufferSource, partialTick, packedLight, packedOverlay);
                 }
 
                 poseStack.popPose();

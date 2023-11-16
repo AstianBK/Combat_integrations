@@ -3,7 +3,6 @@ package com.TBK.better_animation_mob.client.renderers;
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.layers.ArmorGeckoLayer;
 import com.TBK.better_animation_mob.client.layers.DrownedGeckoLayer;
-import com.TBK.better_animation_mob.client.layers.ItemStackGeckoLayer;
 import com.TBK.better_animation_mob.client.models.ReplacedZombieModel;
 import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedZombie;
 import com.mojang.blaze3d.vertex.PoseStack;

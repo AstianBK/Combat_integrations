@@ -5,8 +5,8 @@ import com.TBK.better_animation_mob.client.renderers.ReplacedPillagerRenderer;
 import com.TBK.better_animation_mob.client.renderers.ReplacedSkeletonRenderer;
 import com.TBK.better_animation_mob.client.renderers.ReplacedZombieRenderer;
 import com.TBK.better_animation_mob.client.util.Compati;
-import com.TBK.better_animation_mob.server.modbusevent.register.BkEntityTypes;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEffect;
+import com.TBK.better_animation_mob.server.modbusevent.register.BkEntityTypes;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkItems;
 import com.teamabnormals.savage_and_ravage.core.registry.SREntityTypes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -43,7 +43,7 @@ public class BetterAnimationMob {
         //EntityRenderers.register(EntityType.HUSK, ReplacedZombieRenderer::new);
         EntityRenderers.register(EntityType.SKELETON, ReplacedSkeletonRenderer::new);
         EntityRenderers.register(EntityType.STRAY, ReplacedSkeletonRenderer::new);
-        EntityRenderers.register(EntityType.VINDICATOR,ReplacedExecutionerRenderer::new);
+        EntityRenderers.register(EntityType.VINDICATOR, ReplacedExecutionerRenderer::new);
         EntityRenderers.register(EntityType.PILLAGER, ReplacedPillagerRenderer::new);
         if(this.isLoaded(Compati.SAVAGE_AND_RAVEGER)){
             EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);

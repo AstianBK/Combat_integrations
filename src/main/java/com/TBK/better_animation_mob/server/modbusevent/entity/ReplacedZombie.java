@@ -39,7 +39,7 @@ public class ReplacedZombie extends ReplacedEntity {
                 state.getController().setAnimation(builder.loop( zombie.isAggressive() ? "zombie.move2" : "zombie.move"));
             }else if(zombie.getAttackAnim(state.getPartialTick())>0) {
                 state.getController().setAnimationSpeed(3.0F);
-                state.getController().setAnimation(builder.playOnce("zombie.attack"+((ICombos) zombie).getCombo()));
+                state.getController().setAnimation(builder.playOnce(zombie instanceof ICombos ?( "zombie.attack"+((ICombos) zombie).getCombo()): "zombie.attack1"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.addAnimation("zombie.idle", ILoopType.EDefaultLoopTypes.LOOP));

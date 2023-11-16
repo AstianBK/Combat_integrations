@@ -1,7 +1,6 @@
 package com.TBK.better_animation_mob.client.models;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
-
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.IAnimatable;
 

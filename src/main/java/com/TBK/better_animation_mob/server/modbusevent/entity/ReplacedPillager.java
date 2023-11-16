@@ -21,13 +21,16 @@ public class ReplacedPillager extends ReplacedEntity {
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            boolean isCharge = raider.getArmPose().equals(AbstractIllager.IllagerArmPose.CROSSBOW_HOLD);
-            if (isMove && raider.getAttackAnim(state.getPartialTick()) == 0) {
+            if(raider.getArmPose().equals(AbstractIllager.IllagerArmPose.CROSSBOW_CHARGE)) {
+                state.getController().setAnimationSpeed(0.5F);
+                builder.playOnce("pillager.recharge");
+            }
+            if (isMove) {
+                state.getController().setAnimationSpeed(3.0F);
                 state.getController().setAnimation(builder.addAnimation("pillager.move", ILoopType.EDefaultLoopTypes.LOOP));
-            }else if(raider.getArmPose().equals(AbstractIllager.IllagerArmPose.CROSSBOW_CHARGE)) {
-                state.getController().setAnimation(builder.playOnce("pillager.attack"));
-            }else {
-                state.getController().setAnimation(builder.addAnimation(isCharge ? "pillager.idle2" :  "pillager.idle1" , ILoopType.EDefaultLoopTypes.LOOP));
+            } else {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.addAnimation(raider.isAggressive() ? "pillager.idle2" :  "pillager.idle" , ILoopType.EDefaultLoopTypes.LOOP));
             }
             return PlayState.CONTINUE;
         }));
