@@ -55,4 +55,5 @@ public class ReplacedZombie extends ReplacedEntity {
         if (!(entity instanceof Zombie enderman)) return null;
         return enderman;
     }
+
 }
