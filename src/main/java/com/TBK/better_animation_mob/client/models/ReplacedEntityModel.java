@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
+import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class ReplacedEntityModel <T extends IAnimatable> extends AnimatedGeoModel<T> {
+public abstract class ReplacedEntityModel <T extends IAnimatable> extends AnimatedGeoModel<T> {
 
     private Supplier<LivingEntity> currentEntity;
 
@@ -55,6 +56,8 @@ public class ReplacedEntityModel <T extends IAnimatable> extends AnimatedGeoMode
 
         EntityModelData data = (EntityModelData) event.getExtraDataOfType(EntityModelData.class).get(0);
         if (data!=null){
+            boolean isSitting=data.isSitting;
+            boolean isYoung=data.isChild;
             IBone head = this.getBone("Head");
             if(head!=null){
                 head.setRotationX(data.headPitch * ((float) Math.PI / 180F));
@@ -62,4 +65,8 @@ public class ReplacedEntityModel <T extends IAnimatable> extends AnimatedGeoMode
             }
         }
     }
+
+    protected abstract Iterable<GeoBone> headParts();
+
+    protected abstract Iterable<GeoBone> bodyParts();
 }

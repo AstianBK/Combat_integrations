@@ -18,7 +18,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedIllagers extends ReplacedEntity {
+public class ReplacedIllagers extends ReplacedVindicator {
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {

@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"vindicator.idle": {
+		"raider.idle": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
@@ -149,7 +149,7 @@
 				}
 			}
 		},
-		"vindicator.move": {
+		"raider.move": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
@@ -304,7 +304,7 @@
 				}
 			}
 		},
-		"vindicator.move2": {
+		"raider.move2": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
@@ -449,7 +449,7 @@
 				}
 			}
 		},
-		"vindicator.attack": {
+		"raider.attack": {
 			"animation_length": 4.25,
 			"bones": {
 				"main": {
@@ -663,7 +663,7 @@
 				}
 			}
 		},
-		"vindicator.sit": {
+		"raider.sit": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {

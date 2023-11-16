@@ -63,6 +63,9 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
     public Matrix4f getDispatchedMat(){
         return this.dispatchedMat;
     }
+    public float getCurrentPartialTicks(){
+        return this.currentPartialTicks;
+    }
 
     @Override
     public void renderRecursively(GeoBone bone, PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
@@ -89,12 +92,12 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
                 Matrix4f localMatrix = RenderUtils.invertAndMultiplyMatrices(poseState, this.dispatchedMat);
 
                 bone.setModelSpaceXform(RenderUtils.invertAndMultiplyMatrices(poseState, this.renderEarlyMat));
-                localMatrix.translate(new Vector3f(getRenderOffset((Entity)this.animatable, 1)));
+                localMatrix.translate(new Vector3f(getRenderOffset((Entity)this.currentEntity, 1)));
                 bone.setLocalSpaceXform(localMatrix);
 
                 Matrix4f worldState = localMatrix.copy();
 
-                worldState.translate(new Vector3f(((Entity)this.animatable).position()));
+                worldState.translate(new Vector3f(((Entity)this.currentEntity).position()));
                 bone.setWorldSpaceXform(worldState);
             }
 

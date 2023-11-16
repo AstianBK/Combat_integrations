@@ -1,9 +1,9 @@
-package com.TBK.better_animation_mob.client.renderers;
+package com.TBK.better_animation_mob.client.renderers.zombie;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.layers.ArmorGeckoLayer;
-import com.TBK.better_animation_mob.client.layers.DrownedGeckoLayer;
-import com.TBK.better_animation_mob.client.models.ReplacedZombieModel;
+import com.TBK.better_animation_mob.client.models.zombie.ReplacedZombieModel;
+import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
 import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedZombie;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -23,11 +23,13 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 
 @OnlyIn(Dist.CLIENT)
 public class ReplacedZombieRenderer<T extends Zombie ,P extends ReplacedZombie> extends ExtendedGeoReplacedEntityRenderer<T,P> {
-    public ReplacedZombieRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new ReplacedZombieModel(), (P) new ReplacedZombie());
+    public ReplacedZombieRenderer(EntityRendererProvider.Context renderManager){
+        this(renderManager,new ResourceLocation("textures/entity/zombie/zombie.png"),new ReplacedZombieModel());
+    }
 
-        this.addLayer(new DrownedGeckoLayer<>(this));
-        this.addLayer(new ArmorGeckoLayer<>(this,this.getGeoModelProvider(),new ResourceLocation("textures/entity/zombie/zombie.png"),new ResourceLocation(BetterAnimationMob.MODID,"geo/zombie.geo.json")){
+    public ReplacedZombieRenderer(EntityRendererProvider.Context renderManager,ResourceLocation texture,ReplacedZombieModel model) {
+        super(renderManager, model, (P) new ReplacedZombie());
+        this.addLayer(new ArmorGeckoLayer<>(this,getGeoModelProvider(),texture,new ResourceLocation(BetterAnimationMob.MODID,"geo/zombie.geo.json")){
             @NotNull
             @Override
             protected ModelPart getModelPartForBone(GeoBone bone, EquipmentSlot slot, ItemStack stack, LivingEntity animatable, HumanoidModel armorModel) {
@@ -69,6 +71,7 @@ public class ReplacedZombieRenderer<T extends Zombie ,P extends ReplacedZombie> 
                 return slot;
             }
         });
+        this.shadowRadius=0.5F;
     }
 
     @Override

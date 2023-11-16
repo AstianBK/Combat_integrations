@@ -13,23 +13,30 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedPillager extends ReplacedEntity {
+public class ReplacedVindicator extends ReplacedEntity {
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
             AbstractIllager raider = getRaiderFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
-            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            boolean isRecharged=raider.getArmPose().equals(AbstractIllager.IllagerArmPose.CROSSBOW_CHARGE);
-            if(isRecharged) {
-                builder.playOnce("pillager.recharge");
+            if(raider.isPassenger()){
+                builder.addAnimation("raider.sit");
             }
-            state.getController().setAnimationSpeed(!isRecharged ? 1.0F : 0.5F);
-            if (isMove) {
-                state.getController().setAnimation(builder.addAnimation("pillager.move", ILoopType.EDefaultLoopTypes.LOOP));
-            } else {
-                state.getController().setAnimation(builder.addAnimation(raider.isAggressive() ? "pillager.idle2" :  "pillager.idle" , ILoopType.EDefaultLoopTypes.LOOP));
+            if(raider.getArmPose().equals(AbstractIllager.IllagerArmPose.ATTACKING) && raider.getAttackAnim(state.getPartialTick()) == 0){
+                builder.addAnimation("raider.move2");
+            }
+            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            if (isMove && raider.getAttackAnim(state.getPartialTick()) == 0) {
+                state.getController().setAnimationSpeed(raider.isAggressive()?3.0F : 1.0F);
+                state.getController().setAnimation(builder.addAnimation("raider.move", ILoopType.EDefaultLoopTypes.LOOP));
+            }else if(raider.getAttackAnim(state.getPartialTick())>0) {
+                state.getController().setAnimationSpeed(8.0F);
+                state.getController().setAnimation(builder.playOnce("raider.attack"));
+            }else {
+                state.getController().clearAnimationCache();
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.addAnimation("raider.idle", ILoopType.EDefaultLoopTypes.LOOP));
             }
             return PlayState.CONTINUE;
         }));
@@ -37,7 +44,7 @@ public class ReplacedPillager extends ReplacedEntity {
 
 
     @Nullable
-    private AbstractIllager getRaiderFromState(AnimationEvent<ReplacedPillager> state) {
+    private AbstractIllager getRaiderFromState(AnimationEvent<ReplacedVindicator> state) {
         List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
         if (list.isEmpty()) return null;
         Entity entity = list.get(0);

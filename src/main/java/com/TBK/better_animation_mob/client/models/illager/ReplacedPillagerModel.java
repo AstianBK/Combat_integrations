@@ -1,10 +1,12 @@
-package com.TBK.better_animation_mob.client.models;
+package com.TBK.better_animation_mob.client.models.illager;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
+import com.TBK.better_animation_mob.client.models.ReplacedEntityModel;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.geo.render.built.GeoBone;
 
-public class ReplacedPillagerModel <T extends IAnimatable> extends ReplacedEntityModel<T>{
+public class ReplacedPillagerModel <T extends IAnimatable> extends ReplacedEntityModel<T> {
     @Override
     public ResourceLocation getModelResource(T object) {
         return new ResourceLocation(BetterAnimationMob.MODID,"geo/pillager.geo.json");
@@ -19,5 +21,15 @@ public class ReplacedPillagerModel <T extends IAnimatable> extends ReplacedEntit
     @Override
     public ResourceLocation getAnimationResource(T animatable) {
         return new ResourceLocation(BetterAnimationMob.MODID, "animations/pillager.animation.json");
+    }
+
+    @Override
+    protected Iterable<GeoBone> headParts() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<GeoBone> bodyParts() {
+        return null;
     }
 }

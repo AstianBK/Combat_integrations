@@ -77,19 +77,17 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
 
     @Override
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, T entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        Color renderColor = Color.WHITE;
-        renderCopyModel(this.model,this.textureBase,matrixStackIn,bufferIn,packedLightIn,entityLivingBaseIn,partialTicks,renderColor.getRed() / 255f, renderColor.getGreen() / 255f,
-                renderColor.getBlue() / 255f);
+        renderCopyModel(this.model,this.textureBase,matrixStackIn,bufferIn,packedLightIn,entityLivingBaseIn,partialTicks,1, 1,
+                1);
     }
 
     @Override
     protected void renderCopyModel(GeoModelProvider<T> modelProvider, ResourceLocation texture, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T animatable, float partialTick, float red, float green, float blue) {
-        MultiBufferSource bufferSource1 = getRenderer().getCurrentRTB();
         RenderType renderType = getRenderType(texture);
-        VertexConsumer glintBuffer = bufferSource1.getBuffer(renderType);
-        preRender(poseStack,animatable,modelProvider,renderType,bufferSource1,glintBuffer,partialTick,packedLight,OverlayTexture.NO_OVERLAY);
+        VertexConsumer glintBuffer = bufferSource.getBuffer(renderType);
+        preRender(poseStack,animatable,modelProvider,renderType,bufferSource,glintBuffer,partialTick,packedLight,OverlayTexture.NO_OVERLAY);
         for (GeoBone bone : modelProvider.getModel(this.modelLocation).topLevelBones){
-            renderBoneChild(poseStack,animatable,bone,renderType,bufferSource1,glintBuffer,partialTick,packedLight);
+            renderBoneChild(poseStack,animatable,bone,renderType,bufferSource,glintBuffer,partialTick,packedLight);
         }
     }
 
@@ -126,7 +124,8 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
         }
 
         RenderUtils.translateAwayFromPivotPoint(poseStack, bone);
-        renderForBone(poseStack,animatable,bone,renderType,bufferSource,buffer,partialTick,OverlayTexture.NO_OVERLAY,packedLight);
+
+        renderForBone(poseStack,animatable,bone,renderType,bufferSource,buffer,partialTick,packedLight,getPackedOverlay((((ExtendedGeoReplacedEntityRenderer<?, ?>) this.getRenderer()).getCurrentEntity()),((((ExtendedGeoReplacedEntityRenderer<?, ?>) this.getRenderer()).getCurrentPartialTicks()))));
         if(!bone.childBones.isEmpty()){
             for (GeoBone bone1 : bone.childBones){
                 renderBoneChild(poseStack,animatable,bone1,renderType,bufferSource,buffer,partialTick,packedLight);
@@ -248,7 +247,6 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
                 poseStack.popPose();
             }
         }
-        buffer = bufferSource.getBuffer(renderType);
     }
 
     /**
@@ -256,6 +254,7 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
      */
     protected <I extends Item & IGeoRenderer> void renderVanillaArmorPiece(PoseStack poseStack, T animatable, GeoBone bone, EquipmentSlot slot, ItemStack armorStack,
                                                                            ModelPart modelPart, MultiBufferSource bufferSource, float partialTick, int packedLight, int packedOverlay) {
+        bufferSource=getRenderer().getCurrentRTB();
         ResourceLocation texture = getVanillaArmorResource(animatable, armorStack, slot, "");
         VertexConsumer buffer = getArmorBuffer(bufferSource, null, texture, armorStack.hasFoil());
 
@@ -267,7 +266,7 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
             texture = getVanillaArmorResource(animatable, armorStack, slot, "overlay");
             buffer = getArmorBuffer(bufferSource, null, texture, false);
         }
-        modelPart.render(poseStack, buffer, packedLight, packedOverlay, 1, 1, 1, 1);
+        modelPart.render(poseStack, buffer, packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
     /**
@@ -295,10 +294,6 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
         return IClientItemExtensions.of(stack).getHumanoidArmorModel(animatable, stack, slot, defaultModel);
     }
 
-    /**
-     * Gets a cached resource path for the vanilla armor layer texture for this armor piece.<br>
-     * Equivalent to {@link net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer#getArmorResource HumanoidArmorLayer.getArmorResource}
-     */
     public ResourceLocation getVanillaArmorResource(Entity entity, ItemStack stack, EquipmentSlot slot, String type) {
         String domain = "minecraft";
         String path = ((ArmorItem) stack.getItem()).getMaterial().getName();

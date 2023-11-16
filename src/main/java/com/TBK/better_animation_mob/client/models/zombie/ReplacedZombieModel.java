@@ -1,15 +1,14 @@
-package com.TBK.better_animation_mob.client.models;
+package com.TBK.better_animation_mob.client.models.zombie;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedZombie;
+import com.TBK.better_animation_mob.client.models.ReplacedEntityModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Husk;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.geo.render.built.GeoBone;
 
 @OnlyIn(Dist.CLIENT)
 public class ReplacedZombieModel<T extends IAnimatable> extends ReplacedEntityModel<T> {
@@ -36,7 +35,12 @@ public class ReplacedZombieModel<T extends IAnimatable> extends ReplacedEntityMo
     }
 
     @Override
-    public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
-        super.setCustomAnimations(animatable, instanceId, animationEvent);
+    protected Iterable<GeoBone> headParts() {
+        return null;
+    }
+
+    @Override
+    protected Iterable<GeoBone> bodyParts() {
+        return null;
     }
 }

@@ -1,9 +1,12 @@
 package com.TBK.better_animation_mob;
 
-import com.TBK.better_animation_mob.client.renderers.ReplacedExecutionerRenderer;
-import com.TBK.better_animation_mob.client.renderers.ReplacedPillagerRenderer;
-import com.TBK.better_animation_mob.client.renderers.ReplacedSkeletonRenderer;
-import com.TBK.better_animation_mob.client.renderers.ReplacedZombieRenderer;
+import com.TBK.better_animation_mob.client.renderers.illager.ReplacedExecutionerRenderer;
+import com.TBK.better_animation_mob.client.renderers.illager.ReplacedPillagerRenderer;
+import com.TBK.better_animation_mob.client.renderers.illager.ReplacedVindicatorRenderer;
+import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedSkeletonRenderer;
+import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedDrownedRenderer;
+import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedHuskRenderer;
+import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedZombieRenderer;
 import com.TBK.better_animation_mob.client.util.Compati;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEffect;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEntityTypes;
@@ -39,11 +42,11 @@ public class BetterAnimationMob {
     @OnlyIn(Dist.CLIENT)
     private void registerRenderer(FMLCommonSetupEvent event){
         EntityRenderers.register(EntityType.ZOMBIE, ReplacedZombieRenderer::new);
-        EntityRenderers.register(EntityType.DROWNED, ReplacedZombieRenderer::new);
-        //EntityRenderers.register(EntityType.HUSK, ReplacedZombieRenderer::new);
+        EntityRenderers.register(EntityType.DROWNED, ReplacedDrownedRenderer::new);
+        EntityRenderers.register(EntityType.HUSK, ReplacedHuskRenderer::new);
         EntityRenderers.register(EntityType.SKELETON, ReplacedSkeletonRenderer::new);
         EntityRenderers.register(EntityType.STRAY, ReplacedSkeletonRenderer::new);
-        EntityRenderers.register(EntityType.VINDICATOR, ReplacedExecutionerRenderer::new);
+        EntityRenderers.register(EntityType.VINDICATOR, ReplacedVindicatorRenderer::new);
         EntityRenderers.register(EntityType.PILLAGER, ReplacedPillagerRenderer::new);
         if(this.isLoaded(Compati.SAVAGE_AND_RAVEGER)){
             EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);
