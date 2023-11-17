@@ -21,22 +21,27 @@ public class ReplacedVindicator extends ReplacedEntity {
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
             if(raider.isPassenger()){
-                builder.addAnimation("raider.sit");
+                builder.addAnimation("vindicator.sit");
             }
             if(raider.getArmPose().equals(AbstractIllager.IllagerArmPose.ATTACKING) && raider.getAttackAnim(state.getPartialTick()) == 0){
-                builder.addAnimation("raider.move2");
+                builder.addAnimation("vindicator.move2");
+            }
+            if(raider.hurtTime>0){
+                state.getController().setAnimationSpeed(3.0F);
+                state.getController().setAnimation(builder.playOnce("vindicator.hurt"));
+                return PlayState.CONTINUE;
             }
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             if (isMove && raider.getAttackAnim(state.getPartialTick()) == 0) {
                 state.getController().setAnimationSpeed(raider.isAggressive()?3.0F : 1.0F);
-                state.getController().setAnimation(builder.addAnimation("raider.move", ILoopType.EDefaultLoopTypes.LOOP));
+                state.getController().setAnimation(builder.addAnimation("vindicator.move", ILoopType.EDefaultLoopTypes.LOOP));
             }else if(raider.getAttackAnim(state.getPartialTick())>0) {
                 state.getController().setAnimationSpeed(8.0F);
-                state.getController().setAnimation(builder.playOnce("raider.attack"));
+                state.getController().setAnimation(builder.playOnce("vindicator.attack"));
             }else {
                 state.getController().clearAnimationCache();
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.addAnimation("raider.idle", ILoopType.EDefaultLoopTypes.LOOP));
+                state.getController().setAnimation(builder.addAnimation("vindicator.idle", ILoopType.EDefaultLoopTypes.LOOP));
             }
             return PlayState.CONTINUE;
         }));

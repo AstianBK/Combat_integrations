@@ -22,9 +22,15 @@ public class ReplacedPillager extends ReplacedEntity {
             if (raider == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             boolean isRecharged=raider.getArmPose().equals(AbstractIllager.IllagerArmPose.CROSSBOW_CHARGE);
+            if(raider.hurtTime>0){
+                state.getController().setAnimationSpeed(3.0F);
+                state.getController().setAnimation(builder.playOnce("pillager.hurt"));
+                return PlayState.CONTINUE;
+            }
             if(isRecharged) {
                 builder.playOnce("pillager.recharge");
             }
+
             state.getController().setAnimationSpeed(!isRecharged ? 1.0F : 0.5F);
             if (isMove) {
                 state.getController().setAnimation(builder.addAnimation("pillager.move", ILoopType.EDefaultLoopTypes.LOOP));

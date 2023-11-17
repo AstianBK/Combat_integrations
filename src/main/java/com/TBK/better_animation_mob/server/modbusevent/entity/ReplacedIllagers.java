@@ -25,6 +25,11 @@ public class ReplacedIllagers extends ReplacedVindicator {
             AbstractIllager raider = getRaiderFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
+            if(raider.hurtTime>0){
+                state.getController().setAnimationSpeed(3.0F);
+                state.getController().setAnimation(builder.playOnce("raider.hurt"));
+                return PlayState.CONTINUE;
+            }
             if(raider.isPassenger()){
                 builder.addAnimation("raider.sit");
             }

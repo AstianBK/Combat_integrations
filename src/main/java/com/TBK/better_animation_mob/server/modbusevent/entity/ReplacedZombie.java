@@ -33,6 +33,11 @@ public class ReplacedZombie extends ReplacedEntity {
             if(zombie.isPassenger()){
                 builder.addAnimation("zombie.sit");
             }
+            if(zombie.hurtTime>0){
+                state.getController().setAnimationSpeed(3.0F);
+                state.getController().setAnimation(builder.playOnce("zombie.hurt"));
+                return PlayState.CONTINUE;
+            }
 
             if (isMove && zombie.getAttackAnim(state.getPartialTick()) == 0 && !zombie.isPassenger()) {
                 state.getController().setAnimationSpeed(zombie.isAggressive()?1.5F : 1.4F);

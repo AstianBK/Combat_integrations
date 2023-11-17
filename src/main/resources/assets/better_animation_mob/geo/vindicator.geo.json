@@ -32,7 +32,7 @@
 					]
 				},
 				{
-					"name": "body",
+					"name": "Body",
 					"parent": "main",
 					"pivot": [0, 24, 0],
 					"cubes": [
