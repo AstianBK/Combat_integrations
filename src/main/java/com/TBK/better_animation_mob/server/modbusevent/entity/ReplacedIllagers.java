@@ -30,9 +30,6 @@ public class ReplacedIllagers extends ReplacedVindicator {
                 state.getController().setAnimation(builder.playOnce("raider.hurt"));
                 return PlayState.CONTINUE;
             }
-            if(raider.isPassenger()){
-                builder.addAnimation("raider.sit");
-            }
             if(raider.getArmPose().equals(AbstractIllager.IllagerArmPose.ATTACKING) && raider.getAttackAnim(state.getPartialTick()) == 0){
                 builder.addAnimation("raider.move2");
             }

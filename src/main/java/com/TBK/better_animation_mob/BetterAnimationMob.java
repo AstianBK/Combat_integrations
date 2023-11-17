@@ -4,6 +4,7 @@ import com.TBK.better_animation_mob.client.renderers.illager.ReplacedExecutioner
 import com.TBK.better_animation_mob.client.renderers.illager.ReplacedPillagerRenderer;
 import com.TBK.better_animation_mob.client.renderers.illager.ReplacedVindicatorRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedSkeletonRenderer;
+import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedStrayRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedDrownedRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedHuskRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedZombieRenderer;
@@ -45,7 +46,7 @@ public class BetterAnimationMob {
         EntityRenderers.register(EntityType.DROWNED, ReplacedDrownedRenderer::new);
         EntityRenderers.register(EntityType.HUSK, ReplacedHuskRenderer::new);
         EntityRenderers.register(EntityType.SKELETON, ReplacedSkeletonRenderer::new);
-        EntityRenderers.register(EntityType.STRAY, ReplacedSkeletonRenderer::new);
+        EntityRenderers.register(EntityType.STRAY, ReplacedStrayRenderer::new);
         EntityRenderers.register(EntityType.VINDICATOR, ReplacedVindicatorRenderer::new);
         EntityRenderers.register(EntityType.PILLAGER, ReplacedPillagerRenderer::new);
         if(this.isLoaded(Compati.SAVAGE_AND_RAVEGER)){

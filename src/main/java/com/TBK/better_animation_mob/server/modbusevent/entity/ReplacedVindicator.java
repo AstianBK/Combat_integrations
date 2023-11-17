@@ -20,9 +20,7 @@ public class ReplacedVindicator extends ReplacedEntity {
             AbstractIllager raider = getRaiderFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
-            if(raider.isPassenger()){
-                builder.addAnimation("vindicator.sit");
-            }
+
             if(raider.getArmPose().equals(AbstractIllager.IllagerArmPose.ATTACKING) && raider.getAttackAnim(state.getPartialTick()) == 0){
                 builder.addAnimation("vindicator.move2");
             }

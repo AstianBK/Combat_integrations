@@ -28,9 +28,7 @@ public class ReplacedSkeleton extends ReplacedEntity {
             if (zombie == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             boolean isAim = this.isWieldingTwoHandedWeapon(zombie) && zombie.isAggressive();
-            if(zombie.isPassenger()){
-                builder.loop("skeleton.sit");
-            }
+
             if(zombie.hurtTime>0){
                 state.getController().setAnimationSpeed(3.0F);
                 state.getController().setAnimation(builder.playOnce("skeleton.hurt"));

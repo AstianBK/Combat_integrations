@@ -9,6 +9,7 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedSkeleton;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -21,21 +22,23 @@ import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 
 public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends ReplacedSkeleton> extends ExtendedGeoReplacedEntityRenderer<T,P> {
-    public ReplacedSkeletonRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new ReplacedSkeletonModel<>(), (P) new ReplacedSkeleton());
-        this.addLayer(new StrayGeckoLayer<>(this));
+    public ReplacedSkeletonRenderer(EntityRendererProvider.Context renderManager){
+        this(renderManager,new ReplacedSkeletonModel(),(P) new ReplacedSkeleton());
+    }
+    public ReplacedSkeletonRenderer(EntityRendererProvider.Context renderManager, ReplacedSkeletonModel model,P skeleton) {
+        super(renderManager, model,skeleton);
         this.addLayer(new ArmorGeckoLayer<>(this,this.getGeoModelProvider(),new ResourceLocation("textures/entity/skeleton/skeleton.png"),new ResourceLocation(BetterAnimationMob.MODID,"geo/skeleton.geo.json")){
             @NotNull
             @Override
             protected ModelPart getModelPartForBone(GeoBone bone, EquipmentSlot slot, ItemStack stack, LivingEntity animatable, HumanoidModel armorModel) {
                 ModelPart part=null;
                 switch (bone.getName()){
-                    case "Head"->part=armorModel.head;
-                    case "Body"->part=armorModel.body;
-                    case "RightArm"->part=armorModel.rightArm;
-                    case "LeftArm"->part=armorModel.leftArm;
-                    case "RightLeg"->part=armorModel.rightLeg;
-                    case "LeftLeg"->part=armorModel.leftLeg;
+                    case "HatLayer"->part=armorModel.head;
+                    case "BodyLayer"->part=armorModel.body;
+                    case "RightArmLayer"->part=armorModel.rightArm;
+                    case "LeftArmLayer"->part=armorModel.leftArm;
+                    case "RightLegLayer","RightBootLayer"->part=armorModel.rightLeg;
+                    case "LeftLegLayer","LeftBootLayer"->part=armorModel.leftLeg;
                 }
                 return part;
             }
@@ -45,9 +48,10 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
             protected ItemStack getArmorItemForBone(GeoBone bone, LivingEntity animatable) {
                 ItemStack stack=null;
                 switch (bone.getName()){
-                    case "Head"->stack=animatable.getItemBySlot(EquipmentSlot.HEAD);
-                    case "Body","RightArm","LeftArm"->stack=animatable.getItemBySlot(EquipmentSlot.CHEST);
-                    case "LeftLeg", "RightLeg" ->stack=animatable.getItemBySlot(EquipmentSlot.LEGS);
+                    case "HatLayer"->stack=animatable.getItemBySlot(EquipmentSlot.HEAD);
+                    case "BodyLayer","RightArmLayer","LeftArmLayer"->stack=animatable.getItemBySlot(EquipmentSlot.CHEST);
+                    case "LeftLegLayer", "RightLegLayer" ->stack=animatable.getItemBySlot(EquipmentSlot.LEGS);
+                    case "LeftBootLayer","RightBootLayer" ->stack=animatable.getItemBySlot(EquipmentSlot.FEET);
                 }
                 return stack;
             }
@@ -57,9 +61,10 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
             protected EquipmentSlot getEquipmentSlotForBone(GeoBone bone, ItemStack stack, LivingEntity animatable) {
                 EquipmentSlot slot=null;
                 switch (bone.getName()){
-                    case "Head"->slot=EquipmentSlot.HEAD;
-                    case "Body","LeftArm","RightArm"-> slot=EquipmentSlot.CHEST;
-                    case "LeftLeg", "RightLeg" ->slot=EquipmentSlot.LEGS;
+                    case "HatLayer"->slot=EquipmentSlot.HEAD;
+                    case "BodyLayer","LeftArmLayer","RightArmLayer"-> slot=EquipmentSlot.CHEST;
+                    case "LeftLegLayer", "RightLegLayer" ->slot=EquipmentSlot.LEGS;
+                    case "LeftBootLayer","RightBootLayer" ->slot=EquipmentSlot.FEET;
                 }
                 return slot;
             }

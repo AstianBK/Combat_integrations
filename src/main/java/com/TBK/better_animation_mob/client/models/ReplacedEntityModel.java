@@ -61,6 +61,7 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
             GeoBone leftArm = (GeoBone)this.getBone("LeftArm");
             GeoBone rightLeg = (GeoBone)this.getBone("RightLeg");
             GeoBone leftLeg = (GeoBone)this.getBone("LeftLeg");
+            GeoBone main = (GeoBone)this.getBone("main");
 
             head.setRotationX(data.headPitch * ((float) Math.PI / 180F));
             head.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
@@ -87,6 +88,12 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
                 leftArm.setScale(1,1,1);
                 rightLeg.setScale(1,1,1);
                 leftLeg.setScale(1,1,1);
+            }
+
+            if(data.isSitting){
+                rightLeg.addRotation(1.25664F, -0.261799F,0.0F);
+                leftLeg.addRotation(1.25664F, 0.261799F,0.0F);
+                main.addPosition(0.0F,1.0F,0.0F);
             }
         }
     }
