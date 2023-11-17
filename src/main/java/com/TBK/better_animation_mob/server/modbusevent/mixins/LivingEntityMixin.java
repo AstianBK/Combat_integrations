@@ -21,9 +21,9 @@ public abstract class LivingEntityMixin extends Entity implements ICombos {
         this.proyectoA$count =0;
     }
 
-    @Inject(at = @At("RETURN"), method = "swing(Lnet/minecraft/world/InteractionHand;)V")
-    public void swing(InteractionHand pHand, CallbackInfo ci) {
-        if(this.proyectoA$count <3){
+    @Inject(at = @At("RETURN"), method = "swing(Lnet/minecraft/world/InteractionHand;Z)V")
+    public void swing(InteractionHand p_21012_, boolean p_21013_, CallbackInfo ci) {
+        if(this.proyectoA$count < 3){
             this.proyectoA$count++;
         }else {
             this.proyectoA$count =1;
