@@ -23,13 +23,4 @@ public class ReplacedPillagerModel <T extends IAnimatable> extends ReplacedEntit
         return new ResourceLocation(BetterAnimationMob.MODID, "animations/pillager.animation.json");
     }
 
-    @Override
-    protected Iterable<GeoBone> headParts() {
-        return null;
-    }
-
-    @Override
-    protected Iterable<GeoBone> bodyParts() {
-        return null;
-    }
 }

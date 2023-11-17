@@ -27,14 +27,4 @@ public class ReplacedSkeletonModel<T extends IAnimatable> extends ReplacedEntity
     public ResourceLocation getAnimationResource(T animatable) {
         return new ResourceLocation(BetterAnimationMob.MODID,"animations/skeleton.animation.json");
     }
-
-    @Override
-    protected Iterable<GeoBone> headParts() {
-        return null;
-    }
-
-    @Override
-    protected Iterable<GeoBone> bodyParts() {
-        return null;
-    }
 }
