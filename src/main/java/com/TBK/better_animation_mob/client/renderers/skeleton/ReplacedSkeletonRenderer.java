@@ -91,4 +91,8 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
         }
     }
 
+    @Override
+    public RenderType getRenderType(Object o, float partialTick, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
+        return RenderType.entityTranslucent(texture);
+    }
 }
