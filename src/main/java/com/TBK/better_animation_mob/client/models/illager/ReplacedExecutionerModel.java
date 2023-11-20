@@ -9,7 +9,6 @@ import software.bernie.geckolib3.core.IAnimatable;
 
 @OnlyIn(Dist.CLIENT)
 public class ReplacedExecutionerModel<T extends IAnimatable> extends ReplacedVindicatorModel<T> {
-
     @Override
     public ResourceLocation getModelResource(T object) {
         return new ResourceLocation(BetterAnimationMob.MODID, "geo/svr/executioner.geo.json");

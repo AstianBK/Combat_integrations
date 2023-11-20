@@ -22,7 +22,7 @@ import software.bernie.geckolib3.geo.render.built.GeoBone;
 
 public class ReplacedStrayRenderer<T extends AbstractSkeleton,P extends ReplacedSkeleton> extends ReplacedSkeletonRenderer<T,P> {
     public ReplacedStrayRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new ReplacedSkeletonModel<>(), (P) new ReplacedSkeleton());
-        this.addLayer(new StrayGeckoLayer<>(this,this.getGeoModelProvider(),new ResourceLocation("textures/entity/skeleton/skeleton.png"),new ResourceLocation(BetterAnimationMob.MODID,"geo/skeleton.geo.json")));
+        super(renderManager, new ReplacedSkeletonModel<>(), (P) new ReplacedSkeleton(),new ResourceLocation("textures/entity/skeleton/stray.png"));
+        this.addLayer(new StrayGeckoLayer<>(this,this.getGeoModelProvider(),new ResourceLocation("textures/entity/skeleton/stray.png"),new ResourceLocation(BetterAnimationMob.MODID,"geo/skeleton.geo.json")));
     }
 }

@@ -2,6 +2,7 @@ package com.TBK.better_animation_mob.client.models.zombie;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.models.ReplacedEntityModel;
+import com.TBK.better_animation_mob.client.models.ReplacedHumanoidModel;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Drowned;
@@ -15,7 +16,7 @@ import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 @OnlyIn(Dist.CLIENT)
-public class ReplacedZombieModel<T extends IAnimatable> extends ReplacedEntityModel<T> {
+public class ReplacedZombieModel<T extends IAnimatable> extends ReplacedHumanoidModel<T> {
     @Override
     public ResourceLocation getModelResource(T object) {
         return new ResourceLocation(BetterAnimationMob.MODID,"geo/zombie.geo.json");

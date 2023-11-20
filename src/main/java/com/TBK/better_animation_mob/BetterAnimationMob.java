@@ -5,10 +5,12 @@ import com.TBK.better_animation_mob.client.renderers.illager.ReplacedPillagerRen
 import com.TBK.better_animation_mob.client.renderers.illager.ReplacedVindicatorRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedSkeletonRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedStrayRenderer;
+import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedWitherSkeletonRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedDrownedRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedHuskRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedZombieRenderer;
 import com.TBK.better_animation_mob.client.util.Compati;
+import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedWitherSkeleton;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEffect;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEntityTypes;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkItems;
@@ -47,6 +49,7 @@ public class BetterAnimationMob {
         EntityRenderers.register(EntityType.HUSK, ReplacedHuskRenderer::new);
         EntityRenderers.register(EntityType.SKELETON, ReplacedSkeletonRenderer::new);
         EntityRenderers.register(EntityType.STRAY, ReplacedStrayRenderer::new);
+        EntityRenderers.register(EntityType.WITHER_SKELETON, ReplacedWitherSkeletonRenderer::new);
         EntityRenderers.register(EntityType.VINDICATOR, ReplacedVindicatorRenderer::new);
         EntityRenderers.register(EntityType.PILLAGER, ReplacedPillagerRenderer::new);
         if(this.isLoaded(Compati.SAVAGE_AND_RAVEGER)){

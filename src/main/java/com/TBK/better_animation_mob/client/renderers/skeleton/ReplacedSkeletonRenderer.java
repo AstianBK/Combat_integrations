@@ -7,10 +7,13 @@ import com.TBK.better_animation_mob.client.models.skeleton.ReplacedSkeletonModel
 import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
 import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedSkeleton;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -19,15 +22,17 @@ import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
+import software.bernie.geckolib3.geo.render.built.GeoModel;
 
 public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends ReplacedSkeleton> extends ExtendedGeoReplacedEntityRenderer<T,P> {
     public ReplacedSkeletonRenderer(EntityRendererProvider.Context renderManager){
-        this(renderManager,new ReplacedSkeletonModel(),(P) new ReplacedSkeleton());
+        this(renderManager,new ReplacedSkeletonModel(),(P) new ReplacedSkeleton(),new ResourceLocation("textures/entity/skeleton/skeleton.png"));
     }
-    public ReplacedSkeletonRenderer(EntityRendererProvider.Context renderManager, ReplacedSkeletonModel model,P skeleton) {
+    public ReplacedSkeletonRenderer(EntityRendererProvider.Context renderManager, ReplacedSkeletonModel model,P skeleton,ResourceLocation texture) {
         super(renderManager, model,skeleton);
-        this.addLayer(new ArmorGeckoLayer<>(this,this.getGeoModelProvider(),new ResourceLocation("textures/entity/skeleton/skeleton.png"),new ResourceLocation(BetterAnimationMob.MODID,"geo/skeleton.geo.json")){
+        this.addLayer(new ArmorGeckoLayer<>(this,this.getGeoModelProvider(),texture,new ResourceLocation(BetterAnimationMob.MODID,"geo/skeleton.geo.json")){
             @NotNull
             @Override
             protected ModelPart getModelPartForBone(GeoBone bone, EquipmentSlot slot, ItemStack stack, LivingEntity animatable, HumanoidModel armorModel) {
