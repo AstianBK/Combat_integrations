@@ -51,15 +51,20 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
                 animationEvent.getPartialTick(),
                 animationEvent.isMoving(),
                 list);
+        animationEvent=event;
         super.setCustomAnimations(animatable, instanceId, event);
 
         EntityModelData data = (EntityModelData) event.getExtraDataOfType(EntityModelData.class).get(0);
         if (data!=null){
             GeoBone head = (GeoBone)this.getBone("Head");
-            if(this.currentEntity.get().hurtTime==0){
-                head.setRotationX(data.headPitch * ((float) Math.PI / 180F));
-                head.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
+            if(this.canMoveHead(this.currentEntity.get(),event)){
+                head.setRotationX(head.getRotationX()+data.headPitch * ((float) Math.PI / 180F));
+                head.setRotationY(head.getRotationY()+data.netHeadYaw * ((float) Math.PI / 180F));
             }
         }
+    }
+
+    public boolean canMoveHead(LivingEntity entity,AnimationEvent<?> event){
+        return entity.hurtTime==0;
     }
 }

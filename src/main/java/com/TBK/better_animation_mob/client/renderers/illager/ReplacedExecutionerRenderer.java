@@ -1,7 +1,7 @@
 package com.TBK.better_animation_mob.client.renderers.illager;
 
 import com.TBK.better_animation_mob.client.models.illager.ReplacedExecutionerModel;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedIllagers;
+import com.TBK.better_animation_mob.server.modbusevent.entity.svr.ReplacedIllagers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.teamabnormals.savage_and_ravage.common.entity.monster.Executioner;

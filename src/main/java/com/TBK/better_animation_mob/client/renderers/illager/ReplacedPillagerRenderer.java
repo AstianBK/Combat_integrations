@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.monster.Pillager;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
@@ -20,14 +21,17 @@ public class ReplacedPillagerRenderer<T extends Pillager,P extends ReplacedPilla
     @Override
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
-            boolean trident = item.getItem() instanceof TridentItem;
+            stack.mulPose(Vector3f.XP.rotationDegrees(270F));
+            stack.mulPose(Vector3f.YP.rotationDegrees(-90.F));
+            boolean shieldFlag = item.getItem() instanceof CrossbowItem;
+
             if (item == currentEntity.getMainHandItem()) {
-                if (trident) {
-                    stack.translate(0.0D,0.0D,-0.8D);
-                }else {
-                    stack.mulPose(Vector3f.XP.rotationDegrees(-180F));
-                    stack.mulPose(Vector3f.YP.rotationDegrees(90F));
-                    stack.translate(0.0F, 0.125F, 0.0F);
+                if (shieldFlag) {
+                    stack.translate(-0.05F, 0.125F, 0.0F);
+                }
+            } else {
+                if (shieldFlag) {
+                    stack.translate(0, 0.0, -15);
                 }
             }
         }

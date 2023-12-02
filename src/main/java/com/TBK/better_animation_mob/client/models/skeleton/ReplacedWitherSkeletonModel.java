@@ -11,4 +11,9 @@ public class ReplacedWitherSkeletonModel<T extends IAnimatable> extends Replaced
     public ResourceLocation getTextureResource(T object) {
         return new ResourceLocation("textures/entity/skeleton/wither_skeleton.png");
     }
+
+    @Override
+    public ResourceLocation getAnimationResource(T animatable) {
+        return new ResourceLocation(BetterAnimationMob.MODID,"animations/wither_skeleton.animation.json");
+    }
 }

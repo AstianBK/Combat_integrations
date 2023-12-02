@@ -14,11 +14,15 @@ import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class ReplacedSkeleton extends ReplacedEntity {
+    AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
 
     @Override
     public void registerControllers(AnimationData data) {
@@ -43,6 +47,10 @@ public class ReplacedSkeleton extends ReplacedEntity {
             }
             return PlayState.CONTINUE;
         }));
+    }
+    @Override
+    public AnimationFactory getFactory() {
+        return factory;
     }
     @Nullable
     private AbstractSkeleton getZombieFromState(AnimationEvent<ReplacedSkeleton> state) {

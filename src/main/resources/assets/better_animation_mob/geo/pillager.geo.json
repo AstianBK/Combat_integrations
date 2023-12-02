@@ -35,9 +35,9 @@
 				{
 					"name": "ItemSlotRight",
 					"parent": "RightArm",
-					"pivot": [-6.25, 13, -2],
+					"pivot": [-5.5, 13.25, 0],
 					"cubes": [
-						{"origin": [-6.25, 13, -2], "size": [0, 0, 0], "uv": [2, 2]}
+						{"origin": [-5.5, 13.25, 0], "size": [0, 0, 0], "uv": [0, 0]}
 					]
 				},
 				{

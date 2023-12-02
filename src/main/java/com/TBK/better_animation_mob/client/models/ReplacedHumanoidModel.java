@@ -3,11 +3,8 @@ package com.TBK.better_animation_mob.client.models;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntityModel<T> {
     @Override
@@ -26,7 +23,7 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
                 float f = 1.5F/2.0F;
                 float f1 = 1.0F/2.0F;
                 head.setScale(f,f,f);
-                head.addPosition(0.0F,-13.0F,0.0F);
+                head.addPosition(0.0F, -13.0F,0.0F);
                 body.setScale(f1,f1,f1);
                 body.addPosition(0.0F,-12.0F,0.0F);
                 rightArm.setScale(f1,f1,f1);
@@ -40,8 +37,8 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
             }else {
                 head.setScale(1,1,1);
                 body.setScale(1,1,1);
-                rightArm.setScale(1,1,1);
-                leftArm.setScale(1,1,1);
+                rightArm.setScale(rightArm.getScale());
+                leftArm.setScale(leftArm.getScale());
                 rightLeg.setScale(1,1,1);
                 leftLeg.setScale(1,1,1);
             }

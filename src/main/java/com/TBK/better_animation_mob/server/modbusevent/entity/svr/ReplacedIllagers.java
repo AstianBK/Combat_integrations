@@ -1,19 +1,15 @@
-package com.TBK.better_animation_mob.server.modbusevent.entity;
+package com.TBK.better_animation_mob.server.modbusevent.entity.svr;
 
-import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
+import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedVindicator;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.entity.raid.Raider;
-import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;

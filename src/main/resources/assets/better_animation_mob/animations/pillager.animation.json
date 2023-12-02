@@ -211,6 +211,7 @@
 			}
 		},
 		"pillager.recharge": {
+			"loop": true,
 			"animation_length": 2.20833,
 			"bones": {
 				"Body": {
