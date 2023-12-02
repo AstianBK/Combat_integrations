@@ -28,7 +28,7 @@ public class ReplacedTrickster extends ReplacedEntity {
             }
             if (isMove) {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.loop("trickster.move1"));
+                state.getController().setAnimation(builder.loop("trickster.move"));
             } else {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.loop("trickster.idle"));

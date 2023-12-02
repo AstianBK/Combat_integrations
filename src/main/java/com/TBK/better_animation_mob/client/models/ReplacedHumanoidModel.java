@@ -18,7 +18,7 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
             GeoBone leftArm = (GeoBone)this.getBone("LeftArm");
             GeoBone rightLeg = (GeoBone)this.getBone("RightLeg");
             GeoBone leftLeg = (GeoBone)this.getBone("LeftLeg");
-            GeoBone main = (GeoBone)this.getBone("main");
+            GeoBone main = this.getModel(this.getModelResource(animatable)).getBone("main").isPresent() ? this.getModel(this.getModelResource(animatable)).getBone("main").get() : null;
             if(data.isChild){
                 float f = 1.5F/2.0F;
                 float f1 = 1.0F/2.0F;
@@ -46,7 +46,9 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
             if(data.isSitting){
                 rightLeg.addRotation(1.25664F, -0.261799F,0.0F);
                 leftLeg.addRotation(1.25664F, 0.261799F,0.0F);
-                main.addPosition(0.0F,1.0F,0.0F);
+                if(main!=null){
+                    main.addPosition(0.0F,1.0F,0.0F);
+                }
             }
         }
     }

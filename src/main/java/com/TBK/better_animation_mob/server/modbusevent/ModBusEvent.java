@@ -19,21 +19,5 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = BetterAnimationMob.MODID, bus = Mod.EventBusSubscriber.Bus.MOD,value=Dist.CLIENT)
 public class ModBusEvent {
-    @SubscribeEvent
-    public static void registerRenderer(EntityRenderersEvent.RegisterRenderers event) {
-        EntityRenderers.register(EntityType.ZOMBIE, ReplacedZombieRenderer::new);
-        EntityRenderers.register(EntityType.DROWNED, ReplacedDrownedRenderer::new);
-        EntityRenderers.register(EntityType.HUSK, ReplacedHuskRenderer::new);
-        EntityRenderers.register(EntityType.SKELETON, ReplacedSkeletonRenderer::new);
-        EntityRenderers.register(EntityType.STRAY, ReplacedStrayRenderer::new);
-        EntityRenderers.register(EntityType.WITHER_SKELETON, ReplacedWitherSkeletonRenderer::new);
-        EntityRenderers.register(EntityType.VINDICATOR, ReplacedVindicatorRenderer::new);
-        EntityRenderers.register(EntityType.PILLAGER, ReplacedPillagerRenderer::new);
-        EntityRenderers.register(EntityType.RAVAGER, ReplacedRavagerRenderer::new);
-        if(BetterAnimationMob.isLoaded(Compati.SAVAGE_AND_RAVEGER)){
-            //EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);
-            //EntityRenderers.register(SREntityTypes.TRICKSTER.get(),ReplacedTricksterRenderer::new);
-        }
-        //EntityRenderers.register(EntityType.EVOKER, ReplacedEvokerRenderer::new);
-    }
+
 }

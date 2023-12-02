@@ -5,7 +5,8 @@
   "minVersion": "0.8",
   "refmap": "better_animation_mob.refmap.json",
   "mixins": [
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "SavagerAndRavagerMixins"
   ],
   "injectors": {
     "defaultRequire": 1
