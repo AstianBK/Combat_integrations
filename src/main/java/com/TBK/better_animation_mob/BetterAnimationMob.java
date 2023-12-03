@@ -1,6 +1,7 @@
 package com.TBK.better_animation_mob;
 
 import com.TBK.better_animation_mob.client.renderers.illager.*;
+import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedSkeletonRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedStrayRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedWitherSkeletonRenderer;
@@ -47,11 +48,14 @@ public class BetterAnimationMob {
         EntityRenderers.register(EntityType.VINDICATOR, ReplacedVindicatorRenderer::new);
         EntityRenderers.register(EntityType.PILLAGER, ReplacedPillagerRenderer::new);
         EntityRenderers.register(EntityType.RAVAGER, ReplacedRavagerRenderer::new);
+        EntityRenderers.register(EntityType.EVOKER, ReplacedEvokerRenderer::new);
+
+        EntityRenderers.register(EntityType.PIGLIN_BRUTE, ReplacedPiglinRenderer::new);
+
         if(isLoaded(Compati.SAVAGE_AND_RAVEGER)){
             EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);
             EntityRenderers.register(SREntityTypes.TRICKSTER.get(), ReplacedTricksterRenderer::new);
         }
-        EntityRenderers.register(EntityType.EVOKER, ReplacedEvokerRenderer::new);
     }
 
 
