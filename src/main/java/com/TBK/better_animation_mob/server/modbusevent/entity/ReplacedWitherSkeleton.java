@@ -26,11 +26,6 @@ public class ReplacedWitherSkeleton extends ReplacedSkeleton{
             AbstractSkeleton zombie = getZombieFromState(state);
             if (zombie == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            if(zombie.hurtTime>0 && zombie.getAttackAnim(state.getPartialTick())==0){
-                state.getController().setAnimationSpeed(7.0F);
-                state.getController().setAnimation(new AnimationBuilder().loop("skeleton.hurt"));
-                return PlayState.CONTINUE;
-            }
 
             if (isMove && zombie.getAttackAnim(state.getPartialTick())==0) {
                 state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);

@@ -1,6 +1,7 @@
 package com.TBK.better_animation_mob;
 
 import com.TBK.better_animation_mob.client.renderers.illager.*;
+import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinBruteRenderer;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedSkeletonRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedStrayRenderer;
@@ -39,18 +40,25 @@ public class BetterAnimationMob {
         modEventBus.addListener(this::registerRenderer);
     }
     public void registerRenderer(FMLCommonSetupEvent event) {
+        //Zombies
         EntityRenderers.register(EntityType.ZOMBIE, ReplacedZombieRenderer::new);
         EntityRenderers.register(EntityType.DROWNED, ReplacedDrownedRenderer::new);
         EntityRenderers.register(EntityType.HUSK, ReplacedHuskRenderer::new);
+
+        //Skeletons
         EntityRenderers.register(EntityType.SKELETON, ReplacedSkeletonRenderer::new);
         EntityRenderers.register(EntityType.STRAY, ReplacedStrayRenderer::new);
         EntityRenderers.register(EntityType.WITHER_SKELETON, ReplacedWitherSkeletonRenderer::new);
+
+        //Raiders
         EntityRenderers.register(EntityType.VINDICATOR, ReplacedVindicatorRenderer::new);
         EntityRenderers.register(EntityType.PILLAGER, ReplacedPillagerRenderer::new);
         EntityRenderers.register(EntityType.RAVAGER, ReplacedRavagerRenderer::new);
         EntityRenderers.register(EntityType.EVOKER, ReplacedEvokerRenderer::new);
 
-        EntityRenderers.register(EntityType.PIGLIN_BRUTE, ReplacedPiglinRenderer::new);
+        //Piglins
+        EntityRenderers.register(EntityType.PIGLIN_BRUTE, ReplacedPiglinBruteRenderer::new);
+        EntityRenderers.register(EntityType.PIGLIN, ReplacedPiglinRenderer::new);
 
         if(isLoaded(Compati.SAVAGE_AND_RAVEGER)){
             EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);

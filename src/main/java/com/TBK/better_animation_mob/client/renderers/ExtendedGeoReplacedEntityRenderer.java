@@ -126,8 +126,13 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
         if (getCurrentModelRenderCycle() == EModelRenderCycle.INITIAL) {
             poseStack.pushPose();
             if (shouldRenderItemStack(this.currentEntity)){
-                if(bone.getName().equals("ItemSlotRight")){
-                    ItemStack boneItem = this.currentEntity.getMainHandItem();
+                if(bone.getName().equals("ItemSlotRight") || bone.getName().equals("leftItem")){
+                    ItemStack boneItem;
+                    if(bone.getName().equals("ItemSlotRight")){
+                        boneItem=this.currentEntity.getMainHandItem();
+                    }else {
+                        boneItem=this.currentEntity.getOffhandItem();
+                    }
 
                     if (!boneItem.isEmpty()) {
                         handleItemAndBlockBoneRendering(poseStack, bone, boneItem, packedLight, packedOverlay);

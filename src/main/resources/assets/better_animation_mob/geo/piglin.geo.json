@@ -19,24 +19,33 @@
 					"name": "RightLeg",
 					"parent": "main",
 					"pivot": [-1.9, 12, 0],
-					"rotation": [11, 0, 2],
+					"rotation": [1, 0, 2],
 					"cubes": [
-						{"origin": [-4, 0, -2], "size": [4, 12, 4], "uv": [0, 16]},
-						{"origin": [-4, 0, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [0, 32]}
+						{"origin": [-4, 0, -2], "size": [4, 12, 4], "uv": [0, 16]}
 					]
 				},
 				{
-					"name": "leftItem",
-					"parent": "main",
-					"pivot": [6, 15, 1]
+					"name": "RightLegLayer",
+					"parent": "RightLeg",
+					"pivot": [-1.9, 12, 0],
+					"cubes": [
+						{"origin": [-4, 0, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [0, 32]}
+					]
 				},
 				{
 					"name": "LeftLeg",
 					"parent": "main",
 					"pivot": [1.9, 12, 0],
-					"rotation": [-10, 0, -2],
+					"rotation": [0, 0, -2],
 					"cubes": [
-						{"origin": [0, 0, -2], "size": [4, 12, 4], "uv": [16, 48]},
+						{"origin": [0, 0, -2], "size": [4, 12, 4], "uv": [16, 48]}
+					]
+				},
+				{
+					"name": "LeftLegLayer",
+					"parent": "LeftLeg",
+					"pivot": [1.9, 12, 0],
+					"cubes": [
 						{"origin": [0, 0, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [0, 48]}
 					]
 				},
@@ -44,20 +53,31 @@
 					"name": "LeftArm",
 					"parent": "main",
 					"pivot": [5, 22, 0],
-					"rotation": [12, 0, 0],
+					"rotation": [-0.5, 0, 0],
 					"cubes": [
-						{"origin": [4, 12, -2], "size": [4, 12, 4], "uv": [32, 48]},
+						{"origin": [4, 12, -2], "size": [4, 12, 4], "uv": [32, 48]}
+					]
+				},
+				{
+					"name": "LeftArmLayer",
+					"parent": "LeftArm",
+					"pivot": [5, 22, 0],
+					"cubes": [
 						{"origin": [4, 12, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [48, 48]}
 					]
+				},
+				{
+					"name": "leftItem",
+					"parent": "LeftArm",
+					"pivot": [6, 15, 1]
 				},
 				{
 					"name": "RightArm",
 					"parent": "main",
 					"pivot": [-5, 22, 0],
-					"rotation": [-10, 0, 0],
+					"rotation": [2.5, 0, 0],
 					"cubes": [
-						{"origin": [-8, 12, -2], "size": [4, 12, 4], "uv": [40, 16]},
-						{"origin": [-8, 12, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [40, 32]}
+						{"origin": [-8, 12, -2], "size": [4, 12, 4], "uv": [40, 16]}
 					]
 				},
 				{
@@ -66,6 +86,14 @@
 					"pivot": [-6, 13, 0],
 					"cubes": [
 						{"origin": [-6, 13, 0], "size": [0, 0, 0], "uv": [2, 2]}
+					]
+				},
+				{
+					"name": "RightArmLayer",
+					"parent": "RightArm",
+					"pivot": [-5, 22, 0],
+					"cubes": [
+						{"origin": [-8, 12, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [40, 32]}
 					]
 				},
 				{
@@ -105,11 +133,26 @@
 					]
 				},
 				{
+					"name": "HatLayer",
+					"parent": "Head",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-5, 24, -4], "size": [10, 8, 8], "uv": [0, 0]}
+					]
+				},
+				{
 					"name": "Body",
 					"parent": "main",
 					"pivot": [0, 24, 0],
 					"cubes": [
-						{"origin": [-4, 12, -2], "size": [8, 12, 4], "uv": [16, 16]},
+						{"origin": [-4, 12, -2], "size": [8, 12, 4], "uv": [16, 16]}
+					]
+				},
+				{
+					"name": "BodyLayer",
+					"parent": "Body",
+					"pivot": [0, 24, 0],
+					"cubes": [
 						{"origin": [-4, 12, -2], "size": [8, 12, 4], "inflate": 0.25, "uv": [16, 32]}
 					]
 				}

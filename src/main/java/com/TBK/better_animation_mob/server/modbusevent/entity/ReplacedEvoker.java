@@ -21,35 +21,72 @@ public class ReplacedEvoker extends ReplacedEntity {
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            if(raider.hurtTime>0){
-                state.getController().setAnimationSpeed(3.0F);
-                state.getController().setAnimation(builder.playOnce("evoker.hurt"));
-                return PlayState.CONTINUE;
-            }
-            if (isMove) {
+            if (isMove && !raider.isCastingSpell()) {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.loop("evoker.move2"));
-            } else {
+                state.getController().setAnimation(builder.loop("evoker.movebody"));
+            } else if(raider.isCastingSpell()) {
+                state.getController().setAnimationSpeed(0.5F);
+                state.getController().setAnimation(builder.loop("evoker.spellfangbody"));
+            }else {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.loop("evoker.idle"));
+                state.getController().setAnimation(builder.loop("evoker.idlebody"));
             }
 
             return PlayState.CONTINUE;
         }));
-        data.addAnimationController(new AnimationController<>(this, "controller_attack", 0, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller_legs", 0, state -> {
             Evoker raider = getRaiderFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
-            if(!raider.isCastingSpell()) {
-                return PlayState.CONTINUE;
+            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            if (isMove && !raider.isCastingSpell()) {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.loop("evoker.movelegs"));
+            } else if(raider.isCastingSpell()) {
+                state.getController().setAnimationSpeed(0.5F);
+                state.getController().setAnimation(builder.loop("evoker.spellfanglegs"));
+            }else {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.loop("evoker.idlelegs"));
             }
-            state.getController().setAnimationSpeed(0.5F);
-            state.getController().setAnimation(builder.loop("evoker.spellfang2"));
 
             return PlayState.CONTINUE;
         }));
+        data.addAnimationController(new AnimationController<>(this, "controller_arms", 0, state -> {
+            Evoker raider = getRaiderFromState(state);
+            AnimationBuilder builder=new AnimationBuilder();
+            if (raider == null) return PlayState.STOP;
+            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            if (isMove && !raider.isCastingSpell()) {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.loop("evoker.movearms"));
+            } else if(raider.isCastingSpell()) {
+                state.getController().setAnimationSpeed(1.5F);
+                state.getController().setAnimation(builder.loop("evoker.spellfangarms"));
+            }else {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.loop("evoker.idlearms"));
+            }
+            return PlayState.CONTINUE;
+        }));
+        data.addAnimationController(new AnimationController<>(this, "controller_main", 0, state -> {
+            Evoker raider = getRaiderFromState(state);
+            AnimationBuilder builder=new AnimationBuilder();
+            if (raider == null) return PlayState.STOP;
+            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            if (isMove && !raider.isCastingSpell()) {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.loop("evoker.movemain"));
+            } else if(raider.isCastingSpell()) {
+                state.getController().setAnimationSpeed(0.5F);
+                state.getController().setAnimation(builder.loop("evoker.spellfangmain"));
+            }else {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.loop("evoker.idlemain"));
+            }
+            return PlayState.CONTINUE;
+        }));
     }
-
 
     @Nullable
     private Evoker getRaiderFromState(AnimationEvent<ReplacedEvoker> state) {
