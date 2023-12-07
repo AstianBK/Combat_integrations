@@ -30,7 +30,7 @@ public class ReplacedEvoker implements IAnimatable {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.loop("evoker.move"));
             } else if(raider.isCastingSpell()) {
-                state.getController().setAnimationSpeed(0.5F);
+                state.getController().setAnimationSpeed(1F);
                 state.getController().setAnimation(builder.loop("evoker.spellfang"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);

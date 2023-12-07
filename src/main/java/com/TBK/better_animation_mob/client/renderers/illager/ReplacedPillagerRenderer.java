@@ -27,7 +27,7 @@ public class ReplacedPillagerRenderer<T extends Pillager,P extends ReplacedPilla
 
             if (item == currentEntity.getMainHandItem()) {
                 if (shieldFlag) {
-                    stack.translate(-0.05F, 0.125F, 0.0F);
+                    stack.translate(-0.05F, 0.25F, 0.3F);
                 }
             } else {
                 if (shieldFlag) {

@@ -63,6 +63,7 @@ public class BetterAnimationMob {
         if(isLoaded(Compati.SAVAGE_AND_RAVEGER)){
             EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);
             EntityRenderers.register(SREntityTypes.TRICKSTER.get(), ReplacedTricksterRenderer::new);
+            EntityRenderers.register(SREntityTypes.GRIEFER.get(), ReplacedGrieferRenderer::new);
         }
     }
 

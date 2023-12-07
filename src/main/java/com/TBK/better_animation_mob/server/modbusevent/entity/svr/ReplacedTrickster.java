@@ -28,7 +28,7 @@ public class ReplacedTrickster implements IAnimatable {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.loop("trickster.move"));
             }else if(raider.isCastingSpell()) {
-                state.getController().setAnimationSpeed(0.3F);
+                state.getController().setAnimationSpeed(1F);
                 state.getController().setAnimation(builder.loop("trickster.spell"));
             } else {
                 state.getController().setAnimationSpeed(1.0F);
