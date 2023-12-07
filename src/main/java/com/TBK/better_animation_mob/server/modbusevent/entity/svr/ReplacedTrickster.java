@@ -1,19 +1,22 @@
 package com.TBK.better_animation_mob.server.modbusevent.entity.svr;
 
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedEntity;
 import com.teamabnormals.savage_and_ravage.common.entity.monster.Trickster;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedTrickster extends ReplacedEntity {
+public class ReplacedTrickster implements IAnimatable {
+    AnimationFactory factory = GeckoLibUtil.createFactory(this);
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
@@ -21,14 +24,12 @@ public class ReplacedTrickster extends ReplacedEntity {
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            if(raider.hurtTime>0){
-                state.getController().setAnimationSpeed(3.0F);
-                state.getController().setAnimation(builder.playOnce("trickster.hurt"));
-                return PlayState.CONTINUE;
-            }
             if (isMove) {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.loop("trickster.move"));
+            }else if(raider.isCastingSpell()) {
+                state.getController().setAnimationSpeed(0.3F);
+                state.getController().setAnimation(builder.loop("trickster.spell"));
             } else {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.loop("trickster.idle"));
@@ -36,18 +37,11 @@ public class ReplacedTrickster extends ReplacedEntity {
 
             return PlayState.CONTINUE;
         }));
-        data.addAnimationController(new AnimationController<>(this, "controller_attack", 0, state -> {
-            Trickster raider = getRaiderFromState(state);
-            AnimationBuilder builder=new AnimationBuilder();
-            if (raider == null) return PlayState.STOP;
-            if(!raider.isCastingSpell()) {
-                return PlayState.CONTINUE;
-            }
-            state.getController().setAnimationSpeed(0.5F);
-            state.getController().setAnimation(builder.loop("trickster.spell"));
+    }
 
-            return PlayState.CONTINUE;
-        }));
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
     }
 
 

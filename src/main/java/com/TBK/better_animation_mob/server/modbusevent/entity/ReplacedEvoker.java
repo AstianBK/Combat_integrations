@@ -4,16 +4,21 @@ import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.*;
+import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedEvoker extends ReplacedEntity {
+public class ReplacedEvoker implements IAnimatable {
+    AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
@@ -23,10 +28,10 @@ public class ReplacedEvoker extends ReplacedEntity {
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             if (isMove && !raider.isCastingSpell()) {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.loop("evoker.movebody"));
+                state.getController().setAnimation(builder.loop("evoker.move"));
             } else if(raider.isCastingSpell()) {
                 state.getController().setAnimationSpeed(0.5F);
-                state.getController().setAnimation(builder.loop("evoker.spellfangbody"));
+                state.getController().setAnimation(builder.loop("evoker.spellfang"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.loop("evoker.idlebody"));
@@ -34,7 +39,7 @@ public class ReplacedEvoker extends ReplacedEntity {
 
             return PlayState.CONTINUE;
         }));
-        data.addAnimationController(new AnimationController<>(this, "controller_legs", 0, state -> {
+        /*data.addAnimationController(new AnimationController<>(this, "controller_legs", 0, state -> {
             Evoker raider = getRaiderFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
@@ -85,7 +90,12 @@ public class ReplacedEvoker extends ReplacedEntity {
                 state.getController().setAnimation(builder.loop("evoker.idlemain"));
             }
             return PlayState.CONTINUE;
-        }));
+        }));*/
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
     }
 
     @Nullable

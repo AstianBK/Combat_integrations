@@ -7,17 +7,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.UseAnim;
+import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedZombie extends ReplacedEntity {
+public class ReplacedZombie implements IAnimatable {
+    AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     @Override
     public void registerControllers(AnimationData data) {
@@ -49,6 +53,12 @@ public class ReplacedZombie extends ReplacedEntity {
             return PlayState.CONTINUE;
         }));
     }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
+    }
+
     @Nullable
     private Zombie getZombieFromState(AnimationEvent<ReplacedZombie> state) {
         List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
