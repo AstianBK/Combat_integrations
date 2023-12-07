@@ -83,7 +83,7 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
             if (item == currentEntity.getMainHandItem()) {
                 if (trident) {
                     stack.mulPose(Vector3f.XP.rotationDegrees(180F));
-                    stack.translate(0.0D,-0.05D,0.0D);
+                    stack.translate(-0.1D,-0.05D,0.0D);
                 }else {
                     stack.translate(0.05,-0.25D,-0.5D);
                 }

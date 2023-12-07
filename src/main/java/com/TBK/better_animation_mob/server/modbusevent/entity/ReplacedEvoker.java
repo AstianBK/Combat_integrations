@@ -34,7 +34,7 @@ public class ReplacedEvoker implements IAnimatable {
                 state.getController().setAnimation(builder.loop("evoker.spellfang"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.loop("evoker.idlebody"));
+                state.getController().setAnimation(builder.loop("evoker.idle"));
             }
 
             return PlayState.CONTINUE;

@@ -44,7 +44,7 @@ public class ReplacedPiglin implements IAnimatable {
                     state.getController().setAnimation(new AnimationBuilder().addAnimation(raider.isAggressive()?"piglin.move2":"piglin.move", ILoopType.EDefaultLoopTypes.LOOP));
                 }else if(raider.getAttackAnim(state.getPartialTick())>0) {
                     state.getController().setAnimationSpeed(3F);
-                    state.getController().setAnimation(new AnimationBuilder().playAndHold(("piglin.attack"+((ICombos)raider).getCombo())));
+                    state.getController().setAnimation(new AnimationBuilder().loop(("piglin.attack"+((ICombos)raider).getCombo())));
                 }else {
                     state.getController().setAnimationSpeed(1.0F);
                     state.getController().setAnimation(new AnimationBuilder().addAnimation("piglin.idle", ILoopType.EDefaultLoopTypes.LOOP));

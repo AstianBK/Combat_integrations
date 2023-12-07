@@ -4,8 +4,6 @@ import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.Ravager;
-import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -27,7 +25,7 @@ public class ReplacedWitherSkeleton extends ReplacedSkeleton{
             if (zombie == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
 
-            if (isMove) {
+            if (isMove && zombie.getAttackAnim(state.getPartialTick())==0) {
                 state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);
                 state.getController().setAnimation(new AnimationBuilder().loop("skeleton.moveAlt"));
             }else if(zombie.getAttackAnim(state.getPartialTick())>0){
