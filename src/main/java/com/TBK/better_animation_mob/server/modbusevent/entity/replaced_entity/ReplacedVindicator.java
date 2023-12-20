@@ -1,7 +1,5 @@
-package com.TBK.better_animation_mob.server.modbusevent.entity.svr;
+package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
 
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedVindicator;
-import com.teamabnormals.savage_and_ravage.common.entity.monster.Griefer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractIllager;
@@ -18,28 +16,33 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedGriefer implements IAnimatable {
+public class ReplacedVindicator implements IAnimatable {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
-
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
-            Griefer raider = getRaiderFromState(state);
+        data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
+            AbstractIllager raider = getRaiderFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
+
+            if(raider.getArmPose().equals(AbstractIllager.IllagerArmPose.ATTACKING) && raider.getAttackAnim(state.getPartialTick()) == 0){
+                builder.addAnimation("vindicator.move2");
+            }
+            if(raider.hurtTime>0){
+                state.getController().setAnimationSpeed(3.0F);
+                state.getController().setAnimation(builder.playOnce("vindicator.hurt"));
+                return PlayState.CONTINUE;
+            }
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            if (isMove && raider.getAttackAnim(state.getPartialTick()) == 0 && raider.getKickTicks()==0) {
-                state.getController().setAnimationSpeed(raider.isAggressive()?2.0F : 1.0F);
-                state.getController().setAnimation(builder.addAnimation("griefer.move", ILoopType.EDefaultLoopTypes.LOOP));
+            if (isMove && raider.getAttackAnim(state.getPartialTick()) == 0) {
+                state.getController().setAnimationSpeed(raider.isAggressive()?3.0F : 1.0F);
+                state.getController().setAnimation(builder.addAnimation("vindicator.move", ILoopType.EDefaultLoopTypes.LOOP));
             }else if(raider.getAttackAnim(state.getPartialTick())>0) {
-                state.getController().setAnimationSpeed(7F);
-                state.getController().setAnimation(builder.loop("griefer.attack2"));
-            }else if(raider.getKickTicks()>0) {
-                state.getController().setAnimationSpeed(5F);
-                state.getController().setAnimation(builder.playOnce("griefer.attack"));
+                state.getController().setAnimationSpeed(8.0F);
+                state.getController().setAnimation(builder.playOnce("vindicator.attack"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.addAnimation("griefer.idle", ILoopType.EDefaultLoopTypes.LOOP));
+                state.getController().setAnimation(builder.addAnimation("vindicator.idle", ILoopType.EDefaultLoopTypes.LOOP));
             }
             return PlayState.CONTINUE;
         }));
@@ -50,12 +53,13 @@ public class ReplacedGriefer implements IAnimatable {
         return this.factory;
     }
 
+
     @Nullable
-    private Griefer getRaiderFromState(AnimationEvent<ReplacedGriefer> state) {
+    private AbstractIllager getRaiderFromState(AnimationEvent<ReplacedVindicator> state) {
         List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
         if (list.isEmpty()) return null;
         Entity entity = list.get(0);
-        if (!(entity instanceof Griefer enderman)) return null;
+        if (!(entity instanceof AbstractIllager enderman)) return null;
         return enderman;
     }
 }

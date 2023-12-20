@@ -1,6 +1,6 @@
-package com.TBK.better_animation_mob.server.modbusevent.entity.svr;
+package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr;
 
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedVindicator;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedVindicator;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractIllager;

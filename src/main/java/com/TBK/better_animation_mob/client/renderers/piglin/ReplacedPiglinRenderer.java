@@ -2,12 +2,9 @@ package com.TBK.better_animation_mob.client.renderers.piglin;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.layers.ArmorGeckoLayer;
-import com.TBK.better_animation_mob.client.models.illager.ReplacedVindicatorModel;
 import com.TBK.better_animation_mob.client.models.piglin.ReplacedPiglinModel;
 import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
-import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedPiglin;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedVindicator;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedPiglin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.model.HumanoidModel;
@@ -16,18 +13,14 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.entity.monster.Vindicator;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
-import net.minecraft.world.entity.monster.piglin.Piglin;
-import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 
-public class ReplacedPiglinRenderer<T extends AbstractPiglin,P extends ReplacedPiglin> extends ExtendedGeoReplacedEntityRenderer<T,P> {
+public class ReplacedPiglinRenderer<T extends AbstractPiglin,P extends ReplacedPiglin<T>> extends ExtendedGeoReplacedEntityRenderer<T,P> {
     public ReplacedPiglinRenderer(EntityRendererProvider.Context renderManager){
         this(renderManager,new ReplacedPiglinModel<>(),(P) new ReplacedPiglin(),new ResourceLocation("textures/entity/piglin/piglin.png"));
     }

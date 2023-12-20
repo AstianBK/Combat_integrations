@@ -14,11 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements ICombos {
-    @Unique
-    int proyectoA$count;
+    public int proyectoA$count;
     protected LivingEntityMixin(EntityType<? extends LivingEntity> p_20966_, Level p_20967_) {
         super(p_20966_, p_20967_);
-        this.proyectoA$count =0;
+        this.proyectoA$count = 1;
     }
 
     @Inject(at = @At("RETURN"), method = "swing(Lnet/minecraft/world/InteractionHand;Z)V")
@@ -26,7 +25,7 @@ public abstract class LivingEntityMixin extends Entity implements ICombos {
         if(this.proyectoA$count < 3){
             this.proyectoA$count++;
         }else {
-            this.proyectoA$count =1;
+            this.proyectoA$count = 1;
         }
     }
 

@@ -1,12 +1,9 @@
-package com.TBK.better_animation_mob.server.modbusevent.entity;
+package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
 
 import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.item.UseAnim;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -25,7 +22,7 @@ public class ReplacedZombie implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
             Zombie zombie = getZombieFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
             if (zombie == null) return PlayState.STOP;
@@ -44,7 +41,7 @@ public class ReplacedZombie implements IAnimatable {
                 state.getController().setAnimationSpeed(zombie.isAggressive()?1.5F : 1.4F);
                 state.getController().setAnimation(builder.loop( zombie.isAggressive() ? "zombie.move2" : "zombie.move"));
             }else if(zombie.getAttackAnim(state.getPartialTick())>0) {
-                state.getController().setAnimationSpeed(2.5F);
+                state.getController().setAnimationSpeed(4F);
                 state.getController().setAnimation(builder.playOnce(zombie instanceof ICombos ?( "zombie.attack"+((ICombos) zombie).getCombo()): "zombie.attack1"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);

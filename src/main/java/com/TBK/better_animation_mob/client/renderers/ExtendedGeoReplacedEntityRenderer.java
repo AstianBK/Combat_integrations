@@ -63,6 +63,7 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
     public Matrix4f getDispatchedMat(){
         return this.dispatchedMat;
     }
+
     public float getCurrentPartialTicks(){
         return this.currentPartialTicks;
     }

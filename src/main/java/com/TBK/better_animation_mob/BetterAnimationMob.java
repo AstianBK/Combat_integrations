@@ -1,5 +1,6 @@
 package com.TBK.better_animation_mob;
 
+import com.TBK.better_animation_mob.client.renderers.ReplacedSpiderRenderer;
 import com.TBK.better_animation_mob.client.renderers.illager.*;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinBruteRenderer;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinRenderer;
@@ -10,6 +11,9 @@ import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedDrownedRende
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedHuskRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedZombieRenderer;
 import com.TBK.better_animation_mob.client.util.Compati;
+import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
+import com.TBK.better_animation_mob.server.modbusevent.network.PacketHandler;
+import com.TBK.better_animation_mob.server.modbusevent.provider.PatchProvider;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEffect;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEntityTypes;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkItems;
@@ -36,8 +40,14 @@ public class BetterAnimationMob {
         BkEntityTypes.register(modEventBus);
         BkEffect.EFFECT.register(modEventBus);
         BkItems.ITEMS.register(modEventBus);
+        PacketHandler.registerMessages();
         modEventBus.register(this);
         modEventBus.addListener(this::registerRenderer);
+        modEventBus.addListener(this::Common);
+        modEventBus.addListener(Capabilities::registerCapabilities);
+    }
+    private void Common(final FMLCommonSetupEvent event) {
+        event.enqueueWork(PatchProvider::registerEntityPatches);
     }
     public void registerRenderer(FMLCommonSetupEvent event) {
         //Zombies
@@ -59,6 +69,9 @@ public class BetterAnimationMob {
         //Piglins
         EntityRenderers.register(EntityType.PIGLIN_BRUTE, ReplacedPiglinBruteRenderer::new);
         EntityRenderers.register(EntityType.PIGLIN, ReplacedPiglinRenderer::new);
+
+        //Spider
+        EntityRenderers.register(EntityType.SPIDER, ReplacedSpiderRenderer::new);
 
         if(isLoaded(Compati.SAVAGE_AND_RAVEGER)){
             EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);

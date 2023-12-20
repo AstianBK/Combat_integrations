@@ -1,17 +1,14 @@
-package com.TBK.better_animation_mob.server.modbusevent.entity;
+package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
 
-import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.UseAnim;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -21,7 +18,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedSkeleton implements IAnimatable {
+public class ReplacedSkeleton<T extends AbstractSkeleton> extends ReplacedEntity<T> {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
 
@@ -54,7 +51,7 @@ public class ReplacedSkeleton implements IAnimatable {
         return factory;
     }
     @Nullable
-    private AbstractSkeleton getZombieFromState(AnimationEvent<ReplacedSkeleton> state) {
+    private AbstractSkeleton getZombieFromState(AnimationEvent<ReplacedSkeleton<T>> state) {
         List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
         if (list.isEmpty()) return null;
         Entity entity = list.get(0);

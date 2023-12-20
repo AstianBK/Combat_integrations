@@ -82,7 +82,7 @@
 			}
 		},
 		"piglin.attack1": {
-			"loop": true,
+			"loop": false,
 			"animation_length": 1,
 			"bones": {
 				"Body": {
@@ -125,7 +125,7 @@
 			}
 		},
 		"piglin.attack2": {
-			"loop": true,
+			"loop": false,
 			"animation_length": 1,
 			"bones": {
 				"Body": {
@@ -133,42 +133,42 @@
 					"position": [0, 0, 0]
 				},
 				"Head": {
-					"rotation": [-15, "-24+math.sin(query.anim_time*90)*60", 9],
-					"position": [0, -0.4, "-math.sin(query.anim_time*90)*1"]
+					"rotation": [-15, "-24+math.sin(query.anim_time*180)*60", 9],
+					"position": [0, -0.4, "-math.sin(query.anim_time*180)*1"]
 				},
 				"leftear": {
-					"rotation": ["17.5-math.sin(query.anim_time*180)*15", 0, "-math.sin(query.anim_time*90)*20"]
+					"rotation": ["17.5-math.sin(query.anim_time*360)*15", 0, "-math.sin(query.anim_time*180)*20"]
 				},
 				"rightear": {
-					"rotation": ["math.sin(query.anim_time*180)*15", 0, "math.sin(query.anim_time*90)*30"]
+					"rotation": ["math.sin(query.anim_time*360)*15", 0, "math.sin(query.anim_time*180)*30"]
 				},
 				"RightArm": {
-					"rotation": ["-39.5-math.sin(query.anim_time*90)*53", "80-math.sin(query.anim_time*90)*131", "8-math.sin(query.anim_time*90)*85"],
+					"rotation": ["-39.5-math.sin(query.anim_time*180)*53", "80-math.sin(query.anim_time*180)*131", "8-math.sin(query.anim_time*180)*85"],
 					"position": [0, 0, -1.7]
 				},
 				"LeftArm": {
-					"rotation": ["-197.021-math.sin(query.anim_time*90)*15", 0, 98.6087],
+					"rotation": ["-197.021-math.sin(query.anim_time*180)*15", 0, 98.6087],
 					"position": [0.9, 0, -0.1]
 				},
 				"RightLeg": {
-					"rotation": ["-29.849+math.sin(query.anim_time*90)*10", 2.43553, 7.09567]
+					"rotation": ["-29.849+math.sin(query.anim_time*180)*10", 2.43553, 7.09567]
 				},
 				"LeftLeg": {
-					"rotation": ["4.9155-math.sin(query.anim_time*90)*10", -7.38542, -8.69038]
+					"rotation": ["4.9155-math.sin(query.anim_time*180)*10", -7.38542, -8.69038]
 				},
 				"main": {
-					"rotation": [15, "30-math.sin(query.anim_time*90)*90", 0]
+					"rotation": [15, "60-math.sin(query.anim_time*180)*150", 0]
 				},
 				"nose": {
 					"scale": "1-math.sin(query.anim_time*180)*0.03"
 				},
 				"ItemSlotRight": {
-					"rotation": [0, 0, 0]
+					"rotation": [0, 180, 0]
 				}
 			}
 		},
 		"piglin.attack3": {
-			"loop": true,
+			"loop": false,
 			"animation_length": 1,
 			"bones": {
 				"Body": {

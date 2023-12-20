@@ -1,11 +1,14 @@
 package com.TBK.better_animation_mob.client.models;
 
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-
+@OnlyIn(Dist.CLIENT)
 public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntityModel<T> {
     @Override
     public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
@@ -19,21 +22,22 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
             GeoBone rightLeg = (GeoBone)this.getBone("RightLeg");
             GeoBone leftLeg = (GeoBone)this.getBone("LeftLeg");
             GeoBone main = this.getModel(this.getModelResource(animatable)).getBone("main").isPresent() ? this.getModel(this.getModelResource(animatable)).getBone("main").get() : null;
+            Minecraft mc = Minecraft.getInstance();
             if(data.isChild){
                 float f = 1.5F/2.0F;
                 float f1 = 1.0F/2.0F;
                 head.setScale(f,f,f);
-                head.addPosition(0.0F, -13.0F,0.0F);
+                head.setPosition(-4F, 24F-13F, -4F);
                 body.setScale(f1,f1,f1);
-                body.addPosition(0.0F,-12.0F,0.0F);
+                body.setPosition(-4F, 0F, -2F);
                 rightArm.setScale(f1,f1,f1);
-                rightArm.addPosition(2.5F,-11.0F,0.0F);
+                rightArm.setPosition(5.5F,1.0F,-2.0F);
                 leftArm.setScale(f1,f1,f1);
-                leftArm.addPosition(-2.5F,-11.0F,0.0F);
+                leftArm.setPosition(-1.5F,1.0F,-2.0F);
                 rightLeg.setScale(f1,f1,f1);
-                rightLeg.addPosition(1.0F,-6.0F,0.0F);
+                rightLeg.setPosition(-2.9F, -6.0F, -2F);
                 leftLeg.setScale(f1,f1,f1);
-                leftLeg.addPosition(-1.0F,-6.0F,0.0F);
+                leftLeg.setPosition(-1.1F,-6.0F,-2.0F);
             }else {
                 head.setScale(1,1,1);
                 body.setScale(1,1,1);
@@ -44,10 +48,16 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
             }
 
             if(data.isSitting){
-                rightLeg.addRotation(1.25664F, -0.261799F,0.0F);
-                leftLeg.addRotation(1.25664F, 0.261799F,0.0F);
+                rightLeg.setRotation(1.25664F, -0.261799F,0.0F);
+                leftLeg.setRotation(1.25664F, 0.261799F,0.0F);
                 if(main!=null){
-                    main.addPosition(0.0F,1.0F,0.0F);
+                    main.setPosition(0.0F,1.0F,0.0F);
+                }
+            }else {
+                rightLeg.setRotation(rightLeg.getRotation());
+                leftLeg.setRotation(leftLeg.getRotation());
+                if(main!=null){
+                    main.setPositionY(main.getPositionY());
                 }
             }
         }

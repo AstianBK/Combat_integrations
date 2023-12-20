@@ -2,7 +2,7 @@ package com.TBK.better_animation_mob.client.renderers.illager;
 
 import com.TBK.better_animation_mob.client.models.illager.ReplacedVindicatorModel;
 import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedVindicator;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedVindicator;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

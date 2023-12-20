@@ -6,6 +6,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 import java.util.ArrayList;
@@ -43,7 +44,6 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
     public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
         List<Object> list = new ArrayList<Object>(animationEvent.getExtraData());
         list.add(this.currentEntity.get());
-
         AnimationEvent<?> event = new AnimationEvent<>(
                 animatable,
                 animationEvent.getLimbSwing(),
@@ -51,17 +51,14 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
                 animationEvent.getPartialTick(),
                 animationEvent.isMoving(),
                 list);
-        animationEvent=event;
-        super.setCustomAnimations(animatable, instanceId, event);
-
         EntityModelData data = (EntityModelData) event.getExtraDataOfType(EntityModelData.class).get(0);
         if (data!=null){
             GeoBone head = (GeoBone)this.getBone("Head");
-            if(this.canMoveHead(this.currentEntity.get(),event)){
-                head.setRotationX(head.getRotationX()+data.headPitch * ((float) Math.PI / 180F));
-                head.setRotationY(head.getRotationY()+data.netHeadYaw * ((float) Math.PI / 180F));
-            }
+            head.setRotationX(data.headPitch * ((float) Math.PI / 180F));
+            head.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
+
         }
+        super.setCustomAnimations(animatable, instanceId, event);
     }
 
     public boolean canMoveHead(LivingEntity entity,AnimationEvent<?> event){

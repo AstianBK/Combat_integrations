@@ -1,7 +1,7 @@
 package com.TBK.better_animation_mob.client.renderers.zombie;
 
 import com.TBK.better_animation_mob.client.models.zombie.ReplacedHuskModel;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedZombie;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedZombie;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

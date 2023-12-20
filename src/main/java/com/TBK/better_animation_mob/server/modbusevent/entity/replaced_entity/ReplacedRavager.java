@@ -1,4 +1,4 @@
-package com.TBK.better_animation_mob.server.modbusevent.entity;
+package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
 
 import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
 import net.minecraft.world.entity.Entity;
@@ -7,7 +7,6 @@ import net.minecraft.world.entity.monster.Ravager;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;

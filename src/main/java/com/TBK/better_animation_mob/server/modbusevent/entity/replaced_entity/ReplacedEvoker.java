@@ -1,6 +1,5 @@
-package com.TBK.better_animation_mob.server.modbusevent.entity;
+package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
 
-import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.*;
