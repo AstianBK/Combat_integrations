@@ -44,6 +44,7 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
     public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
         List<Object> list = new ArrayList<Object>(animationEvent.getExtraData());
         list.add(this.currentEntity.get());
+
         AnimationEvent<?> event = new AnimationEvent<>(
                 animatable,
                 animationEvent.getLimbSwing(),
@@ -51,7 +52,9 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
                 animationEvent.getPartialTick(),
                 animationEvent.isMoving(),
                 list);
+
         EntityModelData data = (EntityModelData) event.getExtraDataOfType(EntityModelData.class).get(0);
+
         if (data!=null){
             GeoBone head = (GeoBone)this.getBone("Head");
             head.setRotationX(data.headPitch * ((float) Math.PI / 180F));

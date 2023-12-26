@@ -32,7 +32,7 @@ public class ReplacedPiglinModel<T extends IAnimatable> extends ReplacedHumanoid
     @Override
     public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
         super.setCustomAnimations(animatable, instanceId, animationEvent);
-        /*EntityModelData extraData = (EntityModelData) animationEvent.getExtraDataOfType(EntityModelData.class).get(0);
+        EntityModelData extraData = (EntityModelData) animationEvent.getExtraDataOfType(EntityModelData.class).get(0);
         IBone head = this.getAnimationProcessor().getBone("Head");
         IBone rightArm = this.getAnimationProcessor().getBone("RightArm");
         IBone leftArm = this.getAnimationProcessor().getBone("LeftArm");
@@ -47,7 +47,7 @@ public class ReplacedPiglinModel<T extends IAnimatable> extends ReplacedHumanoid
 
             leftArm.setRotationY(-0.5F);
             leftArm.setRotationX(0.9F);
-        }*/
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.TBK.better_animation_mob.client.renderers;
 
+import com.TBK.better_animation_mob.client.layers.SpiderEyeGeckoLayer;
 import com.TBK.better_animation_mob.client.models.ReplacedSpiderModel;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedSpider;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,6 +13,7 @@ public class ReplacedSpiderRenderer<T extends Spider,P extends ReplacedSpider> e
 
     public ReplacedSpiderRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager,new ReplacedSpiderModel<>(),(P) new ReplacedSpider());
+        this.addLayer(new SpiderEyeGeckoLayer<>(this));
     }
 
     @Override

@@ -22,7 +22,6 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
             GeoBone rightLeg = (GeoBone)this.getBone("RightLeg");
             GeoBone leftLeg = (GeoBone)this.getBone("LeftLeg");
             GeoBone main = this.getModel(this.getModelResource(animatable)).getBone("main").isPresent() ? this.getModel(this.getModelResource(animatable)).getBone("main").get() : null;
-            Minecraft mc = Minecraft.getInstance();
             if(data.isChild){
                 float f = 1.5F/2.0F;
                 float f1 = 1.0F/2.0F;
@@ -33,7 +32,7 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
                 rightArm.setScale(f1,f1,f1);
                 rightArm.setPosition(2.3F, -11F, body.getPositionZ());
                 leftArm.setScale(f1,f1,f1);
-                leftArm.setPosition(-2.3F, -11, 0.1F+body.getPositionZ());
+                leftArm.setPosition(-2.3F, -11, body.getPositionZ());
                 rightLeg.setScale(f1,f1,f1);
                 rightLeg.setPosition(1F, -6.0F, -2F);
                 leftLeg.setScale(f1,f1,f1);

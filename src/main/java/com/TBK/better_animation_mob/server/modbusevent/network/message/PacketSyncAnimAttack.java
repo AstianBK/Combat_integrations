@@ -1,17 +1,13 @@
 package com.TBK.better_animation_mob.server.modbusevent.network.message;
 
-import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
-import com.TBK.better_animation_mob.server.modbusevent.entity.parch.PiglinPatch;
 import com.TBK.better_animation_mob.server.modbusevent.network.Handler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 

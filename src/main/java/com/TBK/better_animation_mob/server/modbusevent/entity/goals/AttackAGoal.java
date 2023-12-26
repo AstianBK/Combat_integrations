@@ -1,19 +1,10 @@
 package com.TBK.better_animation_mob.server.modbusevent.entity.goals;
 
-import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
-import com.TBK.better_animation_mob.server.modbusevent.entity.parch.PiglinPatch;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedEntity;
-import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedPiglin;
-import com.TBK.better_animation_mob.server.modbusevent.network.PacketHandler;
-import com.TBK.better_animation_mob.server.modbusevent.network.message.PacketSyncAnimAttack;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
-import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.pathfinder.Path;
 
