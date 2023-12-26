@@ -53,7 +53,7 @@ public class ReplacedGriefer<T extends Griefer> extends ReplacedEntity<T> {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
             Griefer raider = getRaiderFromState(state);
             ReplacedGriefer replacedGriefer = getPatch(raider, ReplacedGriefer.class);
             AnimationBuilder builder=new AnimationBuilder();
