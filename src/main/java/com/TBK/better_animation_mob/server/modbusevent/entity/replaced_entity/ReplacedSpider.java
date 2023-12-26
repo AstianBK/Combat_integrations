@@ -42,15 +42,14 @@ public class ReplacedSpider<T extends Spider> extends ReplacedEntity<T> {
         ModBusEvent.removeMeleeGoal(this.replaced,goals);
         goals.forEach(this.replaced.goalSelector::removeGoal);
 
-        this.replaced.goalSelector.addGoal(4,new SpiderAttackAGoal<>(this.replaced,1.0D,true,this));
-
+        this.replaced.goalSelector.addGoal(4,new SpiderAttackAGoal<>(this.replaced,this));
     }
 
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
             Spider spider = getSpiderFromState(state);
-            ReplacedSpider<?> replacedSpider = Capabilities.getEntityPatch(spider, ReplacedSpider.class);
+            ReplacedSpider<?> replacedSpider = getPatch(spider,ReplacedSpider.class);
             AnimationBuilder builder=new AnimationBuilder();
             if (spider == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
@@ -59,8 +58,8 @@ public class ReplacedSpider<T extends Spider> extends ReplacedEntity<T> {
                 state.getController().setAnimationSpeed(5F);
                 state.getController().setAnimation(builder.loop("spider.move"));
             }else if(replacedSpider.getAttackTimer()>0) {
-                state.getController().setAnimationSpeed(1F);
-                state.getController().setAnimation(builder.playAndHold("spider.attack"));
+                state.getController().setAnimationSpeed(2F);
+                state.getController().setAnimation(builder.playAndHold("spider.attack"+getCombo(spider)));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.addAnimation("spider.idle", ILoopType.EDefaultLoopTypes.LOOP));

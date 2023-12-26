@@ -46,7 +46,7 @@ public class ModBusEvent {
 
     public static void removeBehavior(Brain<?> brain, Activity activity, int priority, Class targetBehaviorClass) {
         Set<Behavior<?>> set = (Set<Behavior<?>>) brain.availableBehaviorsByPriority.get(priority).get(activity);
-        System.out.print(set.removeIf((behavior) -> targetBehaviorClass.isInstance(behavior)));
+        set.removeIf((behavior) -> targetBehaviorClass.isInstance(behavior));
     }
 
     public static void replaceBehavior(Brain<?> brain, Activity activity, int priority, Class targetBehaviorClass, Behavior<?> newBehavior) {

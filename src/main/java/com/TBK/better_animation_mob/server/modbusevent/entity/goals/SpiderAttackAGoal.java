@@ -5,8 +5,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Spider;
 
 public class SpiderAttackAGoal<T extends Spider,P extends ReplacedSpider<T>> extends AttackAGoal<T,P>{
-    public SpiderAttackAGoal(T p_25552_, double p_25553_, boolean p_25554_, P patchMob) {
-        super(p_25552_, p_25553_, p_25554_, patchMob);
+    public SpiderAttackAGoal(T p_25552_, P patchMob) {
+        super(p_25552_, 1.0D, true, patchMob);
     }
 
     public boolean canUse() {

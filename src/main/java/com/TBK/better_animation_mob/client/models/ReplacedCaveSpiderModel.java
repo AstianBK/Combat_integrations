@@ -8,7 +8,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class ReplacedSpiderModel <T extends IAnimatable>extends ReplacedQuatrupleModel<T> {
+public class ReplacedCaveSpiderModel<T extends IAnimatable>extends ReplacedSpiderModel<T> {
     @Override
     public ResourceLocation getModelResource(T object) {
         return new ResourceLocation(BetterAnimationMob.MODID,"geo/spider.geo.json");
@@ -16,7 +16,7 @@ public class ReplacedSpiderModel <T extends IAnimatable>extends ReplacedQuatrupl
 
     @Override
     public ResourceLocation getTextureResource(T object) {
-        return new ResourceLocation("textures/entity/spider/spider.png");
+        return new ResourceLocation("textures/entity/spider/cave_spider.png");
     }
 
     @Override

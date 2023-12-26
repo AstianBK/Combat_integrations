@@ -1,17 +1,12 @@
 package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
 
-import com.TBK.better_animation_mob.server.modbusevent.ModBusEvent;
 import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
-import com.TBK.better_animation_mob.server.modbusevent.entity.goals.MeleeAttackPatch;
+import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.network.PacketHandler;
 import com.TBK.better_animation_mob.server.modbusevent.network.message.PacketSyncAnimAttack;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.behavior.MeleeAttack;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
-import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -66,10 +61,16 @@ public class ReplacedEntity <T extends Mob> implements IAnimatable {
 
     }
 
+    public int getCombo(LivingEntity livingEntity){
+        return livingEntity instanceof ICombos ?((ICombos)livingEntity).getCombo():1;
+    }
+
     public void playAttack(){
         this.resetCooldownAttack();
         this.plusCombo();
-        PacketHandler.sendToAllTracking(new PacketSyncAnimAttack(this.replaced,0),this.replaced);
+        if(!this.replaced.level.isClientSide){
+            PacketHandler.sendToAllTracking(new PacketSyncAnimAttack(this.replaced,0),this.replaced);
+        }
 
     }
 
@@ -98,5 +99,9 @@ public class ReplacedEntity <T extends Mob> implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return null;
+    }
+
+    public <P extends ReplacedEntity<T>> P getPatch(LivingEntity replaced,Class<P> pClass){
+        return Capabilities.getEntityPatch(replaced,pClass);
     }
 }

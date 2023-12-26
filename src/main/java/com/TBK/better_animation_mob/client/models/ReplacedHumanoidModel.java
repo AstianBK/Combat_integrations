@@ -27,17 +27,17 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
                 float f = 1.5F/2.0F;
                 float f1 = 1.0F/2.0F;
                 head.setScale(f,f,f);
-                head.setPosition(-4F, 24F-13F, -4F);
+                head.setPosition(0F, -11.7F, 0.8F-3);
                 body.setScale(f1,f1,f1);
-                body.setPosition(-4F, 0F, -2F);
+                body.setPosition(0F, -12F, -1);
                 rightArm.setScale(f1,f1,f1);
-                rightArm.setPosition(5.5F,1.0F,-2.0F);
+                rightArm.setPosition(2.3F, -11F, body.getPositionZ());
                 leftArm.setScale(f1,f1,f1);
-                leftArm.setPosition(-1.5F,1.0F,-2.0F);
+                leftArm.setPosition(-2.3F, -11, 0.1F+body.getPositionZ());
                 rightLeg.setScale(f1,f1,f1);
-                rightLeg.setPosition(-2.9F, -6.0F, -2F);
+                rightLeg.setPosition(1F, -6.0F, -2F);
                 leftLeg.setScale(f1,f1,f1);
-                leftLeg.setPosition(-1.1F,-6.0F,-2.0F);
+                leftLeg.setPosition(-1F,-6.0F,-2.0F);
             }else {
                 head.setScale(1,1,1);
                 body.setScale(1,1,1);

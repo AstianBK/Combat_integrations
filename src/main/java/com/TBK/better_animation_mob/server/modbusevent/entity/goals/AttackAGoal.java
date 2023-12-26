@@ -29,7 +29,7 @@ public class AttackAGoal< P extends Mob,T extends ReplacedEntity<P>> extends Goa
     private double pathedTargetY;
     private double pathedTargetZ;
     private int ticksUntilNextPathRecalculation;
-    private int ticksUntilNextAttack;
+    protected int ticksUntilNextAttack;
     private final int attackInterval = 20;
     private long lastCanUseCheck;
     private static final long COOLDOWN_BETWEEN_CAN_USE_CHECKS = 20L;
@@ -94,9 +94,7 @@ public class AttackAGoal< P extends Mob,T extends ReplacedEntity<P>> extends Goa
     }
 
     public void start() {
-        if(this.patchMob.getAttackTimer()==0){
-            this.mob.getNavigation().moveTo(this.path, this.speedModifier);
-        }
+        this.mob.getNavigation().moveTo(this.path, this.speedModifier);
         this.mob.setAggressive(true);
         this.ticksUntilNextPathRecalculation = 0;
     }
@@ -155,7 +153,6 @@ public class AttackAGoal< P extends Mob,T extends ReplacedEntity<P>> extends Goa
     protected void checkAndPerformAttack(LivingEntity p_25557_, double p_25558_) {
         double d0 = this.getAttackReachSqr(p_25557_);
         if (p_25558_ <= d0 && this.patchMob.getAttackTimer() <= 0 && this.ticksUntilNextAttack<=0 ) {
-            this.mob.getNavigation().stop();
             this.resetAttackCooldown();
             this.patchMob.playAttack();
         }
@@ -166,5 +163,13 @@ public class AttackAGoal< P extends Mob,T extends ReplacedEntity<P>> extends Goa
     }
     protected double getAttackReachSqr(LivingEntity p_25556_) {
         return (double)(this.mob.getBbWidth() * 2.0F * this.mob.getBbWidth() * 2.0F + p_25556_.getBbWidth());
+    }
+
+    protected int getTicksUntilNextAttack() {
+        return this.ticksUntilNextAttack;
+    }
+
+    protected int getAttackInterval() {
+        return this.adjustedTickDelay(20);
     }
 }
