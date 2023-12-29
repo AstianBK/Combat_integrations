@@ -37,15 +37,6 @@ public class ReplacedPiglinModel<T extends IAnimatable> extends ReplacedHumanoid
         IBone rightArm = this.getAnimationProcessor().getBone("RightArm");
         IBone leftArm = this.getAnimationProcessor().getBone("LeftArm");
         AbstractPiglin abstractIllager=((AbstractPiglin)this.getCurrentEntity().get());
-        float pLimbSwing = animationEvent.getLimbSwing();
-        float pLimbSwingAmount = animationEvent.getLimbSwingAmount();
-        float pAgeInTicks = abstractIllager.tickCount;
-        float pNetHeadYaw = extraData.netHeadYaw;
-        float pHeadPitch = extraData.headPitch;
-        float f = Mth.cos(pLimbSwing * 0.261799F) * pLimbSwingAmount * 0.5F;
-
-        head.setRotationY(pNetHeadYaw * ((float)Math.PI / 180F));
-        head.setRotationX(pHeadPitch * ((float)Math.PI / 180F));
 
         PiglinArmPose abstractillager$illagerarmpose = abstractIllager.getArmPose();
         if (abstractillager$illagerarmpose == PiglinArmPose.CROSSBOW_CHARGE) {

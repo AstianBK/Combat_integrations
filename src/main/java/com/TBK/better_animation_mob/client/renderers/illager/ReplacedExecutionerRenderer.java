@@ -1,7 +1,7 @@
 package com.TBK.better_animation_mob.client.renderers.illager;
 
 import com.TBK.better_animation_mob.client.models.illager.ReplacedExecutionerModel;
-import com.TBK.better_animation_mob.server.modbusevent.entity.svr.ReplacedIllagers;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedExecutioner;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.teamabnormals.savage_and_ravage.common.entity.monster.Executioner;
@@ -10,9 +10,9 @@ import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 
-public class ReplacedExecutionerRenderer<T extends Executioner,P extends ReplacedIllagers> extends ReplacedVindicatorRenderer<T,P>{
+public class ReplacedExecutionerRenderer<T extends Executioner,P extends ReplacedExecutioner<T>> extends ReplacedVindicatorRenderer<T,P>{
     public ReplacedExecutionerRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager,new ReplacedExecutionerModel<>(),(P) new ReplacedIllagers());
+        super(renderManager,new ReplacedExecutionerModel<>(),(P) new ReplacedExecutioner<T>());
     }
 
     @Override

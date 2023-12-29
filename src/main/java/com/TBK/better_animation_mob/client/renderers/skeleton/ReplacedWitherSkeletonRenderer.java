@@ -1,11 +1,8 @@
 package com.TBK.better_animation_mob.client.renderers.skeleton;
 
-import com.TBK.better_animation_mob.BetterAnimationMob;
-import com.TBK.better_animation_mob.client.layers.StrayGeckoLayer;
-import com.TBK.better_animation_mob.client.models.skeleton.ReplacedSkeletonModel;
 import com.TBK.better_animation_mob.client.models.skeleton.ReplacedWitherSkeletonModel;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedSkeleton;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedWitherSkeleton;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedSkeleton;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedWitherSkeleton;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
@@ -13,7 +10,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;

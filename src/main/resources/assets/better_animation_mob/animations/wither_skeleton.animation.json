@@ -66,7 +66,7 @@
 			}
 		},
 		"skeleton.attackAlt1": {
-			"loop": true,
+			"loop": false,
 			"animation_length": 1,
 			"bones": {
 				"main": {
@@ -118,7 +118,7 @@
 			}
 		},
 		"skeleton.attackAlt2": {
-			"loop": true,
+			"loop": false,
 			"animation_length": 1,
 			"bones": {
 				"main": {
@@ -160,7 +160,7 @@
 			}
 		},
 		"skeleton.attackAlt3": {
-			"loop": true,
+			"loop": false,
 			"animation_length": 1,
 			"bones": {
 				"main": {

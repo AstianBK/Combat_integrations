@@ -2,7 +2,7 @@ package com.TBK.better_animation_mob.client.renderers.illager;
 
 import com.TBK.better_animation_mob.client.models.illager.ReplacedVindicatorModel;
 import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
-import com.TBK.better_animation_mob.server.modbusevent.entity.ReplacedVindicator;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedVindicator;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -12,9 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 
-public class ReplacedVindicatorRenderer<T extends Vindicator,P extends ReplacedVindicator> extends ExtendedGeoReplacedEntityRenderer<T,P> {
+public class ReplacedVindicatorRenderer<T extends Vindicator,P extends ReplacedVindicator<T>> extends ExtendedGeoReplacedEntityRenderer<T,P> {
     public ReplacedVindicatorRenderer(EntityRendererProvider.Context renderManager){
-        this(renderManager,new ReplacedVindicatorModel<>(),(P) new ReplacedVindicator());
+        this(renderManager,new ReplacedVindicatorModel<>(),(P) new ReplacedVindicator<T>());
     }
     public ReplacedVindicatorRenderer(EntityRendererProvider.Context renderManager,ReplacedVindicatorModel<IAnimatable> model,P replaced) {
         super(renderManager, model, replaced);
