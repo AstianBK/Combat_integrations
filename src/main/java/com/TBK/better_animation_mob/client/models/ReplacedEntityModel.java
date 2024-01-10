@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.snapshot.BoneSnapshot;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
@@ -55,13 +56,21 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
 
         EntityModelData data = (EntityModelData) event.getExtraDataOfType(EntityModelData.class).get(0);
 
-        if (data!=null){
+        if (data!=null && canMoveHead(this.currentEntity.get(),animationEvent)){
             GeoBone head = (GeoBone)this.getBone("Head");
             head.setRotationX(data.headPitch * ((float) Math.PI / 180F));
             head.setRotationY(data.netHeadYaw * ((float) Math.PI / 180F));
 
         }
         super.setCustomAnimations(animatable, instanceId, event);
+    }
+
+    public void resetMain(GeoBone main){
+        for(GeoBone child:main.childBones){
+            BoneSnapshot initial=child.getInitialSnapshot();
+            child.setRotation(initial.rotationValueX, initial.rotationValueY, initial.rotationValueZ);
+            child.setPosition(initial.positionOffsetX, initial.positionOffsetY, initial.positionOffsetZ);
+        }
     }
 
     public boolean canMoveHead(LivingEntity entity,AnimationEvent<?> event){

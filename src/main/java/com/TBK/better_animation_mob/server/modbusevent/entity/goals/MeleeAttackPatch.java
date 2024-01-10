@@ -18,13 +18,15 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 public class MeleeAttackPatch extends Behavior<Mob> {
 
     private final int cooldownBetweenAttacks;
+    private final int cooldownBetweenHardAttack;
     private final ReplacedEntity<?> replacedPiglin;
 
 
-    public MeleeAttackPatch(ReplacedEntity<?> replacedPiglin) {
+    public MeleeAttackPatch(ReplacedEntity<?> replacedPiglin,int cooldownBetweenAttacks,int cooldownBetweenHardAttack) {
         super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryStatus.VALUE_ABSENT));
         this.replacedPiglin = replacedPiglin;
-        this.cooldownBetweenAttacks = 24;
+        this.cooldownBetweenAttacks = cooldownBetweenAttacks;
+        this.cooldownBetweenHardAttack=cooldownBetweenHardAttack;
     }
 
     protected boolean checkExtraStartConditions(ServerLevel p_23521_, Mob p_23522_) {
@@ -39,11 +41,19 @@ public class MeleeAttackPatch extends Behavior<Mob> {
         });
     }
 
+    @Override
+    protected boolean canStillUse(ServerLevel p_22545_, Mob p_22546_, long p_22547_) {
+        return super.canStillUse(p_22545_, p_22546_, p_22547_);
+    }
+
     protected void start(ServerLevel p_23524_, Mob p_23525_, long p_23526_) {
         LivingEntity livingentity = this.getAttackTarget(p_23525_);
         BehaviorUtils.lookAtEntity(p_23525_, livingentity);
-        this.replacedPiglin.playAttack();
-        p_23525_.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, (long)this.cooldownBetweenAttacks);
+        if(this.replacedPiglin.getAttackTimer()==0){
+            this.replacedPiglin.playAttack();
+            long cc=replacedPiglin.getCombo(p_23525_)==2 ? (long)this.cooldownBetweenHardAttack : (long)this.cooldownBetweenAttacks;
+            p_23525_.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true,cc);
+        }
     }
 
     @Override

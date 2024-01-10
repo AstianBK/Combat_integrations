@@ -65,7 +65,7 @@ public class ReplacedPiglin<T extends AbstractPiglin> extends ReplacedEntity<T> 
     @Override
     protected void replacedBehavior() {
         ModBusEvent.removeBehavior(this.replaced.getBrain(),Activity.FIGHT,12, MeleeAttack.class);
-        ModBusEvent.replaceBehavior(this.replaced.getBrain(),Activity.FIGHT, 12,MeleeAttackPatch.class,new MeleeAttackPatch(this));
+        ModBusEvent.replaceBehavior(this.replaced.getBrain(),Activity.FIGHT, 12,MeleeAttackPatch.class,new MeleeAttackPatch(this,24,24));
     }
 
     public void resetCooldownAttack(){
