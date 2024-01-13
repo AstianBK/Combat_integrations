@@ -2,6 +2,7 @@ package com.TBK.better_animation_mob;
 
 import com.TBK.better_animation_mob.client.renderers.ReplacedCaveSpiderRenderer;
 import com.TBK.better_animation_mob.client.renderers.ReplacedSpiderRenderer;
+import com.TBK.better_animation_mob.client.renderers.boss.ReplacedWardenRenderer;
 import com.TBK.better_animation_mob.client.renderers.illager.*;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinBruteRenderer;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinRenderer;
@@ -74,6 +75,9 @@ public class BetterAnimationMob {
         //Spider
         EntityRenderers.register(EntityType.SPIDER, ReplacedSpiderRenderer::new);
         EntityRenderers.register(EntityType.CAVE_SPIDER, ReplacedCaveSpiderRenderer::new);
+
+        //Boss
+        EntityRenderers.register(EntityType.WARDEN, ReplacedWardenRenderer::new);
 
         if(isLoaded(Compati.SAVAGE_AND_RAVEGER)){
             EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);

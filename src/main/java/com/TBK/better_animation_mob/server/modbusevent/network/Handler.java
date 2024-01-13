@@ -3,6 +3,7 @@ package com.TBK.better_animation_mob.server.modbusevent.network;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedEntity;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedPiglin;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedWarden;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,9 +19,9 @@ public class Handler {
     }
     @OnlyIn(Dist.CLIENT)
     public static void handleSyncCombo(Entity entity) {
-        ReplacedEntity<?> patch = Capabilities.getEntityPatch(entity, ReplacedEntity.class);
+        ReplacedWarden<?> patch = Capabilities.getEntityPatch(entity, ReplacedWarden.class);
         assert patch!=null;
-        patch.init(entity);
+        patch.playSonicBoom();
     }
 
     public static void handlerManager(int id , Entity entity){

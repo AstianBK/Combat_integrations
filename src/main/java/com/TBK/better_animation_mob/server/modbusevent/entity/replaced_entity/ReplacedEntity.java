@@ -66,22 +66,25 @@ public class ReplacedEntity <T extends Mob> implements IAnimatable {
     }
 
     public void playAttack(){
-        this.resetCooldownAttack();
         this.plusCombo();
+        this.resetCooldownAttack();
         if(!this.replaced.level.isClientSide){
             PacketHandler.sendToAllTracking(new PacketSyncAnimAttack(this.replaced,0),this.replaced);
         }
-
     }
 
     public void plusCombo() {
         if(this.replaced instanceof ICombos entity){
-            if(entity.getCombo() < 3) {
+            if(entity.getCombo() < getMaxCombo()) {
                 entity.setCombo(entity.getCombo()+1);
             }else {
                 entity.setCombo(1);
             }
         }
+    }
+
+    public int getMaxCombo(){
+        return 3;
     }
 
     public void resetCooldownAttack(){
