@@ -82,7 +82,7 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 10, EasingType.EaseInElastic, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
             IronGolem golem = getWardenFromState(state);
             ReplacedIronGolem<?> replacedWarden = getPatch(golem, ReplacedIronGolem.class);
             AnimationBuilder builder=new AnimationBuilder();
@@ -98,7 +98,7 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
             }
             return PlayState.CONTINUE;
         }));
-        data.addAnimationController(new AnimationController<>(this, "controller_legs", 0,EasingType.EaseInElastic, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller_legs", 10, state -> {
             IronGolem golem = getWardenFromState(state);
             ReplacedIronGolem<?> replacedWarden = getPatch(golem, ReplacedIronGolem.class);
             AnimationBuilder builder=new AnimationBuilder();

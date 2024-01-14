@@ -42,9 +42,9 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
     @Override
     public void init(Entity entity) {
         this.cooldownAttack=new int[]{
-                15,
                 24,
-                0
+                24,
+                15
         };
         super.init(entity);
     }
@@ -88,7 +88,7 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
 
     @Override
     public int isMomentHurt() {
-        return this.getCombo(this.replaced) == 2 ? 2 : 5;
+        return this.getCombo(this.replaced) == 2 ? 5 : 10;
     }
 
     @Override
@@ -124,7 +124,7 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
             Warden warden = getWardenFromState(state);
             ReplacedWarden<?> replacedWarden = getPatch(warden, ReplacedWarden.class);
             AnimationBuilder builder=new AnimationBuilder();
-            if (warden == null || warden.hasPose(Pose.DIGGING) || warden.hasPose(Pose.EMERGING)|| warden.hasPose(Pose.ROARING) || warden.hasPose(Pose.SNIFFING)) return PlayState.STOP;
+            if (warden == null || warden.hasPose(Pose.DIGGING) || warden.hasPose(Pose.EMERGING)) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             boolean isAgressive=warden.getClientAngerLevel()>40;
             if(replacedWarden.getAttackTimer()>0){
@@ -168,7 +168,7 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
                 state.getController().setAnimationSpeed(1D);
                 state.getController().setAnimation(builder.playOnce("warden.emerge"));
             }else if (warden.getPose().equals(Pose.ROARING)){
-                state.getController().setAnimationSpeed(0.7D);
+                state.getController().setAnimationSpeed(1D);
                 state.getController().setAnimation(builder.playOnce("warden.roar"));
             }
 
