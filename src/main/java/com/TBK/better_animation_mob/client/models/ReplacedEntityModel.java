@@ -70,6 +70,9 @@ public abstract class ReplacedEntityModel <T extends IAnimatable> extends Animat
             BoneSnapshot initial=child.getInitialSnapshot();
             child.setRotation(initial.rotationValueX, initial.rotationValueY, initial.rotationValueZ);
             child.setPosition(initial.positionOffsetX, initial.positionOffsetY, initial.positionOffsetZ);
+            if(!child.childBones.isEmpty()){
+                resetMain(child);
+            }
         }
     }
 

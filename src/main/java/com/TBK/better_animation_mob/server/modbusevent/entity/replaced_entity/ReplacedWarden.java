@@ -40,6 +40,16 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
     public int sonicBoomAnimTimer;
 
     @Override
+    public void init(Entity entity) {
+        this.cooldownAttack=new int[]{
+                15,
+                24,
+                0
+        };
+        super.init(entity);
+    }
+
+    @Override
     protected void replacedGoals() {
         replacedBehavior();
     }
@@ -94,7 +104,7 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
 
     @Override
     public void resetCooldownAttack() {
-        this.attackTimer = this.getCombo(this.replaced) == 2 ? 20 : 15;
+        this.attackTimer = this.cooldownAttack[this.getCombo(this.replaced)-1];
     }
 
     public void playSonicBoom(){

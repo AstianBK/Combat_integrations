@@ -36,8 +36,6 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
     @Override
     public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
         GeoBone body = (GeoBone) this.getBone("Body");
-        GeoBone rightArm = (GeoBone) this.getBone("right_arm");
-        IBone leftArm = this.getBone("left_arm");
         GeoBone main = this.getModel(this.getModelResource(animatable)).getBone("main").isPresent() ? this.getModel(this.getModelResource(animatable)).getBone("main").get() : null;
         if(main!=null){
             this.resetMain(main);
@@ -68,8 +66,8 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
     }
 
     private void animateWalk(float p_233539_, float p_233540_,GeoBone body) {
-        GeoBone leftLeg=(GeoBone) this.getBone("left_leg");
-        GeoBone rightLeg= (GeoBone) this.getBone("right_leg");
+        GeoBone leftArm=(GeoBone) this.getBone("left_arm");
+        GeoBone rightArm= (GeoBone) this.getBone("right_arm");
         float f = Math.min(0.5F, 3.0F * p_233540_);
         float f1 = p_233539_ * 0.8662F;
         float f2 = Mth.cos(f1);
@@ -77,16 +75,12 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
         float f4 = Math.min(0.35F, f);
         body.addRotationZ(0.1F * f3 * f);
         body.addRotationX(1.0F * f2 * f4);
-        /*leftLeg.setRotationX(1.0F * f2 * f);
-        rightLeg.setRotationX(1.0F * Mth.cos(f1 + (float)Math.PI) * f);
+        leftArm.addRotationX(-(0.8F * f2 * f));
         /*
-        this.leftLeg.xRot = 1.0F * f2 * f;
-        this.rightLeg.xRot = 1.0F * Mth.cos(f1 + (float)Math.PI) * f;
-        this.leftArm.xRot = -(0.8F * f2 * f);
-        this.leftArm.zRot = 0.0F;
-        this.rightArm.xRot = -(0.8F * f3 * f);
-        this.rightArm.zRot = 0.0F;
-        this.resetArmPoses();*/
+        leftArm.setRotationZ();
+        rightArm.setRotationZ();
+         */
+        rightArm.addRotationX(-(0.8F * f3 * f));
     }
 
     private void animateTendrils(Warden p_233527_, float p_233528_, float p_233529_) {

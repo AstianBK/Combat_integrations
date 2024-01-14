@@ -17,6 +17,11 @@ public class ReplacedEntity <T extends Mob> implements IAnimatable {
     protected int attackTimer;
     protected T replaced;
 
+    protected int[] cooldownAttack=new int[]{
+            24,
+            24,
+            24
+    };
     public void onJoinGame(LivingEntity entity, EntityJoinLevelEvent event){
         replacedGoals();
         replacedBehavior();
