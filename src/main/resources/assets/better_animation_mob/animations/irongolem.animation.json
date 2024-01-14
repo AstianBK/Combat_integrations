@@ -5,7 +5,7 @@
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
-				"body": {
+				"Body": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -96,18 +96,18 @@
 						}
 					}
 				},
-				"body2": {
+				"Body2": {
 					"rotation": {
 						"vector": [0, 0, 0]
 					}
 				}
 			}
 		},
-		"irongolem.walk": {
+		"irongolem.move": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
-				"body": {
+				"Body": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -232,7 +232,7 @@
 		"irongolem.attack1": {
 			"animation_length": 1.5,
 			"bones": {
-				"body": {
+				"Body": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -335,7 +335,7 @@
 		"irongolem.attack2": {
 			"animation_length": 1.5,
 			"bones": {
-				"body": {
+				"Body": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
@@ -447,7 +447,7 @@
 		"irongolem.attack3": {
 			"animation_length": 2.5,
 			"bones": {
-				"body": {
+				"Body": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]

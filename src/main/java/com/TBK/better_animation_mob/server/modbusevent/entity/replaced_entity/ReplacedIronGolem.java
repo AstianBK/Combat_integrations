@@ -1,8 +1,11 @@
 package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
 
+import com.TBK.better_animation_mob.server.modbusevent.ModBusEvent;
+import com.TBK.better_animation_mob.server.modbusevent.entity.goals.AttackAGoal;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.PlayState;
@@ -15,7 +18,9 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -25,16 +30,20 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
     @Override
     public void init(Entity entity) {
         this.cooldownAttack=new int[]{
-                24,
-                24,
-                0
+                15,
+                15,
+                35
         };
         super.init(entity);
     }
 
     @Override
     protected void replacedGoals() {
-        replacedBehavior();
+        Set<Goal> goals = new HashSet<>();
+        ModBusEvent.removeMeleeGoal(this.replaced,goals);
+        goals.forEach(this.replaced.goalSelector::removeGoal);
+
+        this.replaced.goalSelector.addGoal(1,new AttackAGoal<>(this.replaced,1.0D,false,this));
     }
     public void onTick(Level level){
         if(level.isClientSide){
@@ -60,25 +69,9 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
         return replaced.getTarget();
     }
 
-
-    @Override
-    protected void replacedBehavior() {
-
-    }
-
     @Override
     public int isMomentHurt() {
-        return this.getCombo(this.replaced) == 2 ? 2 : 5;
-    }
-
-    @Override
-    public void playAttack() {
-        super.playAttack();
-    }
-
-    @Override
-    public int getMaxCombo() {
-        return 2;
+        return getCombo(this.replaced) == 3 ? 10 :5;
     }
 
     @Override
@@ -93,51 +86,30 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
             IronGolem golem = getWardenFromState(state);
             ReplacedIronGolem<?> replacedWarden = getPatch(golem, ReplacedIronGolem.class);
             AnimationBuilder builder=new AnimationBuilder();
-            if (golem == null || golem.hasPose(Pose.DIGGING) || golem.hasPose(Pose.EMERGING)|| golem.hasPose(Pose.ROARING) || golem.hasPose(Pose.SNIFFING)) return PlayState.STOP;
+            if (golem == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             boolean isAgressive= golem.isAggressive();
             if(replacedWarden.getAttackTimer()>0){
-                state.getController().setAnimationSpeed(replacedWarden.getCombo(golem)==2 ? 1.5D : 1.0D);
-                state.getController().setAnimation(builder.playOnce(replacedWarden.getCombo(golem)==2 ?"golem.attack2":"golem.attack1"));
+                state.getController().setAnimationSpeed(1.5D);
+                state.getController().setAnimation(builder.playOnce("irongolem.attack"+getCombo(golem)));
             }else{
-                state.getController().setAnimationSpeed(0.5D);
-                state.getController().setAnimation(builder.loop(isAgressive ? "golem.move2" :"golem.idle"));
+                state.getController().setAnimationSpeed(1D);
+                state.getController().setAnimation(builder.loop(isMove ? "irongolem.move" :"irongolem.idle"));
             }
             return PlayState.CONTINUE;
         }));
-        data.addAnimationController(new AnimationController<>(this, "controller_legs", 0, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller_legs", 0,EasingType.EaseInElastic, state -> {
             IronGolem golem = getWardenFromState(state);
             ReplacedIronGolem<?> replacedWarden = getPatch(golem, ReplacedIronGolem.class);
             AnimationBuilder builder=new AnimationBuilder();
             if (golem == null) return PlayState.STOP;
             if(!state.isMoving() ){
-                state.getController().setAnimationSpeed(2.0D);
-                state.getController().setAnimation(builder.loop( "golem.wardenlegs2"));
-            }else if(!golem.hasPose(Pose.DIGGING) && !golem.hasPose(Pose.EMERGING)){
-                state.getController().setAnimationSpeed(0.5D);
-                state.getController().setAnimation(builder.loop("golem.wardenlegs1"));
-            }
-            return PlayState.CONTINUE;
-        }));
-        data.addAnimationController(new AnimationController<>(this, "controller_pose", 0, EasingType.EaseInOutQuad, state -> {
-            IronGolem golem = getWardenFromState(state);
-            ReplacedIronGolem<?> replacedWarden = getPatch(golem, ReplacedIronGolem.class);
-            AnimationBuilder builder=new AnimationBuilder();
-            if (golem == null || replacedWarden.getAttackTimer()>0) return PlayState.STOP;
-            if(golem.getPose().equals(Pose.SNIFFING)){
                 state.getController().setAnimationSpeed(1.5D);
-                state.getController().setAnimation(builder.loop("golem.sniff"));
-            }else if (golem.getPose().equals(Pose.DIGGING)){
-                state.getController().setAnimationSpeed(1D);
-                state.getController().setAnimation(builder.playOnce("golem.dig"));
-            }else if (golem.getPose().equals(Pose.EMERGING)){
-                state.getController().setAnimationSpeed(1D);
-                state.getController().setAnimation(builder.playOnce("golem.emerge"));
-            }else if (golem.getPose().equals(Pose.ROARING)){
-                state.getController().setAnimationSpeed(0.7D);
-                state.getController().setAnimation(builder.playOnce("golem.roar"));
+                state.getController().setAnimation(builder.loop( "irongolem.legs1"));
+            }else{
+                state.getController().setAnimationSpeed(0.5D);
+                state.getController().setAnimation(builder.loop("irongolem.legs2"));
             }
-
             return PlayState.CONTINUE;
         }));
     }

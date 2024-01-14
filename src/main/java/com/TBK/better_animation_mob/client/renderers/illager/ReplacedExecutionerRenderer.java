@@ -17,7 +17,7 @@ public class ReplacedExecutionerRenderer<T extends Executioner,P extends Replace
 
     @Override
     public boolean shouldRenderItemStack(T currentEntity) {
-        return currentEntity.getArmPose().equals(AbstractIllager.IllagerArmPose.ATTACKING);
+        return true;
     }
 
     @Override

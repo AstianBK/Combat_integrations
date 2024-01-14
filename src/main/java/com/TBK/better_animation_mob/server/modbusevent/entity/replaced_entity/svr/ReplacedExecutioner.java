@@ -3,17 +3,20 @@ package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.s
 import com.TBK.better_animation_mob.server.modbusevent.ModBusEvent;
 import com.TBK.better_animation_mob.server.modbusevent.entity.goals.AttackAGoal;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedEntity;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedIronGolem;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedVindicator;
 import com.teamabnormals.savage_and_ravage.common.entity.monster.Executioner;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Ravager;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.easing.EasingType;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
@@ -26,12 +29,12 @@ public class ReplacedExecutioner<T extends Executioner> extends ReplacedVindicat
 
     @Override
     public void resetCooldownAttack() {
-        this.attackTimer=10;
+        this.attackTimer=15;
     }
 
     @Override
     public int isMomentHurt() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -62,29 +65,32 @@ public class ReplacedExecutioner<T extends Executioner> extends ReplacedVindicat
     }
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
             AbstractIllager raider = getRaiderFromState(state);
             ReplacedExecutioner<?> replacedExecutioner = getPatch(raider,ReplacedExecutioner.class);
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
-            if(raider.isAggressive() && replacedExecutioner.getAttackTimer() == 0){
-                builder.loop("raider.move2");
-            }
-            if(raider.hurtTime>0){
-                state.getController().setAnimationSpeed(3.0F);
-                state.getController().setAnimation(builder.playOnce("raider.hurt"));
-                return PlayState.CONTINUE;
-            }
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            if (isMove && replacedExecutioner.getAttackTimer() == 0) {
-                state.getController().setAnimationSpeed(raider.isAggressive()?3.0F : 1.0F);
-                state.getController().setAnimation(builder.addAnimation("raider.move", ILoopType.EDefaultLoopTypes.LOOP));
-            }else if(replacedExecutioner.getAttackTimer()>0) {
-                state.getController().setAnimationSpeed(5.0F);
+            if(replacedExecutioner.getAttackTimer()>0) {
+                state.getController().setAnimationSpeed(6.0F);
                 state.getController().setAnimation(builder.playAndHold("raider.attack"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.addAnimation("raider.idle", ILoopType.EDefaultLoopTypes.LOOP));
+                state.getController().setAnimation(builder.loop("raider.idle"));
+            }
+            return PlayState.CONTINUE;
+        }));
+        data.addAnimationController(new AnimationController<>(this, "controller_legs", 0, EasingType.EaseInElastic, state -> {
+            AbstractIllager golem = getRaiderFromState(state);
+            ReplacedIronGolem<?> replacedWarden = getPatch(golem, ReplacedIronGolem.class);
+            AnimationBuilder builder=new AnimationBuilder();
+            if (golem == null) return PlayState.STOP;
+            if(!state.isMoving() ){
+                state.getController().setAnimationSpeed(1.5D);
+                state.getController().setAnimation(builder.loop( "raider.legs1"));
+            }else{
+                state.getController().setAnimationSpeed(0.5D);
+                state.getController().setAnimation(builder.loop("raider.legs2"));
             }
             return PlayState.CONTINUE;
         }));
