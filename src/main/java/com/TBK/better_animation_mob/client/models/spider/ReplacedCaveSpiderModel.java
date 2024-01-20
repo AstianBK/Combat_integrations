@@ -1,12 +1,8 @@
-package com.TBK.better_animation_mob.client.models;
+package com.TBK.better_animation_mob.client.models.spider;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class ReplacedCaveSpiderModel<T extends IAnimatable>extends ReplacedSpiderModel<T> {
     @Override
