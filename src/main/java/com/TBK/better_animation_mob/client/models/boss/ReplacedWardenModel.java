@@ -4,6 +4,8 @@ import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.models.ReplacedEntityModel;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedWarden;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,8 +18,34 @@ import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.core.snapshot.BoneSnapshot;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 
+import java.util.List;
+
 @OnlyIn(Dist.CLIENT)
 public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends ReplacedEntityModel<T> {
+
+    private ImmutableList<GeoBone> tendrilsLayerModelParts;
+    private  ImmutableList<GeoBone> heartLayerModelParts;
+    private ImmutableList<GeoBone> bioluminescentLayerModelParts;
+    private ImmutableList<GeoBone> pulsatingSpotsLayerModelParts;
+
+    @Override
+    public void setCustomAnimations(T animatable, int instanceId) {
+        super.setCustomAnimations(animatable, instanceId);
+        GeoBone head=(GeoBone) this.getAnimationProcessor().getBone("Head");
+        GeoBone leftArm=(GeoBone) this.getAnimationProcessor().getBone("left_arm");
+        GeoBone rightArm= (GeoBone) this.getAnimationProcessor().getBone("right_arm");
+        GeoBone leftLeg=(GeoBone) this.getAnimationProcessor().getBone("left_leg");
+        GeoBone rightLeg= (GeoBone) this.getAnimationProcessor().getBone("right_leg");
+        GeoBone body = (GeoBone)this.getAnimationProcessor().getBone("Body");
+        GeoBone leftTendril= (GeoBone) this.getAnimationProcessor().getBone("left_tendril");
+        GeoBone rightTendril= (GeoBone) this.getAnimationProcessor().getBone("right_tendril");
+        this.tendrilsLayerModelParts = ImmutableList.of(leftTendril, rightTendril);
+        this.heartLayerModelParts = ImmutableList.of(body);
+        this.bioluminescentLayerModelParts = ImmutableList.of(head, leftArm, rightArm, leftLeg, rightLeg);
+        this.pulsatingSpotsLayerModelParts = ImmutableList.of(body, head, leftArm, rightArm, leftLeg, rightLeg);
+
+    }
+
     @Override
     public ResourceLocation getModelResource(T object) {
         return new ResourceLocation(BetterAnimationMob.MODID,"geo/warden.geo.json");
@@ -89,5 +117,20 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
         IBone rightTendril=this.getBone("right_tendril");
         leftTendril.setRotationX(f);
         rightTendril.setRotationX(-f);
+    }
+    public List<GeoBone> getTendrilsLayerModelParts() {
+        return this.tendrilsLayerModelParts;
+    }
+
+    public List<GeoBone> getHeartLayerModelParts() {
+        return this.heartLayerModelParts;
+    }
+
+    public List<GeoBone> getBioluminescentLayerModelParts() {
+        return this.bioluminescentLayerModelParts;
+    }
+
+    public List<GeoBone> getPulsatingSpotsLayerModelParts() {
+        return this.pulsatingSpotsLayerModelParts;
     }
 }

@@ -1,7 +1,8 @@
 package com.TBK.better_animation_mob;
 
-import com.TBK.better_animation_mob.client.renderers.ReplacedCaveSpiderRenderer;
-import com.TBK.better_animation_mob.client.renderers.ReplacedSpiderRenderer;
+import com.TBK.better_animation_mob.client.renderers.enderman.ReplacedEnderManRenderer;
+import com.TBK.better_animation_mob.client.renderers.spider.ReplacedCaveSpiderRenderer;
+import com.TBK.better_animation_mob.client.renderers.spider.ReplacedSpiderRenderer;
 import com.TBK.better_animation_mob.client.renderers.boss.ReplacedWardenRenderer;
 import com.TBK.better_animation_mob.client.renderers.golem.ReplacedIronGolemRenderer;
 import com.TBK.better_animation_mob.client.renderers.illager.*;
@@ -10,6 +11,7 @@ import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinRender
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedSkeletonRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedStrayRenderer;
 import com.TBK.better_animation_mob.client.renderers.skeleton.ReplacedWitherSkeletonRenderer;
+import com.TBK.better_animation_mob.client.renderers.wolf.ReplacedWolfRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedDrownedRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedHuskRenderer;
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedZombieRenderer;
@@ -83,7 +85,14 @@ public class BetterAnimationMob {
         //Golems
         EntityRenderers.register(EntityType.IRON_GOLEM, ReplacedIronGolemRenderer::new);
 
+        //EnderMan
+        EntityRenderers.register(EntityType.ENDERMAN, ReplacedEnderManRenderer::new);
+
+        //Wolf
+        EntityRenderers.register(EntityType.WOLF, ReplacedWolfRenderer::new);
+
         if(isLoaded(Compati.SAVAGE_AND_RAVEGER)){
+            EntityRenderers.register(SREntityTypes.ICEOLOGER.get(), ReplacedIceologerRenderer::new);
             EntityRenderers.register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);
             EntityRenderers.register(SREntityTypes.TRICKSTER.get(), ReplacedTricksterRenderer::new);
             EntityRenderers.register(SREntityTypes.GRIEFER.get(), ReplacedGrieferRenderer::new);

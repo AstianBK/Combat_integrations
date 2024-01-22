@@ -1,6 +1,7 @@
-package com.TBK.better_animation_mob.client.models;
+package com.TBK.better_animation_mob.client.models.spider;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
+import com.TBK.better_animation_mob.client.models.ReplacedQuatrupleModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.IAnimatable;
