@@ -20,11 +20,11 @@
 					"rotation": [0, 0, "-math.sin(query.anim_time*180)*10"]
 				},
 				"RightArm": {
-					"rotation": [-17.5, 0, "-math.sin(query.anim_time*180)*5"],
+					"rotation": ["-85+math.sin(query.anim_time*90)*15", 0, "-math.sin(query.anim_time*180)*5"],
 					"position": [0, "math.sin(query.anim_time*180)*0.3", "-math.sin(query.anim_time*180)*1"]
 				},
 				"LeftArm": {
-					"rotation": [-35, 0, "math.sin(query.anim_time*180)*5"],
+					"rotation": ["-100-math.sin(query.anim_time*90)*15", 0, "0+math.sin(query.anim_time*180)*5"],
 					"position": [0, "math.sin(query.anim_time*180)*0.3", "-math.sin(query.anim_time*180)*1"]
 				},
 				"RightLeg": {
@@ -82,7 +82,6 @@
 			}
 		},
 		"piglin.attack1": {
-			"loop": false,
 			"animation_length": 1,
 			"bones": {
 				"Body": {
@@ -168,7 +167,6 @@
 			}
 		},
 		"piglin.attack3": {
-			"loop": false,
 			"animation_length": 1,
 			"bones": {
 				"Body": {
