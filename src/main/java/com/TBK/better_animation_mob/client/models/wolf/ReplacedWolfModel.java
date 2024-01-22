@@ -10,6 +10,7 @@ import net.minecraft.world.entity.monster.Ravager;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
+import software.bernie.geckolib3.geo.render.built.GeoBone;
 
 public class ReplacedWolfModel<T extends ReplacedWolf<Wolf>> extends ReplacedQuatrupleModel<T> {
     @Override
@@ -19,7 +20,11 @@ public class ReplacedWolfModel<T extends ReplacedWolf<Wolf>> extends ReplacedQua
 
     @Override
     public ResourceLocation getTextureResource(T object) {
-        return ((Wolf)this.getCurrentEntity().get()).isAngry() ? new ResourceLocation("textures/entity/wolf/wolf_angry.png") :  new ResourceLocation("textures/entity/wolf/wolf.png");
+        Wolf wolf =((Wolf)getCurrentEntity().get());
+        if(wolf.isTame()){
+            return new ResourceLocation("textures/entity/wolf/wolf_tame.png");
+        }
+        return wolf.isAngry() ? new ResourceLocation("textures/entity/wolf/wolf_angry.png") :  new ResourceLocation("textures/entity/wolf/wolf.png");
     }
 
     @Override
@@ -29,9 +34,30 @@ public class ReplacedWolfModel<T extends ReplacedWolf<Wolf>> extends ReplacedQua
 
     @Override
     public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
+        GeoBone main = (GeoBone)this.getBone("main");
+        GeoBone realHead = (GeoBone)this.getBone("Head");
+        GeoBone tail= (GeoBone) getAnimationProcessor().getBone("tail");
+        GeoBone body = (GeoBone)this.getBone("body");
+        GeoBone upperBody= (GeoBone) getAnimationProcessor().getBone("mane");
+        Wolf wolf = (Wolf) getCurrentEntity().get();
+        float partialTick=animationEvent.getPartialTick();
+        float limbSwing=animationEvent.getLimbSwing();
+        float limbSwingAmount=animationEvent.getLimbSwingAmount();
+        resetMain(main);
         super.setCustomAnimations(animatable, instanceId, animationEvent);
-        IBone tail=this.getAnimationProcessor().getBone("tail");
-        Wolf wolf = (Wolf) this.getCurrentEntity().get();
-        tail.setRotationX(wolf.getTailAngle());
+        if (wolf.isAngry()) {
+            tail.setRotationY(0.0F);
+        } else {
+            tail.setRotationY(Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
+        }
+
+        realHead.addRotationZ((wolf.getHeadRollAngle(partialTick) + wolf.getBodyRollAngle(partialTick, 0.0F)));
+        upperBody.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.08F));
+        body.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.16F));
+        tail.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.2F));
+
+        tail.addPositionZ(-0.3f);
+        tail.addPositionY(-0.5F);
+        tail.addRotationX(-wolf.getTailAngle());
     }
 }

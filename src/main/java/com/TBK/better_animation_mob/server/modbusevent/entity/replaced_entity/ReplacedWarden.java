@@ -30,9 +30,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -141,7 +139,6 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
         }));
         data.addAnimationController(new AnimationController<>(this, "controller_legs", 0, state -> {
             Warden warden = getWardenFromState(state);
-            ReplacedWarden<?> replacedWarden = getPatch(warden, ReplacedWarden.class);
             AnimationBuilder builder=new AnimationBuilder();
             if (warden == null) return PlayState.STOP;
             if(!state.isMoving() ){
@@ -159,16 +156,16 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
             AnimationBuilder builder=new AnimationBuilder();
             if (warden == null || replacedWarden.getAttackTimer()>0 || replacedWarden.getSonicBoomAnimTimer()>0) return PlayState.STOP;
             if(warden.getPose().equals(Pose.SNIFFING)){
-                state.getController().setAnimationSpeed(1.5D);
+                state.getController().setAnimationSpeed(1D);
                 state.getController().setAnimation(builder.loop("warden.sniff"));
             }else if (warden.getPose().equals(Pose.DIGGING)){
-                state.getController().setAnimationSpeed(1D);
+                state.getController().setAnimationSpeed(0.43D);
                 state.getController().setAnimation(builder.playOnce("warden.dig"));
             }else if (warden.getPose().equals(Pose.EMERGING)){
-                state.getController().setAnimationSpeed(1D);
+                state.getController().setAnimationSpeed(0.45D);
                 state.getController().setAnimation(builder.playOnce("warden.emerge"));
             }else if (warden.getPose().equals(Pose.ROARING)){
-                state.getController().setAnimationSpeed(1D);
+                state.getController().setAnimationSpeed(1.0D);
                 state.getController().setAnimation(builder.playOnce("warden.roar"));
             }
 

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.easing.EasingType;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -41,25 +42,44 @@ public class ReplacedEnderMan<T extends EnderMan> extends ReplacedEntity<T>{
 
     @Override
     public void resetCooldownAttack() {
-        this.attackTimer=10;
+        this.attackTimer=15;
+    }
+
+    @Override
+    public int getMaxCombo() {
+        return 2;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller", 10,EasingType.EaseInElastic, state -> {
+            EnderMan zombie = getZombieFromState(state);
+            ReplacedEntity<?> replaced = Capabilities.getEntityPatch(zombie, ReplacedEnderMan.class);
+            if (zombie == null) return PlayState.STOP;
+            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            if(isMove && replaced.getAttackTimer()==0){
+                state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);
+                state.getController().setAnimation(new AnimationBuilder().loop( zombie.isAggressive() ? "enderman.move2" : "enderman.move"));
+            }else if(replaced.getAttackTimer()>0){
+                state.getController().setAnimationSpeed(1.5D);
+                state.getController().setAnimation(new AnimationBuilder().playAndHold("enderman.attack"+((ICombos)zombie).getCombo()));
+            }else {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(new AnimationBuilder().loop("enderman.idle"));
+            }
+            return PlayState.CONTINUE;
+        }));
+        data.addAnimationController(new AnimationController<>(this, "controller_legs", 10, state -> {
             EnderMan zombie = getZombieFromState(state);
             ReplacedEntity<?> replaced = Capabilities.getEntityPatch(zombie, ReplacedEnderMan.class);
             if (zombie == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             if (isMove && replaced.getAttackTimer()==0) {
                 state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);
-                state.getController().setAnimation(new AnimationBuilder().loop("enderman.moveAlt"));
-            }else if(replaced.getAttackTimer()>0){
-                state.getController().setAnimationSpeed(2.5D);
-                state.getController().setAnimation(new AnimationBuilder().playAndHold("enderman.attackAlt"+((ICombos)zombie).getCombo()));
+                state.getController().setAnimation(new AnimationBuilder().loop("enderman.legs1"));
             }else {
-                state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(new AnimationBuilder().loop("enderman.idleAlt"));
+                state.getController().setAnimationSpeed(1.0f);
+                state.getController().setAnimation(new AnimationBuilder().loop("enderman.legs2"));
             }
             return PlayState.CONTINUE;
         }));

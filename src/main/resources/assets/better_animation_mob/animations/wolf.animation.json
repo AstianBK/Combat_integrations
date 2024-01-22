@@ -1,6 +1,35 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
+		"wolf.attack1": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"main": {
+					"rotation": ["-30-math.clamp(math.cos(query.anim_time*180)*35,-30,30)", 0, 0],
+					"position": [0, "-4-math.clamp(math.cos(query.anim_time*180)*4,-4,0)", 0]
+				},
+				"Head": {
+					"rotation": ["math.clamp(math.cos(query.anim_time*180)*45,0,45)", 0, 0]
+				},
+				"leg1": {
+					"rotation": ["math.clamp(math.cos(query.anim_time*180)*66.5,0,66.5)", 0, 0]
+				},
+				"leg2": {
+					"rotation": ["math.clamp(math.cos(query.anim_time*180)*77.5,0,77.5)", 0, 0]
+				},
+				"leg3": {
+					"rotation": ["math.clamp(-math.cos(-80+query.anim_time*180)*45,-45,0)", 0, 0]
+				},
+				"leg4": {
+					"rotation": ["math.clamp(-math.cos(-40+query.anim_time*180)*45,-45,0)", 0, 0]
+				},
+				"tail": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				}
+			}
+		},
 		"wolf.idle": {
 			"loop": true,
 			"bones": {
@@ -182,163 +211,6 @@
 		},
 		"wolf.legs2": {
 			"loop": true
-		},
-		"wolf.shake": {
-			"loop": true,
-			"animation_length": 2.70833,
-			"bones": {
-				"1": {
-					"rotation": {
-						"vector": [0, 0, -17.5]
-					},
-					"position": {
-						"vector": [0, -0.5, 0]
-					}
-				},
-				"2": {
-					"position": {
-						"vector": [0, -0.25, 0]
-					}
-				},
-				"torso": {
-					"rotation": {
-						"vector": [3.5, 0, 0]
-					}
-				},
-				"body_rotation": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.625": {
-							"vector": [0, 0, 7.5],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"1.25": {
-							"vector": [0, 0, -7.5],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"1.875": {
-							"vector": [0, 0, 7.5],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"2.5417": {
-							"vector": [0, 0, 0],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						}
-					}
-				},
-				"mane": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.625": {
-							"vector": [0, 0, -20],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"1.25": {
-							"vector": [0, 0, 20],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"1.875": {
-							"vector": [0, 0, -20],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"2.5417": {
-							"vector": [0, 0, 0],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						}
-					}
-				},
-				"Head": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.625": {
-							"vector": [0, 0, 20],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"1.25": {
-							"vector": [0, 0, -20],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"1.875": {
-							"vector": [0, 0, 20],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"2.5417": {
-							"vector": [0, 0, 0],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						}
-					},
-					"position": {
-						"0.0": {
-							"vector": [0, -1, 0]
-						},
-						"2.5417": {
-							"vector": [0, -1, 0],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						}
-					}
-				}
-			}
-		},
-		"wolf.attack1": {
-			"animation_length": 1.08333,
-			"bones": {
-				"Head": {
-					"rotation": {
-						"0.0": {
-							"vector": [-17.5, 0, 0]
-						},
-						"0.25": {
-							"vector": [27.5, 0, 0],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"0.4167": {
-							"vector": [30.40773, 24.1782, 13.51584],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"0.5417": {
-							"vector": [29.39942, -19.84302, -10.82777],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"0.6667": {
-							"vector": [30.40773, 24.1782, 13.51584],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"0.75": {
-							"vector": [29.39942, -19.84302, -10.82777],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						},
-						"0.875": {
-							"vector": [0, 0, 0],
-							"easing": "easeInElastic",
-							"easingArgs": [0.2]
-						}
-					}
-				}
-			}
 		}
 	},
 	"geckolib_format_version": 2

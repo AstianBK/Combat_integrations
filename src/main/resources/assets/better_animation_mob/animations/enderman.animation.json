@@ -23,12 +23,12 @@
 						"vector": ["math.clamp(math.cos(query.anim_time*180)*3,-10,3)", 0, "-math.sin(query.anim_time*180)*1.5"]
 					}
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": {
 						"vector": [0, 0, "-math.sin(query.anim_time*180)*1.2"]
 					}
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": {
 						"vector": [0, 0, "math.sin(query.anim_time*180)*1.2"]
 					}
@@ -43,12 +43,12 @@
 						"vector": ["math.sin(query.anim_time*180)*5", "math.sin(query.anim_time*180)*2", "math.sin(query.anim_time*180)*2"]
 					}
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": {
 						"vector": ["0-math.sin(query.anim_time*180)*5", 0, "2.5+math.clamp(math.cos(query.anim_time*180)*2,-2,2)"]
 					}
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": {
 						"vector": ["0-math.sin(query.anim_time*180)*5", 0, "-2.5-math.clamp(math.cos(query.anim_time*180)*2,-2,2)"]
 					}
@@ -86,7 +86,7 @@
 						"vector": [0, 0, -1]
 					}
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": {
 						"vector": ["-math.sin(query.anim_time*180)*15", 0, 10]
 					},
@@ -94,7 +94,7 @@
 						"vector": [0, 0, -1]
 					}
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": {
 						"vector": ["math.sin(query.anim_time*180)*15", 0, -10]
 					},
@@ -164,7 +164,7 @@
 						}
 					}
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": {
 						"0.0": {
 							"vector": [15, 0, 30]
@@ -193,7 +193,7 @@
 						}
 					}
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": {
 						"0.0": {
 							"vector": [15, 0, -30]
@@ -294,7 +294,7 @@
 						}
 					}
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 122.5]
@@ -315,7 +315,7 @@
 						"easing": "linear"
 					}
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, -122.5]
@@ -356,7 +356,7 @@
 		"enderman.legs1": {
 			"loop": true,
 			"bones": {
-				"right_leg": {
+				"RightLeg": {
 					"rotation": {
 						"vector": ["math.sin(query.anim_time*180)*20", 0, 0]
 					},
@@ -364,7 +364,7 @@
 						"vector": [0, "math.clamp(-math.cos(query.anim_time*180)*2,0,3)", 0]
 					}
 				},
-				"left_leg": {
+				"LeftLeg": {
 					"rotation": {
 						"vector": ["-math.sin(query.anim_time*180)*10", 0, 0]
 					},

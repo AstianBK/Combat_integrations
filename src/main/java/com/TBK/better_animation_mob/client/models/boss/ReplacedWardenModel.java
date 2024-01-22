@@ -9,6 +9,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -64,7 +65,8 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
     @Override
     public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
         GeoBone body = (GeoBone) this.getBone("Body");
-        GeoBone main = this.getModel(this.getModelResource(animatable)).getBone("main").isPresent() ? this.getModel(this.getModelResource(animatable)).getBone("main").get() : null;
+        GeoBone main = (GeoBone) this.getBone("main");
+        Warden warden = (Warden) this.getCurrentEntity().get();
         if(main!=null){
             this.resetMain(main);
         }
@@ -72,11 +74,19 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
         float partialTick=animationEvent.getPartialTick();
         float limbSwing=animationEvent.getLimbSwing();
         float limbSwingAmount=animationEvent.getLimbSwingAmount();
-        Warden warden = (Warden) this.getCurrentEntity().get();
 
         animateWalk(limbSwing,limbSwingAmount, (GeoBone) body);
         animateIdlePose(partialTick, (GeoBone) body);
         animateTendrils(warden,limbSwing,limbSwingAmount);
+        if(warden.hasPose(Pose.EMERGING)){
+            if (main != null) {
+                main.addPosition(0.0F,-46.0F,0.0F);
+            }
+        }else {
+            if (main != null) {
+            main.addPosition(0.0F,0.0F,0.0F);
+            }
+        }
     }
 
     @Override
