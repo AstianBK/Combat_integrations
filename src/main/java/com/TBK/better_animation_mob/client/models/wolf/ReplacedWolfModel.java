@@ -43,21 +43,23 @@ public class ReplacedWolfModel<T extends ReplacedWolf<Wolf>> extends ReplacedQua
         float partialTick=animationEvent.getPartialTick();
         float limbSwing=animationEvent.getLimbSwing();
         float limbSwingAmount=animationEvent.getLimbSwingAmount();
-        resetMain(main);
-        super.setCustomAnimations(animatable, instanceId, animationEvent);
-        if (wolf.isAngry()) {
-            tail.setRotationY(0.0F);
-        } else {
-            tail.setRotationY(Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
+        if(!wolf.isInSittingPose()){
+            this.resetMain(main);
         }
+        super.setCustomAnimations(animatable, instanceId, animationEvent);
+        if(!wolf.isInSittingPose()){
+            if (wolf.isAngry()) {
+                tail.setRotationY(0.0F);
+            } else {
+                tail.setRotationY(Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount);
+            }
 
-        realHead.addRotationZ((wolf.getHeadRollAngle(partialTick) + wolf.getBodyRollAngle(partialTick, 0.0F)));
-        upperBody.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.08F));
-        body.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.16F));
-        tail.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.2F));
+            realHead.addRotationZ((wolf.getHeadRollAngle(partialTick) + wolf.getBodyRollAngle(partialTick, 0.0F)));
+            upperBody.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.08F));
+            body.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.16F));
+            tail.addRotationZ(wolf.getBodyRollAngle(partialTick, -0.2F));
 
-        tail.addPositionZ(-0.3f);
-        tail.addPositionY(-0.5F);
-        tail.addRotationX(-wolf.getTailAngle());
+            tail.addRotationX(-wolf.getTailAngle());
+        }
     }
 }

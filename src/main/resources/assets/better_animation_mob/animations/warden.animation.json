@@ -5,7 +5,7 @@
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
-				"root": {
+				"main": {
 					"rotation": {
 						"vector": [-2.5, 0, 0]
 					}
@@ -51,16 +51,6 @@
 				"left_arm": {
 					"rotation": {
 						"vector": ["-math.sin(query.anim_time*180)*1.5", 0, "-math.clamp(math.cos(query.anim_time*180)*1,-1,1)"]
-					}
-				},
-				"right_leg": {
-					"rotation": {
-						"vector": [2.5, 0, 0]
-					}
-				},
-				"left_leg": {
-					"rotation": {
-						"vector": [2.5, 0, 0]
 					}
 				}
 			}
@@ -954,6 +944,53 @@
 		"warden.dig": {
 			"animation_length": 4.5,
 			"bones": {
+				"main": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, -16.48454, -6.5784],
+							"easing": "easeInElastic"
+						},
+						"0.7083": {
+							"vector": [0, -16.48454, -6.5784],
+							"easing": "easeInElastic"
+						},
+						"1.0417": {
+							"vector": [0, -16.97, -7.11],
+							"easing": "easeInElastic"
+						},
+						"1.625": {
+							"vector": [0, -13.97, -7.11],
+							"easing": "easeInElastic"
+						},
+						"2.2083": {
+							"vector": [0, -11.48454, -0.5784],
+							"easing": "easeInElastic"
+						},
+						"2.5417": {
+							"vector": [0, -16.48454, -6.5784],
+							"easing": "easeInElastic"
+						},
+						"2.6667": {
+							"vector": [0, -20.27, -5.42],
+							"easing": "easeInElastic"
+						},
+						"3.375": {
+							"vector": [0, -26.48454, -5.5784],
+							"easing": "easeInElastic"
+						},
+						"4.0417": {
+							"vector": [0, -26.48454, -5.5784],
+							"easing": "easeInElastic"
+						},
+						"4.5": {
+							"vector": [0, -43, -8],
+							"easing": "easeInElastic"
+						}
+					}
+				},
 				"Body": {
 					"rotation": {
 						"0.0": {
@@ -2023,6 +2060,13 @@
 		"warden.emerge": {
 			"animation_length": 3.75,
 			"bones": {
+				"main": {
+					"position":{
+						"0.0": {
+							"vector": [0,-46,0]
+						}
+					}
+				},
 				"Body": {
 					"rotation": {
 						"0.0": {
@@ -2349,6 +2393,7 @@
 			"loop": true
 		},
 		"warden.wardenlegs2": {
+			"animation_length": 2.0,
 			"loop": true,
 			"bones": {
 				"right_leg": {

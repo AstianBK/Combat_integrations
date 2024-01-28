@@ -33,12 +33,13 @@ public class ReplacedWitherSkeletonRenderer<T extends WitherSkeleton,P extends R
             boolean trident = item.getItem() instanceof BowItem;
             if (item == currentEntity.getMainHandItem()) {
                 if (trident) {
-                    stack.mulPose(Vector3f.XP.rotationDegrees(180F));
+                    //stack.mulPose(Vector3f.XP.rotationDegrees(180F));
                     stack.translate(0.0D,-0.05D,0.0D);
                 }else {
-                    stack.mulPose(Vector3f.YP.rotationDegrees(90F));
-                    stack.mulPose(Vector3f.XP.rotationDegrees(-30F));
-                    stack.translate(0.05,-0.25D,-0.5D);
+                    stack.mulPose(Vector3f.ZP.rotationDegrees(-35F));
+                    stack.mulPose(Vector3f.YP.rotationDegrees(-35F));
+                    stack.mulPose(Vector3f.XP.rotationDegrees(-180F));
+                    stack.translate(0.2D,0.0D,0.0D);
                 }
             }
         }

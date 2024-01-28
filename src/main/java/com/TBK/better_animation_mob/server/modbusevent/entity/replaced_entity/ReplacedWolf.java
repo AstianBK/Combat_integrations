@@ -52,13 +52,13 @@ public class ReplacedWolf<T extends Wolf> extends ReplacedEntity<T> {
             if (zombie == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
 
-            if (isMove && replaced.getAttackTimer() == 0) {
+            if (isMove && replaced.getAttackTimer() == 0 && !zombie.isInSittingPose()) {
                 state.getController().setAnimationSpeed(zombie.isAggressive()?3.5F : 1.4F);
                 state.getController().setAnimation(builder.loop( zombie.isAggressive() ? "wolf.move2" : "wolf.move1"));
             }else if(replaced.getAttackTimer()>0) {
                 state.getController().setAnimationSpeed(1.5F);
                 state.getController().setAnimation(builder.playOnce("wolf.attack1"));
-            }else {
+            }else if(!zombie.isInSittingPose()){
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.addAnimation("wolf.idle", ILoopType.EDefaultLoopTypes.LOOP));
             }
@@ -67,7 +67,7 @@ public class ReplacedWolf<T extends Wolf> extends ReplacedEntity<T> {
         data.addAnimationController(new AnimationController<>(this, "controller_legs", 10, state -> {
             Wolf zombie = getZombieFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
-            if (zombie == null) return PlayState.STOP;
+            if (zombie == null|| zombie.isInSittingPose()) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
 
             if (isMove) {
@@ -77,6 +77,13 @@ public class ReplacedWolf<T extends Wolf> extends ReplacedEntity<T> {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.addAnimation("wolf.legs2", ILoopType.EDefaultLoopTypes.LOOP));
             }
+            return PlayState.CONTINUE;
+        }));
+        data.addAnimationController(new AnimationController<>(this, "controller_pose", 5, state -> {
+            Wolf zombie = getZombieFromState(state);
+            AnimationBuilder builder=new AnimationBuilder();
+            if (zombie == null || !zombie.isInSittingPose()) return PlayState.STOP;
+            state.getController().setAnimation(builder.loop("wolf.sit"));
             return PlayState.CONTINUE;
         }));
     }

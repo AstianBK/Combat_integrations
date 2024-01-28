@@ -67,25 +67,17 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
         GeoBone body = (GeoBone) this.getBone("Body");
         GeoBone main = (GeoBone) this.getBone("main");
         Warden warden = (Warden) this.getCurrentEntity().get();
-        if(main!=null){
+        if (main != null) {
             this.resetMain(main);
         }
         super.setCustomAnimations(animatable, instanceId, animationEvent);
-        float partialTick=animationEvent.getPartialTick();
-        float limbSwing=animationEvent.getLimbSwing();
-        float limbSwingAmount=animationEvent.getLimbSwingAmount();
-
-        animateWalk(limbSwing,limbSwingAmount, (GeoBone) body);
-        animateIdlePose(partialTick, (GeoBone) body);
-        animateTendrils(warden,limbSwing,limbSwingAmount);
-        if(warden.hasPose(Pose.EMERGING)){
-            if (main != null) {
-                main.addPosition(0.0F,-46.0F,0.0F);
-            }
-        }else {
-            if (main != null) {
-            main.addPosition(0.0F,0.0F,0.0F);
-            }
+        float partialTick = animationEvent.getPartialTick();
+        float limbSwing = animationEvent.getLimbSwing();
+        float limbSwingAmount = animationEvent.getLimbSwingAmount();
+        if(!warden.hasPose(Pose.DIGGING)){
+            animateWalk(limbSwing, limbSwingAmount, (GeoBone) body);
+            animateIdlePose(partialTick, (GeoBone) body);
+            animateTendrils(warden, limbSwing, limbSwingAmount);
         }
     }
 

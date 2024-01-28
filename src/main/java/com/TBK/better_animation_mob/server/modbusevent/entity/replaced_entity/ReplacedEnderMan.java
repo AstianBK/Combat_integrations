@@ -65,11 +65,11 @@ public class ReplacedEnderMan<T extends EnderMan> extends ReplacedEntity<T>{
                 state.getController().setAnimation(new AnimationBuilder().playAndHold("enderman.attack"+((ICombos)zombie).getCombo()));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(new AnimationBuilder().loop("enderman.idle"));
+                state.getController().setAnimation(new AnimationBuilder().loop( zombie.isAggressive()? "enderman.idle2":"enderman.idle"));
             }
             return PlayState.CONTINUE;
         }));
-        data.addAnimationController(new AnimationController<>(this, "controller_legs", 10, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller_legs", 0, state -> {
             EnderMan zombie = getZombieFromState(state);
             ReplacedEntity<?> replaced = Capabilities.getEntityPatch(zombie, ReplacedEnderMan.class);
             if (zombie == null) return PlayState.STOP;

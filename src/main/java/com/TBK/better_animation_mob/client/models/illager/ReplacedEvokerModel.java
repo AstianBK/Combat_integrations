@@ -10,7 +10,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 public class ReplacedEvokerModel<T extends IAnimatable> extends ReplacedVindicatorModel<T> {
     @Override
     public ResourceLocation getModelResource(T object) {
-        return new ResourceLocation(BetterAnimationMob.MODID, "geo/vindicator.geo.json");
+        return new ResourceLocation(BetterAnimationMob.MODID, "geo/evoker.geo.json");
     }
 
     @Override

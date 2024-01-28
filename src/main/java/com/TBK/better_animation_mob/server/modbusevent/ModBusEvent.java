@@ -6,19 +6,20 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.goals.MeleeAttackP
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedEntity;
 import com.TBK.better_animation_mob.server.modbusevent.provider.PatchProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.util.Unit;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.MeleeAttack;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
+import net.minecraft.world.entity.monster.warden.Warden;
+import net.minecraft.world.entity.monster.warden.WardenAi;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -41,7 +42,6 @@ public class ModBusEvent {
                 piglinPatch.onJoinGame((LivingEntity) event.getEntity(),event);
             }
         }
-
     }
 
     public static void removeBehavior(Brain<?> brain, Activity activity, int priority, Class targetBehaviorClass) {
@@ -68,7 +68,9 @@ public class ModBusEvent {
 
     @SubscribeEvent
     public static void hurtEvent(LivingHurtEvent event){
-        //event.getEntity().getAttackAnim()
+        if(event.getEntity() instanceof Warden warden){
+            warden.setPose(Pose.DIGGING);
+        }
     }
 
     @SubscribeEvent

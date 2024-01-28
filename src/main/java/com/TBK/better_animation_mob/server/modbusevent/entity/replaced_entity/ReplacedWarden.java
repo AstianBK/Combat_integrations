@@ -123,15 +123,16 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
             ReplacedWarden<?> replacedWarden = getPatch(warden, ReplacedWarden.class);
             AnimationBuilder builder=new AnimationBuilder();
             if (warden == null || warden.hasPose(Pose.DIGGING) || warden.hasPose(Pose.EMERGING)) return PlayState.STOP;
-            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             boolean isAgressive=warden.getClientAngerLevel()>40;
+            state.getController().transitionLengthTicks=10.0F;
             if(replacedWarden.getAttackTimer()>0){
                 state.getController().setAnimationSpeed(replacedWarden.getCombo(warden)==2 ? 1.5D : 1.0D);
                 state.getController().setAnimation(builder.playOnce(replacedWarden.getCombo(warden)==2 ?"warden.attack2":"warden.attack1"));
             }else if(replacedWarden.getSonicBoomAnimTimer()>0){
                 state.getController().setAnimationSpeed(1.5D);
                 state.getController().setAnimation(builder.playOnce("warden.boom"));
-            }else{
+            } else{
+                state.getController().transitionLengthTicks=0.0f;
                 state.getController().setAnimationSpeed(0.5D);
                 state.getController().setAnimation(builder.loop(isAgressive ? "warden.move2" :"warden.idle"));
             }
@@ -140,11 +141,13 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
         data.addAnimationController(new AnimationController<>(this, "controller_legs", 0, state -> {
             Warden warden = getWardenFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
-            if (warden == null) return PlayState.STOP;
-            if(!state.isMoving() ){
+            if (warden == null || warden.hasPose(Pose.DIGGING) || warden.hasPose(Pose.EMERGING)) return PlayState.STOP;
+            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            state.getController().transitionLengthTicks=0.0f;
+            if(isMove){
                 state.getController().setAnimationSpeed(2.0D);
                 state.getController().setAnimation(builder.loop( "warden.wardenlegs2"));
-            }else if(!warden.hasPose(Pose.DIGGING) && !warden.hasPose(Pose.EMERGING)){
+            }else{
                 state.getController().setAnimationSpeed(0.5D);
                 state.getController().setAnimation(builder.loop("warden.wardenlegs1"));
             }
@@ -154,21 +157,22 @@ public class ReplacedWarden<T extends Warden> extends ReplacedEntity<T> {
             Warden warden = getWardenFromState(state);
             ReplacedWarden<?> replacedWarden = getPatch(warden, ReplacedWarden.class);
             AnimationBuilder builder=new AnimationBuilder();
+
             if (warden == null || replacedWarden.getAttackTimer()>0 || replacedWarden.getSonicBoomAnimTimer()>0) return PlayState.STOP;
+
             if(warden.getPose().equals(Pose.SNIFFING)){
                 state.getController().setAnimationSpeed(1D);
                 state.getController().setAnimation(builder.loop("warden.sniff"));
             }else if (warden.getPose().equals(Pose.DIGGING)){
-                state.getController().setAnimationSpeed(0.43D);
+                state.getController().setAnimationSpeed(1.2D);
                 state.getController().setAnimation(builder.playOnce("warden.dig"));
             }else if (warden.getPose().equals(Pose.EMERGING)){
-                state.getController().setAnimationSpeed(0.45D);
+                state.getController().setAnimationSpeed(0.4D);
                 state.getController().setAnimation(builder.playOnce("warden.emerge"));
             }else if (warden.getPose().equals(Pose.ROARING)){
-                state.getController().setAnimationSpeed(1.0D);
+                state.getController().setAnimationSpeed(0.5D);
                 state.getController().setAnimation(builder.playOnce("warden.roar"));
             }
-
             return PlayState.CONTINUE;
         }));
     }

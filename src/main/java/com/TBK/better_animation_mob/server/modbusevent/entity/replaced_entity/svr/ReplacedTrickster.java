@@ -1,5 +1,6 @@
 package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr;
 
+import com.teamabnormals.savage_and_ravage.common.entity.monster.Iceologer;
 import com.teamabnormals.savage_and_ravage.common.entity.monster.Trickster;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,6 +34,21 @@ public class ReplacedTrickster implements IAnimatable {
             } else {
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.loop("trickster.idle"));
+            }
+
+            return PlayState.CONTINUE;
+        }));
+        data.addAnimationController(new AnimationController<>(this, "controller_legs", 10, state -> {
+            Trickster raider = getRaiderFromState(state);
+            AnimationBuilder builder=new AnimationBuilder();
+            if (raider == null) return PlayState.STOP;
+            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            if (isMove) {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.loop("trickster.legs1"));
+            }else {
+                state.getController().setAnimationSpeed(1.0F);
+                state.getController().setAnimation(builder.loop("trickster.legs2"));
             }
 
             return PlayState.CONTINUE;

@@ -79,11 +79,11 @@ public class ReplacedZombieRenderer<T extends Zombie ,P extends ReplacedZombie> 
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
             boolean trident = item.getItem() instanceof TridentItem;
             if (item == currentEntity.getMainHandItem()) {
+                stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
                 if (trident) {
-                    stack.mulPose(Vector3f.XP.rotationDegrees(90F));
-                    stack.translate(0.0D,0.0D,-0.8D);
+                    stack.translate(0.05D,0.0D,0.0D);
                 }else {
-                    stack.translate(0.05,-0.25D,-0.5D);
+                    stack.translate(0.05,-0.0D,0.0D);
                 }
             }
         }

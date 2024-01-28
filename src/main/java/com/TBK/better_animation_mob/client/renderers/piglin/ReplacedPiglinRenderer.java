@@ -74,14 +74,12 @@ public class ReplacedPiglinRenderer<T extends AbstractPiglin,P extends ReplacedP
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
             boolean shieldFlag = item.getItem() instanceof CrossbowItem;
+            stack.mulPose(Vector3f.XP.rotationDegrees(-90.F));
             if (item == currentEntity.getMainHandItem()) {
                 if (shieldFlag) {
-                    stack.mulPose(Vector3f.XP.rotationDegrees(270F));
-                    stack.mulPose(Vector3f.YP.rotationDegrees(-90.F));
-                    stack.translate(-0.3F, 0.125F, 0.3F);
+                    stack.translate(-0.1F,0.15D,-0.1D);
                 }else {
-                    stack.mulPose(Vector3f.ZP.rotationDegrees(200F));
-                    stack.translate(-0.05F,-0.25D,-0.45D);
+                    stack.translate(-0.0F,0.2D,0.0D);
                 }
             } else {
                 stack.translate(0.2F,-0.2D,-0.4D);

@@ -29,6 +29,7 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
         Map<EntityType<?>, Function<Entity, Supplier<ReplacedEntity<?>>>> registry = Maps.newHashMap();
         registry.put(EntityType.PIGLIN, (entityIn) -> ReplacedPiglin::new);
         registry.put(EntityType.PIGLIN_BRUTE, (entityIn) -> ReplacedPiglin::new);
+        registry.put(EntityType.ZOMBIFIED_PIGLIN,entity -> ReplacedZombiePiglin::new);
         registry.put(EntityType.WITHER_SKELETON,(entity -> ReplacedWitherSkeleton::new));
         registry.put(EntityType.SPIDER,(entity -> ReplacedSpider::new));
         registry.put(EntityType.CAVE_SPIDER,entity -> ReplacedSpider::new);

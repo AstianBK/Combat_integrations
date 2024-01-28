@@ -9,11 +9,16 @@ import software.bernie.geckolib3.core.IAnimatable;
 
 @OnlyIn(Dist.CLIENT)
 public class ReplacedIceologerModel<T extends IAnimatable> extends ReplacedVindicatorModel<T> {
+    @Override
+    public ResourceLocation getModelResource(T object) {
+        return new ResourceLocation(BetterAnimationMob.MODID, "geo/evoker.geo.json");
+    }
 
     @Override
     public ResourceLocation getTextureResource(T object) {
-        return new ResourceLocation(SavageAndRavage.MOD_ID,"textures/entity/iceloger.png");
+        return new ResourceLocation(SavageAndRavage.MOD_ID,"textures/entity/iceologer.png");
     }
+
 
     @Override
     public ResourceLocation getAnimationResource(T animatable) {

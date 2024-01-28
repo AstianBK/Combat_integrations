@@ -45,7 +45,7 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
     protected void renderItemStack(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ItemStack stack,
                                    String boneName) {
         Minecraft.getInstance().getItemRenderer().renderStatic(this.currentEntity, stack,
-                ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND, false, poseStack, bufferSource, null, packedLight,
+                boneName.equals("leftItem") ?ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND  :ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, false, poseStack, bufferSource, null, packedLight,
                 LivingEntityRenderer.getOverlayCoords(this.currentEntity, 0.0F),
                 currentEntity.getId());
     }

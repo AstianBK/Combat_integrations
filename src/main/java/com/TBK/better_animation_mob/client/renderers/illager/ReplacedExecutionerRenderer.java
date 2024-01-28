@@ -23,9 +23,9 @@ public class ReplacedExecutionerRenderer<T extends Executioner,P extends Replace
     @Override
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
-            stack.mulPose(Vector3f.ZP.rotationDegrees(180F));
+            stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
             if (item == currentEntity.getMainHandItem()) {
-                stack.translate(-0.05F,-1.0D,-1.05D);
+                stack.translate(-0.05F,0.3D,-0.15D);
             }
         }
     }

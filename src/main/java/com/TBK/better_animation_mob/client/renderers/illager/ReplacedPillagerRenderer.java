@@ -20,13 +20,11 @@ public class ReplacedPillagerRenderer<T extends Pillager,P extends ReplacedPilla
     @Override
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
-            stack.mulPose(Vector3f.XP.rotationDegrees(270F));
-            stack.mulPose(Vector3f.YP.rotationDegrees(-90.F));
+            stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
             boolean shieldFlag = item.getItem() instanceof CrossbowItem;
-
             if (item == currentEntity.getMainHandItem()) {
                 if (shieldFlag) {
-                    stack.translate(-0.05F, 0.25F, 0.3F);
+                    stack.translate(-0.05F,0.15D,0.0D);
                 }
             } else {
                 if (shieldFlag) {

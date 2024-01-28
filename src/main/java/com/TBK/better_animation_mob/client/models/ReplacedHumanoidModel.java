@@ -24,7 +24,6 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
             this.resetMain(main);
         }
         super.setCustomAnimations(animatable, instanceId, animationEvent);
-
         if (data!=null ){
             if(data.isChild){
                 float f = 1.5F/2.0F;
@@ -44,8 +43,8 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
             }else {
                 head.setScale(1,1,1);
                 body.setScale(1,1,1);
-                rightArm.setScale(1,1,1);
-                leftArm.setScale(1,1,1);
+                rightArm.setScale(rightArm.getScale());
+                leftArm.setScale(leftArm.getScale());
                 rightLeg.setScale(1,1,1);
                 leftLeg.setScale(1,1,1);
             }

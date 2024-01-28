@@ -1,35 +1,31 @@
-package com.TBK.better_animation_mob.client.renderers.skeleton;
+package com.TBK.better_animation_mob.client.renderers.piglin;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.layers.ArmorGeckoLayer;
-import com.TBK.better_animation_mob.client.models.skeleton.ReplacedSkeletonModel;
+import com.TBK.better_animation_mob.client.models.piglin.ReplacedPiglinBruteModel;
+import com.TBK.better_animation_mob.client.models.piglin.ReplacedZombiePiglinModel;
 import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
-import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedSkeleton;
+import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedZombieRenderer;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedPiglin;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedZombiePiglin;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.item.BowItem;
+import net.minecraft.world.entity.monster.ZombifiedPiglin;
+import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 
-public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends ReplacedSkeleton> extends ExtendedGeoReplacedEntityRenderer<T,P> {
-    public ReplacedSkeletonRenderer(EntityRendererProvider.Context renderManager){
-        this(renderManager,new ReplacedSkeletonModel(),(P) new ReplacedSkeleton(),new ResourceLocation("textures/entity/skeleton/skeleton.png"));
-    }
-    public ReplacedSkeletonRenderer(EntityRendererProvider.Context renderManager, ReplacedSkeletonModel model,P skeleton,ResourceLocation texture) {
-        super(renderManager, model,skeleton);
-        this.addLayer(new ArmorGeckoLayer<>(this,this.getGeoModelProvider(),texture,new ResourceLocation(BetterAnimationMob.MODID,"geo/skeleton.geo.json")){
+public class ReplacedZombiePiglinRenderer<T extends ZombifiedPiglin,P extends ReplacedZombiePiglin<T>> extends ExtendedGeoReplacedEntityRenderer<T,P> {
+    public ReplacedZombiePiglinRenderer(EntityRendererProvider.Context renderManager){
+        super(renderManager,new ReplacedZombiePiglinModel<>(),(P)new ReplacedZombiePiglin());
+        this.addLayer(new ArmorGeckoLayer<>(this,getGeoModelProvider(),new ResourceLocation("textures/entity/piglin/zombified_piglin.png"),new ResourceLocation(BetterAnimationMob.MODID,"geo/piglin.geo.json")){
             @NotNull
             @Override
             protected ModelPart getModelPartForBone(GeoBone bone, EquipmentSlot slot, ItemStack stack, LivingEntity animatable, HumanoidModel armorModel) {
@@ -53,7 +49,7 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
                     case "HatLayer"->stack=animatable.getItemBySlot(EquipmentSlot.HEAD);
                     case "BodyLayer","RightArmLayer","LeftArmLayer"->stack=animatable.getItemBySlot(EquipmentSlot.CHEST);
                     case "LeftLegLayer", "RightLegLayer" ->stack=animatable.getItemBySlot(EquipmentSlot.LEGS);
-                    case "LeftBootLayer","RightBootLayer" ->stack=animatable.getItemBySlot(EquipmentSlot.FEET);
+                    //case "LeftBootLayer","RightBootLayer" ->stack=animatable.getItemBySlot(EquipmentSlot.FEET);
                 }
                 return stack;
             }
@@ -66,7 +62,7 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
                     case "HatLayer"->slot=EquipmentSlot.HEAD;
                     case "BodyLayer","LeftArmLayer","RightArmLayer"-> slot=EquipmentSlot.CHEST;
                     case "LeftLegLayer", "RightLegLayer" ->slot=EquipmentSlot.LEGS;
-                    case "LeftBootLayer","RightBootLayer" ->slot=EquipmentSlot.FEET;
+                    //case "LeftBootLayer","RightBootLayer" ->slot=EquipmentSlot.FEET;
                 }
                 return slot;
             }
@@ -76,20 +72,11 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
     @Override
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
-            boolean trident = item.getItem() instanceof BowItem;
+            stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
             if (item == currentEntity.getMainHandItem()) {
-                if (trident) {
-                    stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
-                    stack.translate(0.15D,-0.0D,0.05D);
-                }else {
-                    stack.translate(0.05,-0.25D,-0.5D);
-                }
+                stack.translate(0.05F,0.15D,0.0D);
             }
         }
     }
 
-    @Override
-    public RenderType getRenderType(Object o, float partialTick, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, ResourceLocation texture) {
-        return RenderType.entityTranslucent(texture);
-    }
 }

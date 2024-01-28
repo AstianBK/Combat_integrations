@@ -1,6 +1,7 @@
 package com.TBK.better_animation_mob;
 
 import com.TBK.better_animation_mob.client.renderers.enderman.ReplacedEnderManRenderer;
+import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedZombiePiglinRenderer;
 import com.TBK.better_animation_mob.client.renderers.spider.ReplacedCaveSpiderRenderer;
 import com.TBK.better_animation_mob.client.renderers.spider.ReplacedSpiderRenderer;
 import com.TBK.better_animation_mob.client.renderers.boss.ReplacedWardenRenderer;
@@ -74,6 +75,7 @@ public class BetterAnimationMob {
         //Piglins
         EntityRenderers.register(EntityType.PIGLIN_BRUTE, ReplacedPiglinBruteRenderer::new);
         EntityRenderers.register(EntityType.PIGLIN, ReplacedPiglinRenderer::new);
+        EntityRenderers.register(EntityType.ZOMBIFIED_PIGLIN, ReplacedZombiePiglinRenderer::new);
 
         //Spider
         EntityRenderers.register(EntityType.SPIDER, ReplacedSpiderRenderer::new);

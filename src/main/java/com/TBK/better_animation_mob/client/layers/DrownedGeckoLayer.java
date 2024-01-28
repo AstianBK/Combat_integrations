@@ -20,9 +20,6 @@ import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 @OnlyIn(Dist.CLIENT)
 public class DrownedGeckoLayer<T extends Entity & IAnimatable> extends GeoLayerRenderer<T> {
-    protected static final HumanoidModel<LivingEntity> INNER_ARMOR_MODEL = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_INNER_ARMOR));
-
-
     public DrownedGeckoLayer(IGeoRenderer<T> entityRendererIn) {
         super(entityRendererIn);
     }
@@ -32,9 +29,9 @@ public class DrownedGeckoLayer<T extends Entity & IAnimatable> extends GeoLayerR
         if(entityLivingBaseIn instanceof Drowned drowned){
             getRenderer().render(
                     getEntityModel().getModel(new ResourceLocation(BetterAnimationMob.MODID, "geo/zombie.geo.json")),
-                    entityLivingBaseIn,partialTicks, RenderType.armorCutoutNoCull(getTextureDrowned()),matrixStackIn,
+                    entityLivingBaseIn,partialTicks, RenderType.entityCutoutNoCull(getTextureDrowned()),matrixStackIn,
                     bufferIn,bufferIn.getBuffer(RenderType.entityCutoutNoCull(getTextureDrowned())),packedLightIn,
-                    LivingEntityRenderer.getOverlayCoords(drowned,partialTicks),1.0F,1.0F,1.0F,1.0F);
+                    LivingEntityRenderer.getOverlayCoords(drowned,0.0F),1.0F,1.0F,1.0F,1.0F);
         }
     }
 
