@@ -17,7 +17,7 @@ public class ReplacedZombiePiglinModel<T extends IAnimatable> extends ReplacedHu
     }
     @Override
     public ResourceLocation getAnimationResource(T animatable) {
-        return new ResourceLocation(BetterAnimationMob.MODID,"animations/piglin.animation.json");
+        return new ResourceLocation(BetterAnimationMob.MODID,"animations/zombie_piglin.animation.json");
     }
 
 

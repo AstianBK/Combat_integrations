@@ -97,7 +97,7 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
 
     private void animateWalk(float p_233539_, float p_233540_,GeoBone body) {
         GeoBone leftArm=(GeoBone) this.getBone("left_arm");
-        GeoBone rightArm= (GeoBone) this.getBone("right_arm");
+        GeoBone rightArm=(GeoBone) this.getBone("right_arm");
         float f = Math.min(0.5F, 3.0F * p_233540_);
         float f1 = p_233539_ * 0.8662F;
         float f2 = Mth.cos(f1);
@@ -106,11 +106,11 @@ public class ReplacedWardenModel<T extends ReplacedWarden<Warden>> extends Repla
         body.addRotationZ(0.1F * f3 * f);
         body.addRotationX(1.0F * f2 * f4);
         leftArm.addRotationX(-(0.8F * f2 * f));
-        /*
-        leftArm.setRotationZ();
+
+        /*leftArm.setRotationZ();
         rightArm.setRotationZ();
-         */
-        rightArm.addRotationX(-(0.8F * f3 * f));
+            */
+        rightArm.addRotationX(-(0.8F * f2 * f));
     }
 
     private void animateTendrils(Warden p_233527_, float p_233528_, float p_233529_) {
