@@ -6,7 +6,8 @@
   "refmap": "better_animation_mob.refmap.json",
   "mixins": [
     "LivingEntityMixin",
-    "SavagerAndRavagerMixins"
+    "SavagerAndRavagerMixins",
+    "SupplementariesMixins"
   ],
   "injectors": {
     "defaultRequire": 1

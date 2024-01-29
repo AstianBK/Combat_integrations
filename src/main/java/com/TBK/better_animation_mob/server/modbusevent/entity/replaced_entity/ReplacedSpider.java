@@ -69,6 +69,11 @@ public class ReplacedSpider<T extends Spider> extends ReplacedEntity<T> {
     }
 
     @Override
+    public int getMaxCombo() {
+        return 1;
+    }
+
+    @Override
     public AnimationFactory getFactory() {
         return this.factory;
     }

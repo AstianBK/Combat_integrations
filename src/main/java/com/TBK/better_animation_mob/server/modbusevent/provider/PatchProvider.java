@@ -1,5 +1,7 @@
 package com.TBK.better_animation_mob.server.modbusevent.provider;
 
+import com.TBK.better_animation_mob.BetterAnimationMob;
+import com.TBK.better_animation_mob.client.util.Compati;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.*;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedExecutioner;
@@ -44,9 +46,11 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
         registry.put(EntityType.WOLF,entity -> ReplacedWolf::new);
 
         registry.put(EntityType.WARDEN,entity -> ReplacedWarden::new);
+        if(BetterAnimationMob.isLoaded(Compati.SAVAGE_AND_RAVEGER)){
+            registry.put(SREntityTypes.EXECUTIONER.get(),entity -> ReplacedExecutioner::new);
+            registry.put(SREntityTypes.GRIEFER.get(),entity -> ReplacedGriefer::new);
 
-        registry.put(SREntityTypes.EXECUTIONER.get(),entity -> ReplacedExecutioner::new);
-        registry.put(SREntityTypes.GRIEFER.get(),entity -> ReplacedGriefer::new);
+        }
 
         CAPABILITIES.putAll(registry);
     }

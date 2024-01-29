@@ -39,7 +39,7 @@ public class ReplacedWitherSkeletonRenderer<T extends WitherSkeleton,P extends R
                     stack.mulPose(Vector3f.ZP.rotationDegrees(-35F));
                     stack.mulPose(Vector3f.YP.rotationDegrees(-35F));
                     stack.mulPose(Vector3f.XP.rotationDegrees(-180F));
-                    stack.translate(0.2D,0.0D,0.0D);
+                    stack.translate(-0.05D,0.2D,-0.05D);
                 }
             }
         }

@@ -24,10 +24,15 @@ import com.TBK.better_animation_mob.server.modbusevent.register.BkEffect;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEntityTypes;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkItems;
 import com.teamabnormals.savage_and_ravage.core.registry.SREntityTypes;
+import net.mehvahdjukaar.moonlight.core.Moonlight;
+import net.mehvahdjukaar.supplementaries.Supplementaries;
+import net.mehvahdjukaar.supplementaries.configs.ClientConfigs;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -48,9 +53,11 @@ public class BetterAnimationMob {
         BkItems.ITEMS.register(modEventBus);
         PacketHandler.registerMessages();
         modEventBus.register(this);
-        modEventBus.addListener(this::registerRenderer);
         modEventBus.addListener(this::Common);
         modEventBus.addListener(Capabilities::registerCapabilities);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,()->()->{
+            modEventBus.addListener(this::registerRenderer);
+        });
     }
     private void Common(final FMLCommonSetupEvent event) {
         event.enqueueWork(PatchProvider::registerEntityPatches);

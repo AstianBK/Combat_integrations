@@ -18,9 +18,9 @@ public class ReplacedPiglinBruteRenderer<T extends PiglinBrute,P extends Replace
     @Override
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
-            stack.mulPose(Vector3f.ZP.rotationDegrees(200F));
+            stack.mulPose(Vector3f.XP.rotationDegrees(-90.F));
             if (item == currentEntity.getMainHandItem()) {
-                stack.translate(-0.05F,-0.25D,-0.45D);
+                stack.translate(0.0F,0.2D,0.0D);
             }
         }
     }

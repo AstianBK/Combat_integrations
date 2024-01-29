@@ -83,7 +83,7 @@ public class ReplacedZombieRenderer<T extends Zombie ,P extends ReplacedZombie> 
                 if (trident) {
                     stack.translate(0.05D,0.0D,0.0D);
                 }else {
-                    stack.translate(0.05,-0.0D,0.0D);
+                    stack.translate(0.05,0.2D,0.0D);
                 }
             }
         }

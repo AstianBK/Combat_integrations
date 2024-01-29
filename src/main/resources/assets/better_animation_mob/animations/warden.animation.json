@@ -93,7 +93,7 @@
 				},
 				"right_arm": {
 					"rotation": {
-						"vector": ["0-math.sin(query.anim_time*180)*8", 0, "2.5+math.clamp(math.cos(query.anim_time*180)*2,-2,2)"]
+						"vector": [0, 0, "2.5+math.clamp(math.cos(query.anim_time*180)*2,-2,2)"]
 					}
 				},
 				"left_arm": {
