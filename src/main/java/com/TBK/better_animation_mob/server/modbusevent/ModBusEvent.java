@@ -1,10 +1,17 @@
 package com.TBK.better_animation_mob.server.modbusevent;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
+import com.TBK.better_animation_mob.client.models.ReplacedEntityModel;
+import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.entity.goals.MeleeAttackPatch;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedEntity;
 import com.TBK.better_animation_mob.server.modbusevent.provider.PatchProvider;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.*;
@@ -21,17 +28,24 @@ import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.monster.warden.WardenAi;
 import net.minecraft.world.entity.schedule.Activity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.geo.render.built.GeoModel;
+import software.bernie.geckolib3.renderers.geo.GeoReplacedEntityRenderer;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = BetterAnimationMob.MODID)
+@Mod.EventBusSubscriber()
 public class ModBusEvent {
 
     @SubscribeEvent
@@ -44,15 +58,34 @@ public class ModBusEvent {
         }
     }
 
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public static void renderEvent(RenderLivingEvent.Pre<?,?> event){
+        EntityType<?> type = event.getEntity().getType();
+        if(BetterAnimationMob.getProviders().containsKey(type)){
+            Minecraft mc = Minecraft.getInstance();
+            EntityRendererProvider.Context context = new EntityRendererProvider.Context(mc.getEntityRenderDispatcher(),
+                    mc.getItemRenderer(),mc.getBlockRenderer(),mc.gameRenderer.itemInHandRenderer,
+                    mc.getResourceManager(),mc.getEntityModels(),mc.font);
+            EntityRenderer<?> renderer=BetterAnimationMob.getProviders().get(type).create(context);
+            IAnimatable animatable = Capabilities.getEntityPatch(event.getEntity(),ReplacedEntity.class);
+            if(renderer instanceof ExtendedGeoReplacedEntityRenderer<?,?> geoRenderer && PatchProvider.getAnimatables()!=null && animatable!=null){
+                event.setCanceled(true);
+                geoRenderer.setCurrentEntity(event.getEntity());
+                geoRenderer.render(event.getEntity(),animatable,0.0F,event.getPartialTick(),event.getPoseStack(),event.getMultiBufferSource(),event.getPackedLight());
+            }
+        }
+    }
+
     public static void removeBehavior(Brain<?> brain, Activity activity, int priority, Class targetBehaviorClass) {
         Set<Behavior<?>> set = (Set<Behavior<?>>) brain.availableBehaviorsByPriority.get(priority).get(activity);
-        set.removeIf((behavior) -> targetBehaviorClass.isInstance(behavior));
+        set.removeIf(targetBehaviorClass::isInstance);
     }
 
     public static void replaceBehavior(Brain<?> brain, Activity activity, int priority, Class targetBehaviorClass, Behavior<?> newBehavior) {
         Set<Behavior<?>> set = (Set<Behavior<?>>) brain.availableBehaviorsByPriority.get(priority).get(activity);
 
-        set.removeIf((behavior) -> targetBehaviorClass.isInstance(behavior));
+        set.removeIf(targetBehaviorClass::isInstance);
         set.add(newBehavior);
     }
 

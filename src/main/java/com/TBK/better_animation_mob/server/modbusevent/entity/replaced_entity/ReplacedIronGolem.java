@@ -51,9 +51,6 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
         }else {
             onServerTick();
         }
-        if(this.sonicBoomAnimTimer>0){
-            this.sonicBoomAnimTimer--;
-        }
         if(this.attackTimer>0){
             this.attackTimer--;
             if(this.attackTimer==isMomentHurt()){
@@ -88,7 +85,6 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
             AnimationBuilder builder=new AnimationBuilder();
             if (golem == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            boolean isAgressive= golem.isAggressive();
             if(replacedWarden.getAttackTimer()>0){
                 state.getController().setAnimationSpeed(1.5D);
                 state.getController().setAnimation(builder.playOnce("irongolem.attack"+getCombo(golem)));
@@ -100,7 +96,6 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
         }));
         data.addAnimationController(new AnimationController<>(this, "controller_legs", 10, state -> {
             IronGolem golem = getWardenFromState(state);
-            ReplacedIronGolem<?> replacedWarden = getPatch(golem, ReplacedIronGolem.class);
             AnimationBuilder builder=new AnimationBuilder();
             if (golem == null) return PlayState.STOP;
             if(!state.isMoving() ){
