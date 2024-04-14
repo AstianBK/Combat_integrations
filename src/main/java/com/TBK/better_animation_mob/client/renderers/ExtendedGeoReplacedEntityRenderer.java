@@ -15,10 +15,8 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.geo.render.built.GeoCube;
@@ -167,11 +165,8 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
     public T getCurrentEntity() {
         return currentEntity;
     }
-
-    @NotNull
-    @Override
-    public Vec3 getRenderOffset(Entity pEntity, float pPartialTicks) {
-        this.currentEntity = (T) pEntity;
-        return super.getRenderOffset(pEntity, pPartialTicks);
+    public void setCurrentEntity(LivingEntity animatable){
+        this.currentEntity= (T) animatable;
     }
+
 }

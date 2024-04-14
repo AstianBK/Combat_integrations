@@ -7,6 +7,7 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.*;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedExecutioner;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedGriefer;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedIceologer;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedTrickster;
 import com.google.common.collect.Maps;
 import com.teamabnormals.savage_and_ravage.core.registry.SREntityTypes;
 import net.minecraft.core.Direction;
@@ -45,11 +46,14 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
         registry.put(EntityType.ENDERMAN,entity -> ReplacedEnderMan::new);
         registry.put(EntityType.WOLF,entity -> ReplacedWolf::new);
 
+        registry.put(EntityType.EVOKER,entity -> ReplacedEvoker::new);
+
         registry.put(EntityType.WARDEN,entity -> ReplacedWarden::new);
         if(BetterAnimationMob.isLoaded(Compati.SAVAGE_AND_RAVEGER)){
             registry.put(SREntityTypes.EXECUTIONER.get(),entity -> ReplacedExecutioner::new);
             registry.put(SREntityTypes.GRIEFER.get(),entity -> ReplacedGriefer::new);
-
+            registry.put(SREntityTypes.ICEOLOGER.get(),entity -> ReplacedIceologer::new);
+            registry.put(SREntityTypes.TRICKSTER.get(),entity -> ReplacedTrickster::new);
         }
 
         CAPABILITIES.putAll(registry);
@@ -60,6 +64,9 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
         EntityType<?> entityType = ForgeRegistries.ENTITY_TYPES.getValue(rl);
 
         return CAPABILITIES.get(entityType);
+    }
+    public static Map<EntityType<?>, Function<Entity, Supplier<ReplacedEntity<?>>>> getAnimatables(){
+        return CAPABILITIES;
     }
 
     private ReplacedEntity<?> capability;

@@ -1,5 +1,6 @@
 package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr;
 
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedEntity;
 import com.teamabnormals.savage_and_ravage.common.entity.monster.Iceologer;
 import com.teamabnormals.savage_and_ravage.common.entity.monster.Trickster;
 import net.minecraft.world.entity.Entity;
@@ -16,7 +17,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedIceologer implements IAnimatable {
+public class ReplacedIceologer<T extends Iceologer> extends ReplacedEntity<T> {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
     @Override
     public void registerControllers(AnimationData data) {
@@ -62,7 +63,7 @@ public class ReplacedIceologer implements IAnimatable {
 
 
     @Nullable
-    private Iceologer getRaiderFromState(AnimationEvent<ReplacedIceologer> state) {
+    private Iceologer getRaiderFromState(AnimationEvent<ReplacedIceologer<T>> state) {
         List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
         if (list.isEmpty()) return null;
         Entity entity = list.get(0);

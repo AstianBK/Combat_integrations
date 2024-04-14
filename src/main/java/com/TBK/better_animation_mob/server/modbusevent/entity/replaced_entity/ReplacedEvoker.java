@@ -15,7 +15,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedEvoker implements IAnimatable {
+public class ReplacedEvoker<T extends  Evoker> extends ReplacedEntity<T> {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     @Override
@@ -60,7 +60,7 @@ public class ReplacedEvoker implements IAnimatable {
     }
 
     @Nullable
-    private Evoker getRaiderFromState(AnimationEvent<ReplacedEvoker> state) {
+    private Evoker getRaiderFromState(AnimationEvent<ReplacedEvoker<T>> state) {
         List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
         if (list.isEmpty()) return null;
         Entity entity = list.get(0);

@@ -12,8 +12,11 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class ReplacedEntity <T extends Mob> implements IAnimatable {
+    AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
     protected int attackTimer;
     protected T replaced;
 
@@ -106,7 +109,7 @@ public class ReplacedEntity <T extends Mob> implements IAnimatable {
 
     @Override
     public AnimationFactory getFactory() {
-        return null;
+        return this.factory;
     }
 
     public <P extends ReplacedEntity<T>> P getPatch(LivingEntity replaced,Class<P> pClass){
