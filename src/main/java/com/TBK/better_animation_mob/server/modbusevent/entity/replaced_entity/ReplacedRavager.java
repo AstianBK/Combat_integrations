@@ -58,11 +58,7 @@ public class ReplacedRavager<T extends Ravager> extends ReplacedEntity<T> {
             ReplacedRavager<?> replacedRavager= Capabilities.getEntityPatch(raider, ReplacedRavager.class);
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
-            if(raider.hurtTime>0){
-                state.getController().setAnimationSpeed(3.0F);
-                state.getController().setAnimation(builder.playOnce("ravager.hurt"));
-                return PlayState.CONTINUE;
-            }
+
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             if (isMove && replacedRavager.getAttackTimer() == 0) {
                 state.getController().setAnimationSpeed(raider.isAggressive()?3.0F : 0.5F);

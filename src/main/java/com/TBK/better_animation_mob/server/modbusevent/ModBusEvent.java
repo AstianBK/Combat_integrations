@@ -67,13 +67,6 @@ public class ModBusEvent {
 
 
     @SubscribeEvent
-    public static void hurtEvent(LivingHurtEvent event){
-        if(event.getEntity() instanceof Warden warden){
-            warden.setPose(Pose.DIGGING);
-        }
-    }
-
-    @SubscribeEvent
     public static void onTick(LivingEvent.LivingTickEvent event){
         ReplacedEntity<?> piglinPatch = Capabilities.getEntityPatch(event.getEntity(), ReplacedEntity.class);
         if(piglinPatch!=null){
