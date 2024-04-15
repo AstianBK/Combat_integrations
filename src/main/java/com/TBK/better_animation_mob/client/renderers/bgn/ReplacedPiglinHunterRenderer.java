@@ -19,14 +19,5 @@ public class ReplacedPiglinHunterRenderer<T extends PiglinHunter,P extends Repla
         super(renderManager,new ReplacedPiglinHunterModel<>(),(P) new ReplacedPiglin(),new ResourceLocation(BygoneNetherMod.MODID,"textures/entity/piglin/piglin_hunter.png"));
     }
 
-    @Override
-    protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
-        if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
-            stack.mulPose(Vector3f.XP.rotationDegrees(-90.F));
-            if (item == currentEntity.getMainHandItem()) {
-                stack.translate(0.0F,0.2D,0.0D);
-            }
-        }
-    }
 
 }

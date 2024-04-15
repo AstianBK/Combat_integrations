@@ -45,6 +45,9 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
         registry.put(EntityType.DROWNED,(entity -> ReplacedZombie::new));
         registry.put(EntityType.IRON_GOLEM,entity -> ReplacedIronGolem::new);
 
+        registry.put(EntityType.SKELETON, entity -> ReplacedSkeleton::new);
+        registry.put(EntityType.STRAY, entity -> ReplacedSkeleton::new);
+
         registry.put(EntityType.ENDERMAN,entity -> ReplacedEnderMan::new);
         registry.put(EntityType.WOLF,entity -> ReplacedWolf::new);
 
