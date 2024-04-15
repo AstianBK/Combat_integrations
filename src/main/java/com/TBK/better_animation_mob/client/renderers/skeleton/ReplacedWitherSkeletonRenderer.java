@@ -21,7 +21,6 @@ public class ReplacedWitherSkeletonRenderer<T extends WitherSkeleton,P extends R
     public ReplacedWitherSkeletonRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new ReplacedWitherSkeletonModel<>(), (P) new ReplacedWitherSkeleton(),new ResourceLocation("textures/entity/skeleton/wither_skeleton.png"));
     }
-
     @Override
     public void render(GeoModel model, Object o, float partialTick, RenderType type, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         poseStack.scale(1.2F, 1.2F, 1.2F);

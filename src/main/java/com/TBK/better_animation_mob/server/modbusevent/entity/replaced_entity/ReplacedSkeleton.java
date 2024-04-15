@@ -1,9 +1,12 @@
 package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
 
+import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
+import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.UseAnim;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -26,18 +29,33 @@ public class ReplacedSkeleton<T extends AbstractSkeleton> extends ReplacedEntity
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
             AbstractSkeleton zombie = getZombieFromState(state);
+            ReplacedEntity<?> replacedPiglin = Capabilities.getEntityPatch(zombie,ReplacedSkeleton.class);
             AnimationBuilder builder=new AnimationBuilder();
             if (zombie == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             boolean isAim = this.isWieldingTwoHandedWeapon(zombie) && zombie.isAggressive();
 
-            if (isMove) {
-                state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);
-                state.getController().setAnimation(builder.loop("skeleton.move"+(!isAim ? "" : "2")));
+            if(zombie.getMainHandItem().getItem() instanceof BowItem){
+                if (isMove) {
+                    state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);
+                    state.getController().setAnimation(builder.loop("skeleton.move"+(!isAim ? "" : "2")));
+                }else {
+                    state.getController().setAnimationSpeed(1.0F);
+                    state.getController().setAnimation(builder.loop(isAim ?"skeleton.aim" :"skeleton.idle"));
+                }
             }else {
-                state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.loop(isAim ?"skeleton.aim" :"skeleton.idle"));
+                if (isMove && replacedPiglin.getAttackTimer()==0) {
+                    state.getController().setAnimationSpeed(2.0F);
+                    state.getController().setAnimation(new AnimationBuilder().loop("skeleton.movemelee"));
+                }else if(replacedPiglin.getAttackTimer()>0) {
+                    state.getController().setAnimationSpeed(2.5D);
+                    state.getController().setAnimation(new AnimationBuilder().playAndHold("skeleton.attack"+replacedPiglin.getCombo(zombie)));
+                }else{
+                    state.getController().setAnimationSpeed(1F);
+                    state.getController().setAnimation(new AnimationBuilder().loop("skeleton.idle"));
+                }
             }
+
             return PlayState.CONTINUE;
         }));
     }

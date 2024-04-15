@@ -1,6 +1,7 @@
 package com.TBK.better_animation_mob;
 
 import com.TBK.better_animation_mob.client.models.zombie.ReplacedZombieModel;
+import com.TBK.better_animation_mob.client.renderers.bgn.*;
 import com.TBK.better_animation_mob.client.renderers.enderman.ReplacedEnderManRenderer;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedZombiePiglinRenderer;
 import com.TBK.better_animation_mob.client.renderers.spider.ReplacedCaveSpiderRenderer;
@@ -26,6 +27,7 @@ import com.TBK.better_animation_mob.server.modbusevent.register.BkEffect;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEntityTypes;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkItems;
 import com.google.common.collect.Maps;
+import com.izofar.bygonenether.init.ModEntityTypes;
 import com.teamabnormals.savage_and_ravage.core.registry.SREntityTypes;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -110,6 +112,16 @@ public class BetterAnimationMob {
             register(SREntityTypes.EXECUTIONER.get(), ReplacedExecutionerRenderer::new);
             register(SREntityTypes.TRICKSTER.get(), ReplacedTricksterRenderer::new);
             register(SREntityTypes.GRIEFER.get(), ReplacedGrieferRenderer::new);
+        }
+        if(isLoaded(Compati.BYGONE_NETHER)){
+            register(ModEntityTypes.CORPOR.get(), ReplacedCorporRenderer::new);
+            register(ModEntityTypes.PIGLIN_HUNTER.get(), ReplacedPiglinHunterRenderer::new);
+            register(ModEntityTypes.PIGLIN_PRISONER.get(), ReplacedPiglinPrisonerRenderer::new);
+            register(ModEntityTypes.WARPED_ENDERMAN.get(), ReplacedWarpedEnderManRenderer::new);
+            register(ModEntityTypes.WEX.get(), ReplacedWexRenderer::new);
+            register(ModEntityTypes.WITHER_SKELETON_KNIGHT.get(),ReplacedWitherSkeletonKnightRenderer::new);
+            register(ModEntityTypes.WRAITHER.get(),ReplacedWraitherRenderer::new);
+
         }
     }
     

@@ -80,7 +80,6 @@ public class ReplacedPiglin<T extends AbstractPiglin> extends ReplacedEntity<T> 
         AbstractPiglin piglin = this.getRaiderFromState(state);
         ReplacedEntity<?> replacedPiglin = Capabilities.getEntityPatch(piglin,ReplacedPiglin.class);
         if(piglin==null){
-            System.out.print("\n----STOP----\n");
             return PlayState.STOP;
         }
         boolean hasCrossbow=piglin.getMainHandItem().is(Items.CROSSBOW);
