@@ -1,10 +1,13 @@
 package com.TBK.better_animation_mob.server.modbusevent.provider;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
+import com.TBK.better_animation_mob.client.renderers.compi.dm.ReplacedFungusThrowerRenderer;
 import com.TBK.better_animation_mob.client.util.Compati;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.*;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.bgn.ReplacedWex;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedFungusThrower;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedZombieFungusThrower;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedExecutioner;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedGriefer;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedIceologer;
@@ -68,7 +71,14 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
             registry.put(ModEntityTypes.WARPED_ENDERMAN.get(),entity -> ReplacedEnderMan::new);
             registry.put(ModEntityTypes.WEX.get(),entity -> ReplacedWex::new);
             registry.put(ModEntityTypes.WRAITHER.get(),entity -> ReplacedSkeleton::new);
-
+        }
+        if(BetterAnimationMob.isLoaded(Compati.DUNGEONS_MOBS)){
+            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.FROZEN_ZOMBIE.get(), entity -> ReplacedZombie::new);
+            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.JUNGLE_ZOMBIE.get(),entity -> ReplacedZombie::new);
+            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.MOSSY_SKELETON.get(),entity -> ReplacedSkeleton::new);
+            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.SUNKEN_SKELETON.get(),entity -> ReplacedSkeleton::new);
+            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.ZOMBIFIED_FUNGUS_THROWER.get(),entity -> ReplacedZombieFungusThrower::new);
+            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.FUNGUS_THROWER.get(),entity -> ReplacedFungusThrower::new);
         }
         CAPABILITIES.putAll(registry);
     }

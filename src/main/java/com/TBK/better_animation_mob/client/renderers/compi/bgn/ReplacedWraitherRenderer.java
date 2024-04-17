@@ -1,4 +1,4 @@
-package com.TBK.better_animation_mob.client.renderers.bgn;
+package com.TBK.better_animation_mob.client.renderers.compi.bgn;
 
 import com.TBK.better_animation_mob.client.models.bgn.ReplacedWitherSkeletonKnightModel;
 import com.TBK.better_animation_mob.client.models.bgn.ReplacedWraitherModel;

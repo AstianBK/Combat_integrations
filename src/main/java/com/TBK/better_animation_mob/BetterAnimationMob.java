@@ -1,7 +1,7 @@
 package com.TBK.better_animation_mob;
 
-import com.TBK.better_animation_mob.client.models.zombie.ReplacedZombieModel;
-import com.TBK.better_animation_mob.client.renderers.bgn.*;
+import com.TBK.better_animation_mob.client.renderers.compi.bgn.*;
+import com.TBK.better_animation_mob.client.renderers.compi.dm.*;
 import com.TBK.better_animation_mob.client.renderers.enderman.ReplacedEnderManRenderer;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedZombiePiglinRenderer;
 import com.TBK.better_animation_mob.client.renderers.spider.ReplacedCaveSpiderRenderer;
@@ -20,30 +20,26 @@ import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedHuskRenderer
 import com.TBK.better_animation_mob.client.renderers.zombie.ReplacedZombieRenderer;
 import com.TBK.better_animation_mob.client.util.Compati;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
-import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedZombie;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedZombieFungusThrower;
 import com.TBK.better_animation_mob.server.modbusevent.network.PacketHandler;
 import com.TBK.better_animation_mob.server.modbusevent.provider.PatchProvider;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEffect;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkEntityTypes;
 import com.TBK.better_animation_mob.server.modbusevent.register.BkItems;
 import com.google.common.collect.Maps;
+import com.infamous.dungeons_mobs.DungeonsMobs;
 import com.izofar.bygonenether.init.ModEntityTypes;
 import com.teamabnormals.savage_and_ravage.core.registry.SREntityTypes;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib3.GeckoLib;
 
-import java.util.Collections;
 import java.util.Map;
 
 @Mod(BetterAnimationMob.MODID)
@@ -119,9 +115,17 @@ public class BetterAnimationMob {
             register(ModEntityTypes.PIGLIN_PRISONER.get(), ReplacedPiglinPrisonerRenderer::new);
             register(ModEntityTypes.WARPED_ENDERMAN.get(), ReplacedWarpedEnderManRenderer::new);
             register(ModEntityTypes.WEX.get(), ReplacedWexRenderer::new);
-            register(ModEntityTypes.WITHER_SKELETON_KNIGHT.get(),ReplacedWitherSkeletonKnightRenderer::new);
-            register(ModEntityTypes.WRAITHER.get(),ReplacedWraitherRenderer::new);
+            register(ModEntityTypes.WITHER_SKELETON_KNIGHT.get(), ReplacedWitherSkeletonKnightRenderer::new);
+            register(ModEntityTypes.WRAITHER.get(), ReplacedWraitherRenderer::new);
+        }
 
+        if(isLoaded(Compati.DUNGEONS_MOBS)){
+            register(com.infamous.dungeons_mobs.mod.ModEntityTypes.FROZEN_ZOMBIE.get(), ReplacedFrozenZombieRenderer::new);
+            register(com.infamous.dungeons_mobs.mod.ModEntityTypes.JUNGLE_ZOMBIE.get(), ReplacedJungleZombieRenderer::new);
+            register(com.infamous.dungeons_mobs.mod.ModEntityTypes.MOSSY_SKELETON.get(), ReplacedMossySkeletonRenderer::new);
+            register(com.infamous.dungeons_mobs.mod.ModEntityTypes.SUNKEN_SKELETON.get(), ReplacedSunkenSkeletonRenderer::new);
+            register(com.infamous.dungeons_mobs.mod.ModEntityTypes.ZOMBIFIED_FUNGUS_THROWER.get(), ReplacedZombiefierFungusThrowerRenderer::new);
+            register(com.infamous.dungeons_mobs.mod.ModEntityTypes.FUNGUS_THROWER.get(), ReplacedFungusThrowerRenderer::new);
         }
     }
     

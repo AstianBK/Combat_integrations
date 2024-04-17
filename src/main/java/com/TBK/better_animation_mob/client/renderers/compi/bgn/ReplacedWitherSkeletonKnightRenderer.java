@@ -1,4 +1,4 @@
-package com.TBK.better_animation_mob.client.renderers.bgn;
+package com.TBK.better_animation_mob.client.renderers.compi.bgn;
 
 import com.TBK.better_animation_mob.client.models.bgn.ReplacedCorporModel;
 import com.TBK.better_animation_mob.client.models.bgn.ReplacedWitherSkeletonKnightModel;
@@ -30,6 +30,7 @@ public class ReplacedWitherSkeletonKnightRenderer<T extends WitherSkeletonKnight
         poseStack.scale(1.2F, 1.2F, 1.2F);
         super.render(model, o, partialTick, type, poseStack, bufferSource, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
+
     @Override
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {

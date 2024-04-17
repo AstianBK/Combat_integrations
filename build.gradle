@@ -130,6 +130,9 @@ dependencies {
     implementation fg.deobf("curse.maven:savage-and-ravage-381736:4429231")
     implementation fg.deobf("curse.maven:blueprint-382216:4442628")
     implementation fg.deobf("curse.maven:bygone-nether-576124:4747443")
+    implementation fg.deobf("curse.maven:dungeons-mobs-428883:4501524")
+    implementation fg.deobf("curse.maven:dungeons-libraries-550941:5112044")
+    implementation fg.deobf("curse.maven:curios-309927:5066842")
     implementation 'org.jetbrains:annotations:23.0.0'
 
 }
