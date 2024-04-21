@@ -1,15 +1,12 @@
-package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity;
+package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm;
 
 import com.TBK.better_animation_mob.server.modbusevent.ModBusEvent;
 import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.entity.goals.MeleeAttackPatch;
-import com.TBK.better_animation_mob.server.modbusevent.network.PacketHandler;
-import com.TBK.better_animation_mob.server.modbusevent.network.message.PacketSyncAnimAttack;
-import net.minecraft.network.protocol.game.ClientboundAnimatePacket;
-import net.minecraft.server.level.ServerChunkCache;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionHand;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedEntity;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedPiglin;
+import com.infamous.dungeons_mobs.entities.piglin.FungusThrowerEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -19,9 +16,6 @@ import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import software.bernie.geckolib3.core.AnimationState;
-import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
@@ -34,7 +28,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReplacedPiglin<T extends AbstractPiglin> extends ReplacedEntity<T> {
+public class ReplacedFungusThrower<T extends FungusThrowerEntity> extends ReplacedPiglin<T> {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public void onTick(Level level){
@@ -76,33 +70,21 @@ public class ReplacedPiglin<T extends AbstractPiglin> extends ReplacedEntity<T> 
         data.addAnimationController(new AnimationController<>(this, "controller", 10, this::predicate));
     }
 
-    private PlayState predicate(AnimationEvent<ReplacedPiglin<T>> state) {
-        AbstractPiglin piglin = this.getRaiderFromState(state);
-        ReplacedEntity<?> replacedPiglin = Capabilities.getEntityPatch(piglin,ReplacedPiglin.class);
+    private PlayState predicate(AnimationEvent<ReplacedFungusThrower<T>> state) {
+        FungusThrowerEntity piglin = this.getRaiderFromState(state);
         if(piglin==null){
             return PlayState.STOP;
         }
-        boolean hasCrossbow=piglin.getMainHandItem().is(Items.CROSSBOW);
         boolean isMove=!(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-        if(hasCrossbow){
-            if (isMove) {
-                state.getController().setAnimationSpeed(piglin.isAggressive()?5.0F : 1.0F);
-                state.getController().setAnimation(new AnimationBuilder().addAnimation("piglin.moveAim", ILoopType.EDefaultLoopTypes.LOOP));
-            }else {
-                state.getController().setAnimationSpeed(1F);
-                state.getController().setAnimation(new AnimationBuilder().addAnimation("piglin.idleAim", ILoopType.EDefaultLoopTypes.LOOP));
-            }
-        }else {
-            if (isMove && replacedPiglin.getAttackTimer()==0) {
-                state.getController().setAnimationSpeed(piglin.isAggressive()?5.0F : 2.0F);
-                state.getController().setAnimation(new AnimationBuilder().loop(piglin.isAggressive()?"piglin.move2":"piglin.move"));
-            }else if(replacedPiglin.getAttackTimer()>0) {
-                state.getController().setAnimationSpeed(2.5D);
-                state.getController().setAnimation(new AnimationBuilder().playAndHold("piglin.attack"+((ICombos)piglin).getCombo()));
-            }else{
-                state.getController().setAnimationSpeed(1F);
-                state.getController().setAnimation(new AnimationBuilder().loop("piglin.idle"));
-            }
+        if (isMove && piglin.getAttackAnim(state.getPartialTick())==0) {
+            state.getController().setAnimationSpeed(piglin.isAggressive()?5.0F : 2.0F);
+            state.getController().setAnimation(new AnimationBuilder().loop(piglin.isAggressive()?"piglin.move2":"piglin.move"));
+        }else if(piglin.getAttackAnim(state.getPartialTick())>0) {
+            state.getController().setAnimationSpeed(1.0D);
+            state.getController().setAnimation(new AnimationBuilder().playAndHold("piglin.throw"));
+        }else{
+            state.getController().setAnimationSpeed(1F);
+            state.getController().setAnimation(new AnimationBuilder().loop("piglin.idle"));
         }
         return PlayState.CONTINUE;
     }
@@ -114,11 +96,11 @@ public class ReplacedPiglin<T extends AbstractPiglin> extends ReplacedEntity<T> 
 
 
     @Nullable
-    private AbstractPiglin getRaiderFromState(AnimationEvent<ReplacedPiglin<T>> state) {
+    private FungusThrowerEntity getRaiderFromState(AnimationEvent<ReplacedFungusThrower<T>> state) {
         List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
         if (list.isEmpty()) return null;
         Entity entity = list.get(0);
-        if (!(entity instanceof AbstractPiglin enderman)) return null;
+        if (!(entity instanceof FungusThrowerEntity enderman)) return null;
         return enderman;
     }
 }

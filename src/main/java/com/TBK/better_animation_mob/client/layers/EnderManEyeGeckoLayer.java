@@ -16,22 +16,28 @@ import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 @OnlyIn(Dist.CLIENT)
 public class EnderManEyeGeckoLayer<T extends Entity & IAnimatable> extends GeoLayerRenderer<T> {
+    public final ResourceLocation EYE;
+    public final ResourceLocation GEO_LOCATION;
 
-    public EnderManEyeGeckoLayer(IGeoRenderer<T> entityRendererIn) {
+    public EnderManEyeGeckoLayer(IGeoRenderer<T> entityRendererIn,ResourceLocation geoLocation,ResourceLocation eyeLocation) {
         super(entityRendererIn);
+        EYE=eyeLocation;
+        GEO_LOCATION=geoLocation;
     }
 
     @Override
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, T entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        getRenderer().render(
-                getEntityModel().getModel(new ResourceLocation(BetterAnimationMob.MODID, "geo/enderman.geo.json")),
-                entityLivingBaseIn,partialTicks, RenderType.eyes(getTextureEye()),matrixStackIn,
-                bufferIn,bufferIn.getBuffer(RenderType.eyes(getTextureEye())),packedLightIn,
-                LivingEntityRenderer.getOverlayCoords((LivingEntity) entityLivingBaseIn,partialTicks),1.0F,1.0F,1.0F,1.0F);
+        if(EYE!=null && GEO_LOCATION!=null){
+            getRenderer().render(
+                    getEntityModel().getModel(GEO_LOCATION),
+                    entityLivingBaseIn,partialTicks, RenderType.eyes(getTextureEye()),matrixStackIn,
+                    bufferIn,bufferIn.getBuffer(RenderType.eyes(getTextureEye())),packedLightIn,
+                    LivingEntityRenderer.getOverlayCoords((LivingEntity) entityLivingBaseIn,partialTicks),1.0F,1.0F,1.0F,1.0F);
+        }
     }
 
     public ResourceLocation getTextureEye(){
-        return new ResourceLocation("textures/entity/enderman/enderman_eyes.png");
+        return EYE;
     }
 }
 
