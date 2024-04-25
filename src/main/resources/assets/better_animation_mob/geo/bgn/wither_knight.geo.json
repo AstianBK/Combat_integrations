@@ -51,7 +51,7 @@
 				{
 					"name": "LeftArm",
 					"parent": "main",
-					"pivot": [5, 22, 0],
+					"pivot": [4, 23, 0],
 					"mirror": true,
 					"cubes": [
 						{"origin": [4, 12, -1], "size": [2, 12, 2], "uv": [40, 16]}
@@ -76,7 +76,7 @@
 				{
 					"name": "RightArm",
 					"parent": "main",
-					"pivot": [-5, 22, 0],
+					"pivot": [-4, 23, 0],
 					"cubes": [
 						{"origin": [-6, 12, -1], "size": [2, 12, 2], "uv": [40, 16]}
 					]
