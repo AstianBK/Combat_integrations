@@ -19,6 +19,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
@@ -84,6 +85,10 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
                 }else {
                     stack.translate(0.05,-0.25D,-0.5D);
                 }
+            }
+            if(item.getItem() instanceof ShieldItem){
+                stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
+                stack.translate(0.05,-0.25D,-0.5D);
             }
         }
     }

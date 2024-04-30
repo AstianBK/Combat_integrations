@@ -17,13 +17,14 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.geo.render.built.GeoModel;
 
-public class ReplacedWitherSkeletonKnightRenderer<T extends WitherSkeletonKnight,P extends ReplacedWitherSkeleton<T>> extends ReplacedSkeletonRenderer<T,P> {
+public class ReplacedWitherSkeletonKnightRenderer<T extends WitherSkeletonKnight,P extends ReplacedSkeleton<T>> extends ReplacedSkeletonRenderer<T,P> {
     public ReplacedWitherSkeletonKnightRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new ReplacedWitherSkeletonKnightModel(), (P) new ReplacedWitherSkeleton<T>(),new ResourceLocation(BygoneNetherMod.MODID,"textures/entity/wither/wither_skeleton_knight.png"));
+        super(renderManager, new ReplacedWitherSkeletonKnightModel(), (P) new ReplacedSkeleton<T>(),new ResourceLocation(BygoneNetherMod.MODID,"textures/entity/wither/wither_skeleton_knight.png"));
     }
     @Override
     public void render(GeoModel model, Object o, float partialTick, RenderType type, PoseStack poseStack, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
@@ -35,17 +36,32 @@ public class ReplacedWitherSkeletonKnightRenderer<T extends WitherSkeletonKnight
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
             boolean trident = item.getItem() instanceof BowItem;
+            boolean shield = item.getItem() instanceof ShieldItem;
             if (item == currentEntity.getMainHandItem()) {
                 if (trident) {
                     //stack.mulPose(Vector3f.XP.rotationDegrees(180F));
                     stack.translate(0.0D,-0.05D,0.0D);
-                }else {
-                    stack.mulPose(Vector3f.ZP.rotationDegrees(-35F));
-                    stack.mulPose(Vector3f.YP.rotationDegrees(-35F));
-                    stack.mulPose(Vector3f.XP.rotationDegrees(-180F));
-                    stack.translate(-0.05D,0.2D,-0.05D);
+                }else if(!shield){
+                    stack.mulPose(Vector3f.ZP.rotationDegrees(0F));
+                    stack.mulPose(Vector3f.YP.rotationDegrees(180F));
+                    stack.mulPose(Vector3f.XP.rotationDegrees(180F));
+                    stack.translate(0.0D,-0.02D,-0.05D);
+                }
+            }
+            if(item == currentEntity.getOffhandItem()){
+                if(shield){
+                    if(currentEntity.isUsingShield()){
+                        stack.mulPose(Vector3f.XP.rotationDegrees(-94F));
+                        stack.mulPose(Vector3f.YP.rotationDegrees(70F));
+                        stack.mulPose(Vector3f.ZP.rotationDegrees(18F));
+                        stack.translate(-1.0D,0.35D,-0.5D);
+                    }else {
+                        stack.mulPose(Vector3f.YP.rotationDegrees(180F));
+                        stack.translate(0.01D,0.25D,-1.5D);
+                    }
                 }
             }
         }
     }
+
 }

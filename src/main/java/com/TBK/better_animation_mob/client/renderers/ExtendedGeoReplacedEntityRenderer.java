@@ -52,7 +52,7 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
     protected void renderItemStack(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ItemStack stack,
                                    String boneName) {
         Minecraft.getInstance().getItemRenderer().renderStatic(this.currentEntity, stack,
-                boneName.equals("leftItem") ? ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND : ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, false, poseStack, bufferSource, null, packedLight,
+                boneName.equals("leftItem") || boneName.equals("ItemSlotLeft") ? ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND : ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, false, poseStack, bufferSource, null, packedLight,
                 LivingEntityRenderer.getOverlayCoords(this.currentEntity, 0.0F),
                 currentEntity.getId());
     }
@@ -139,7 +139,7 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
         if (getCurrentModelRenderCycle() == EModelRenderCycle.INITIAL) {
             poseStack.pushPose();
             if (shouldRenderItemStack(this.currentEntity)){
-                if(bone.getName().equals("ItemSlotRight") || bone.getName().equals("leftItem")){
+                if(bone.getName().equals("ItemSlotRight") || bone.getName().equals("ItemSlotLeft") || bone.getName().equals("leftItem")){
                     ItemStack boneItem;
                     if(bone.getName().equals("ItemSlotRight")){
                         boneItem=this.currentEntity.getMainHandItem();

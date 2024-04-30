@@ -68,7 +68,7 @@ public class ReplacedZombie<T extends Zombie> extends ReplacedEntity<T> {
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 10, state -> {
+        data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
             Zombie zombie = getZombieFromState(state);
             ReplacedZombie<?> replacedZombie = getPatch(zombie,ReplacedZombie.class);
             AnimationBuilder builder=new AnimationBuilder();

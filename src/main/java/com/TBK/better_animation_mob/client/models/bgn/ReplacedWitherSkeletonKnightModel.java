@@ -19,6 +19,6 @@ public class ReplacedWitherSkeletonKnightModel<T extends IAnimatable> extends Re
 
     @Override
     public ResourceLocation getAnimationResource(T animatable) {
-        return new ResourceLocation(BetterAnimationMob.MODID,"animations/wither_skeleton.animation.json");
+        return new ResourceLocation(BetterAnimationMob.MODID,"animations/skeleton.animation.json");
     }
 }

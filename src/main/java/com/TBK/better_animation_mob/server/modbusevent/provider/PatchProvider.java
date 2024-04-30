@@ -67,7 +67,7 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
             registry.put(ModEntityTypes.CORPOR.get(), entity -> ReplacedSkeleton::new);
             registry.put(ModEntityTypes.PIGLIN_PRISONER.get(),entity -> ReplacedPiglin::new);
             registry.put(ModEntityTypes.PIGLIN_HUNTER.get(),entity -> ReplacedPiglin::new);
-            registry.put(ModEntityTypes.WITHER_SKELETON_KNIGHT.get(),entity -> ReplacedWitherSkeleton::new);
+            registry.put(ModEntityTypes.WITHER_SKELETON_KNIGHT.get(),entity -> ReplacedSkeleton::new);
             registry.put(ModEntityTypes.WARPED_ENDERMAN.get(),entity -> ReplacedEnderMan::new);
             registry.put(ModEntityTypes.WEX.get(),entity -> ReplacedWex::new);
             registry.put(ModEntityTypes.WRAITHER.get(),entity -> ReplacedSkeleton::new);

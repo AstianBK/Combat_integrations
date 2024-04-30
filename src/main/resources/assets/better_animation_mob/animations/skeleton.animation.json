@@ -565,16 +565,6 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"LeftLeg": {
-					"rotation": {
-						"vector": [0, 0, 0]
-					}
-				},
-				"RightLeg": {
-					"rotation": {
-						"vector": [0, 0, 0]
-					}
-				},
 				"LeftArm": {
 					"rotation": {
 						"0.0": {
