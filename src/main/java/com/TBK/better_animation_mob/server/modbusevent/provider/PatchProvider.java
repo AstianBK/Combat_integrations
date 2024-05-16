@@ -2,12 +2,18 @@ package com.TBK.better_animation_mob.server.modbusevent.provider;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.renderers.compi.dm.ReplacedFungusThrowerRenderer;
+import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedForgottenRenderer;
+import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedFoxhoundRenderer;
+import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedWraithRenderer;
 import com.TBK.better_animation_mob.client.util.Compati;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.*;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.bgn.ReplacedWex;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedFungusThrower;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedZombieFungusThrower;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedForgotten;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedFoxhound;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedWraith;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedExecutioner;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedGriefer;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.svr.ReplacedIceologer;
@@ -24,6 +30,10 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.registries.ForgeRegistries;
+import vazkii.quark.base.Quark;
+import vazkii.quark.content.mobs.module.ForgottenModule;
+import vazkii.quark.content.mobs.module.FoxhoundModule;
+import vazkii.quark.content.mobs.module.WraithModule;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -79,6 +89,11 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
             registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.SUNKEN_SKELETON.get(),entity -> ReplacedSkeleton::new);
             registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.ZOMBIFIED_FUNGUS_THROWER.get(),entity -> ReplacedZombieFungusThrower::new);
             registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.FUNGUS_THROWER.get(),entity -> ReplacedFungusThrower::new);
+        }
+        if(BetterAnimationMob.isLoaded(Compati.QUARK)){
+            registry.put(FoxhoundModule.foxhoundType, entity-> ReplacedFoxhound::new);
+            registry.put(ForgottenModule.forgottenType, entity -> ReplacedForgotten::new);
+            registry.put(WraithModule.wraithType,entity ->  ReplacedWraith::new);
         }
         CAPABILITIES.putAll(registry);
     }

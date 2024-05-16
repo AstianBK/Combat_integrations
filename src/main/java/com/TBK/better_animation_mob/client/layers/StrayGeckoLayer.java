@@ -55,17 +55,20 @@ import java.util.Optional;
 @OnlyIn(Dist.CLIENT)
 public class StrayGeckoLayer<T extends Entity & IAnimatable> extends GeoLayerRenderer<T> {
 
-    protected static final HumanoidModel<LivingEntity> OUTER_ARMOR_MODEL = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR));
+    protected static final HumanoidModel<LivingEntity> OUTER_ARMOR_MODEL = new HumanoidModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.STRAY_OUTER_LAYER));
 
     AnimatedGeoModel<T> model;
     private final ResourceLocation textureBase;
     private final ResourceLocation modelLocation;
+    private final ResourceLocation overlayLocation;
 
-    public StrayGeckoLayer(IGeoRenderer<T> entityRendererIn, AnimatedGeoModel<T> model,ResourceLocation textureLocation,ResourceLocation modelLocation) {
+
+    public StrayGeckoLayer(IGeoRenderer<T> entityRendererIn, AnimatedGeoModel<T> model,ResourceLocation textureLocation,ResourceLocation modelLocation,ResourceLocation overlayLocation) {
         super(entityRendererIn);
         this.model=model;
         this.textureBase= textureLocation;
         this.modelLocation=modelLocation;
+        this.overlayLocation=overlayLocation;
     }
 
     @Override
@@ -228,7 +231,7 @@ public class StrayGeckoLayer<T extends Entity & IAnimatable> extends GeoLayerRen
     }
 
     public ResourceLocation getTextureStray(){
-        return new ResourceLocation("textures/entity/skeleton/stray_overlay.png");
+        return this.overlayLocation;
     }
 }
 

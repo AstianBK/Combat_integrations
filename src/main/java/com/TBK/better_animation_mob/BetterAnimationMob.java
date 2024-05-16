@@ -2,6 +2,9 @@ package com.TBK.better_animation_mob;
 
 import com.TBK.better_animation_mob.client.renderers.compi.bgn.*;
 import com.TBK.better_animation_mob.client.renderers.compi.dm.*;
+import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedForgottenRenderer;
+import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedFoxhoundRenderer;
+import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedWraithRenderer;
 import com.TBK.better_animation_mob.client.renderers.enderman.ReplacedEnderManRenderer;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedZombiePiglinRenderer;
 import com.TBK.better_animation_mob.client.renderers.spider.ReplacedCaveSpiderRenderer;
@@ -39,6 +42,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib3.GeckoLib;
+import vazkii.quark.base.Quark;
+import vazkii.quark.base.proxy.CommonProxy;
+import vazkii.quark.content.mobs.entity.Forgotten;
+import vazkii.quark.content.mobs.module.ForgottenModule;
+import vazkii.quark.content.mobs.module.FoxhoundModule;
+import vazkii.quark.content.mobs.module.WraithModule;
 
 import java.util.Map;
 
@@ -126,6 +135,11 @@ public class BetterAnimationMob {
             register(com.infamous.dungeons_mobs.mod.ModEntityTypes.SUNKEN_SKELETON.get(), ReplacedSunkenSkeletonRenderer::new);
             register(com.infamous.dungeons_mobs.mod.ModEntityTypes.ZOMBIFIED_FUNGUS_THROWER.get(), ReplacedZombiefierFungusThrowerRenderer::new);
             register(com.infamous.dungeons_mobs.mod.ModEntityTypes.FUNGUS_THROWER.get(), ReplacedFungusThrowerRenderer::new);
+        }
+        if(isLoaded(Compati.QUARK)){
+            register(FoxhoundModule.foxhoundType, ReplacedFoxhoundRenderer::new);
+            register(ForgottenModule.forgottenType, ReplacedForgottenRenderer::new);
+            register(WraithModule.wraithType, ReplacedWraithRenderer::new);
         }
     }
     

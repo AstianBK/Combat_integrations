@@ -17,9 +17,11 @@ import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 @OnlyIn(Dist.CLIENT)
 public class SpiderEyeGeckoLayer<T extends Entity & IAnimatable> extends GeoLayerRenderer<T> {
+    private final ResourceLocation eyeLocation;
 
-    public SpiderEyeGeckoLayer(IGeoRenderer<T> entityRendererIn) {
+    public SpiderEyeGeckoLayer(IGeoRenderer<T> entityRendererIn,ResourceLocation eyeLocation) {
         super(entityRendererIn);
+        this.eyeLocation=eyeLocation;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class SpiderEyeGeckoLayer<T extends Entity & IAnimatable> extends GeoLaye
     }
 
     public ResourceLocation getTextureEye(){
-        return new ResourceLocation("textures/entity/spider_eyes.png");
+        return this.eyeLocation;
     }
 }
 
