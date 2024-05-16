@@ -1,5 +1,6 @@
 package com.TBK.better_animation_mob.client.renderers.spider;
 
+import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.layers.SpiderEyeGeckoLayer;
 import com.TBK.better_animation_mob.client.models.spider.ReplacedSpiderModel;
 import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
@@ -15,7 +16,7 @@ public class ReplacedSpiderRenderer<T extends Spider,P extends ReplacedSpider> e
 
     public ReplacedSpiderRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager,new ReplacedSpiderModel<>(),(P) new ReplacedSpider());
-        this.addLayer(new SpiderEyeGeckoLayer<>(this,new ResourceLocation("textures/entity/spider_eyes.png")));
+        this.addLayer(new SpiderEyeGeckoLayer<>(this,new ResourceLocation("textures/entity/spider_eyes.png"),new ResourceLocation(BetterAnimationMob.MODID, "geo/spider.geo.json")));
     }
 
     @Override

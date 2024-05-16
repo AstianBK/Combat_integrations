@@ -1,4 +1,4 @@
-package com.TBK.better_animation_mob.client.models.qrk;
+package com.TBK.better_animation_mob.client.models.compi.qrk;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.models.ReplacedHumanoidModel;
@@ -17,11 +17,6 @@ public class ReplacedForgottenModel<T extends IAnimatable> extends ReplacedSkele
 
     @Override
     public ResourceLocation getTextureResource(T object) {
-        return new ResourceLocation(Quark.MOD_ID,"model/entity/forgotten/main.png");
-    }
-
-    @Override
-    public ResourceLocation getAnimationResource(T animatable) {
-        return new ResourceLocation(BetterAnimationMob.MODID,"animations/qrk/forgotten.animation.json");
+        return new ResourceLocation(Quark.MOD_ID,"textures/model/entity/forgotten/main.png");
     }
 }

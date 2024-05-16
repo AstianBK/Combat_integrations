@@ -42,6 +42,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib3.GeckoLib;
+import tallestegg.guardvillagers.GuardVillagers;
 import vazkii.quark.base.Quark;
 import vazkii.quark.base.proxy.CommonProxy;
 import vazkii.quark.content.mobs.entity.Forgotten;
@@ -140,6 +141,9 @@ public class BetterAnimationMob {
             register(FoxhoundModule.foxhoundType, ReplacedFoxhoundRenderer::new);
             register(ForgottenModule.forgottenType, ReplacedForgottenRenderer::new);
             register(WraithModule.wraithType, ReplacedWraithRenderer::new);
+        }
+        if(isLoaded(Compati.GUARD_VILLAGERS)){
+
         }
     }
     

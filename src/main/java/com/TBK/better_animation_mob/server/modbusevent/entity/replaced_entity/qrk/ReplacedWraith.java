@@ -40,13 +40,13 @@ public class ReplacedWraith<T extends Wraith> extends ReplacedZombie<T> {
 
             if (isMove && replacedZombie.getAttackTimer() == 0) {
                 state.getController().setAnimationSpeed(zombie.isAggressive()?1.5F : 1.4F);
-                state.getController().setAnimation(builder.loop( zombie.isAggressive() ? "zombie.move2" : "zombie.move"));
+                state.getController().setAnimation(builder.loop( "wraith.move"));
             }else if(replacedZombie.getAttackTimer()>0) {
-                state.getController().setAnimationSpeed(4F);
-                state.getController().setAnimation(builder.playOnce(zombie instanceof ICombos ?( "zombie.attack"+((ICombos) zombie).getCombo()): "zombie.attack1"));
+                state.getController().setAnimationSpeed(1F);
+                state.getController().setAnimation(builder.playOnce("wraith.attack"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.addAnimation("zombie.idle", ILoopType.EDefaultLoopTypes.LOOP));
+                state.getController().setAnimation(builder.addAnimation("wraith.idle", ILoopType.EDefaultLoopTypes.LOOP));
             }
             return PlayState.CONTINUE;
         }));

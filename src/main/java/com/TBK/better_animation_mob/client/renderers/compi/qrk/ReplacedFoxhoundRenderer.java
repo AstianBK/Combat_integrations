@@ -1,14 +1,11 @@
 package com.TBK.better_animation_mob.client.renderers.compi.qrk;
 
 import com.TBK.better_animation_mob.client.layers.CollarGeckoLayer;
-import com.TBK.better_animation_mob.client.models.qrk.ReplacedFoxhoundModel;
-import com.TBK.better_animation_mob.client.models.wolf.ReplacedWolfModel;
+import com.TBK.better_animation_mob.client.models.compi.qrk.ReplacedFoxhoundModel;
 import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRenderer;
-import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedWolf;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedFoxhound;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import vazkii.quark.content.mobs.entity.Foxhound;

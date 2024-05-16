@@ -56,9 +56,6 @@ public class ReplacedFoxhound<T extends Foxhound> extends ReplacedEntity<T> {
             if (isMove && replaced.getAttackTimer() == 0 && !zombie.isInSittingPose()) {
                 state.getController().setAnimationSpeed(zombie.isAggressive()?3.5F : 1.4F);
                 state.getController().setAnimation(builder.loop( zombie.isAggressive() ? "foxhound.move2" : "foxhound.move1"));
-            }else if(replaced.getAttackTimer()>0) {
-                state.getController().setAnimationSpeed(1.5F);
-                state.getController().setAnimation(builder.playOnce("foxhound.attack1"));
             }else if(!zombie.isInSittingPose()){
                 state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.addAnimation("foxhound.idle", ILoopType.EDefaultLoopTypes.LOOP));

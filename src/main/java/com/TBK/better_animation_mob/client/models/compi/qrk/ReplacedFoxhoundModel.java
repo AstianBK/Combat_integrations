@@ -1,4 +1,4 @@
-package com.TBK.better_animation_mob.client.models.qrk;
+package com.TBK.better_animation_mob.client.models.compi.qrk;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.models.ReplacedQuatrupleModel;

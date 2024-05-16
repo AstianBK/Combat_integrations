@@ -5,7 +5,8 @@ public enum Compati {
     SAVAGE_AND_RAVEGER("savage_and_ravage"),
     BYGONE_NETHER("bygonenether"),
     DUNGEONS_MOBS("dungeons_mobs"),
-    QUARK("quark");
+    QUARK("quark"),
+    GUARD_VILLAGERS("guardvillagers");
 
     public final String id;
 

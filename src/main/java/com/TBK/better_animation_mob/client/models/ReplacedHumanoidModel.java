@@ -13,7 +13,7 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
     @Override
     public void setCustomAnimations(T animatable, int instanceId, AnimationEvent animationEvent) {
         EntityModelData data = (EntityModelData) animationEvent.getExtraDataOfType(EntityModelData.class).get(0);
-        GeoBone head = (GeoBone)this.getBone("Head");
+        GeoBone head = (GeoBone)this.getAnimationProcessor().getBone("Head");
         GeoBone body = (GeoBone)this.getBone("Body");
         GeoBone rightArm = (GeoBone)this.getBone("RightArm");
         GeoBone leftArm = (GeoBone)this.getBone("LeftArm");
