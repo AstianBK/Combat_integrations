@@ -25,11 +25,6 @@ public class ReplacedPillager implements IAnimatable {
             AnimationBuilder builder=new AnimationBuilder();
             if (raider == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            if(raider.hurtTime>0){
-                state.getController().setAnimationSpeed(3.0F);
-                state.getController().setAnimation(builder.playOnce("pillager.hurt"));
-                return PlayState.CONTINUE;
-            }
             state.getController().setAnimationSpeed(1.0F);
             if (isMove) {
                 state.getController().setAnimation(builder.loop("pillager.move"));

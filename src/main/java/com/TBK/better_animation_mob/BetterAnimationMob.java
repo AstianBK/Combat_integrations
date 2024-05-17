@@ -2,6 +2,8 @@ package com.TBK.better_animation_mob;
 
 import com.TBK.better_animation_mob.client.renderers.compi.bgn.*;
 import com.TBK.better_animation_mob.client.renderers.compi.dm.*;
+import com.TBK.better_animation_mob.client.renderers.compi.gv.ReplacedGuardVillagerRenderer;
+import com.TBK.better_animation_mob.client.renderers.compi.myf.ReplacedBellringerRenderer;
 import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedForgottenRenderer;
 import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedFoxhoundRenderer;
 import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedWraithRenderer;
@@ -33,6 +35,7 @@ import com.google.common.collect.Maps;
 import com.infamous.dungeons_mobs.DungeonsMobs;
 import com.izofar.bygonenether.init.ModEntityTypes;
 import com.teamabnormals.savage_and_ravage.core.registry.SREntityTypes;
+import lykrast.meetyourfight.registry.ModEntities;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.MinecraftForge;
@@ -42,6 +45,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib3.GeckoLib;
+import tallestegg.guardvillagers.GuardEntityType;
 import tallestegg.guardvillagers.GuardVillagers;
 import vazkii.quark.base.Quark;
 import vazkii.quark.base.proxy.CommonProxy;
@@ -142,7 +146,13 @@ public class BetterAnimationMob {
             register(ForgottenModule.forgottenType, ReplacedForgottenRenderer::new);
             register(WraithModule.wraithType, ReplacedWraithRenderer::new);
         }
+
         if(isLoaded(Compati.GUARD_VILLAGERS)){
+            register(GuardEntityType.GUARD.get(), ReplacedGuardVillagerRenderer::new);
+        }
+
+        if(isLoaded(Compati.MEET_YOUR_FIGHT)){
+            register(ModEntities.BELLRINGER.get(), ReplacedBellringerRenderer::new);
 
         }
     }

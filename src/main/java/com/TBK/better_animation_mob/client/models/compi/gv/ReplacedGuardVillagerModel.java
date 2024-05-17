@@ -10,22 +10,24 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
+import tallestegg.guardvillagers.configuration.GuardConfig;
+import tallestegg.guardvillagers.entities.Guard;
 
 public class ReplacedGuardVillagerModel<T extends IAnimatable> extends ReplacedHumanoidModel<T> {
     @Override
     public ResourceLocation getModelResource(T object) {
-        return new ResourceLocation(BetterAnimationMob.MODID,"geo/pillager.geo.json");
+        return new ResourceLocation(BetterAnimationMob.MODID,"geo/gv/guardvillager.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(T object) {
-        return new ResourceLocation("textures/entity/illager/pillager.png");
-
+        Guard entity= (Guard) this.getCurrentEntity().get();
+        return !GuardConfig.guardSteve ? new ResourceLocation("guardvillagers", "textures/entity/guard/guard_" + entity.getGuardVariant() + ".png") : new ResourceLocation("guardvillagers", "textures/entity/guard/guard_steve_" + entity.getGuardVariant() + ".png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(T animatable) {
-        return new ResourceLocation(BetterAnimationMob.MODID, "animations/pillager.animation.json");
+        return new ResourceLocation(BetterAnimationMob.MODID, "animations/gv/guardvillager.animation.json");
     }
 
     @Override

@@ -150,6 +150,30 @@
 					}
 				}
 			}
+		},
+		"guardvillager.attackmelee": {
+			"animation_length": 1,
+			"bones": {
+				"head": {
+					"rotation": ["math.sin(query.anim_time*180)*25", 0, "math.sin(query.anim_time*180)*5"],
+					"position": [0, 0, "math.sin(query.anim_time*180)*-5"]
+				},
+				"body": {
+					"rotation": ["math.sin(query.anim_time*180)*15", 0, 0]
+				},
+				"left_arm": {
+					"rotation": ["math.sin(query.anim_time*180)*25", 0, 0],
+					"position": [0, 0, "math.sin(query.anim_time*180)*-3"]
+				},
+				"right_arm": {
+					"rotation": ["-155.3343+math.sin(query.anim_time*180)*150", 4.20854, -9.07947],
+					"position": [0, 0, "math.sin(query.anim_time*180)*-3"]
+				},
+				"quiver": {
+					"rotation": ["math.sin(query.anim_time*180)*15", 0, 0],
+					"position": [0, 0, "math.sin(query.anim_time*180)*-2"]
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

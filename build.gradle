@@ -136,6 +136,7 @@ dependencies {
     implementation fg.deobf("curse.maven:autoreglib-250363:4100299")
     implementation fg.deobf("curse.maven:quark-243121:4812006")
     implementation fg.deobf("curse.maven:guard-villagers-360203:5116175")
+    implementation fg.deobf("curse.maven:meet-your-fight-409371:4645104")
     implementation 'org.jetbrains:annotations:23.0.0'
 
 }
