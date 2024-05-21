@@ -1,11 +1,8 @@
 package com.TBK.better_animation_mob.server.modbusevent.provider;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
-import com.TBK.better_animation_mob.client.renderers.compi.dm.ReplacedFungusThrowerRenderer;
-import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedForgottenRenderer;
-import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedFoxhoundRenderer;
-import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedWraithRenderer;
 import com.TBK.better_animation_mob.client.util.Compati;
+import com.TBK.better_animation_mob.config.BKConfig;
 import com.TBK.better_animation_mob.server.modbusevent.cap.Capabilities;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.*;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.bgn.ReplacedWex;
@@ -30,7 +27,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.registries.ForgeRegistries;
-import vazkii.quark.base.Quark;
 import vazkii.quark.content.mobs.module.ForgottenModule;
 import vazkii.quark.content.mobs.module.FoxhoundModule;
 import vazkii.quark.content.mobs.module.WraithModule;
@@ -45,56 +41,72 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
 
     public static void registerEntityPatches() {
         Map<EntityType<?>, Function<Entity, Supplier<ReplacedEntity<?>>>> registry = Maps.newHashMap();
-        registry.put(EntityType.PIGLIN, (entityIn) -> ReplacedPiglin::new);
-        registry.put(EntityType.PIGLIN_BRUTE, (entityIn) -> ReplacedPiglin::new);
-        registry.put(EntityType.ZOMBIFIED_PIGLIN,entity -> ReplacedZombiePiglin::new);
-        registry.put(EntityType.WITHER_SKELETON,(entity -> ReplacedWitherSkeleton::new));
-        registry.put(EntityType.SPIDER,(entity -> ReplacedSpider::new));
-        registry.put(EntityType.CAVE_SPIDER,entity -> ReplacedSpider::new);
-        registry.put(EntityType.RAVAGER,(entity -> ReplacedRavager::new));
-        registry.put(EntityType.VINDICATOR,(entity -> ReplacedVindicator::new));
-        registry.put(EntityType.ZOMBIE,(entity -> ReplacedZombie::new));
-        registry.put(EntityType.HUSK,(entity -> ReplacedZombie::new));
-        registry.put(EntityType.DROWNED,(entity -> ReplacedZombie::new));
-        registry.put(EntityType.IRON_GOLEM,entity -> ReplacedIronGolem::new);
+        if(BKConfig.vanillaMobsAnimations){
+            registry.put(EntityType.PIGLIN, (entityIn) -> ReplacedPiglin::new);
+            registry.put(EntityType.PIGLIN_BRUTE, (entityIn) -> ReplacedPiglin::new);
+            registry.put(EntityType.ZOMBIFIED_PIGLIN,entity -> ReplacedZombiePiglin::new);
+            registry.put(EntityType.WITHER_SKELETON,(entity -> ReplacedWitherSkeleton::new));
+            registry.put(EntityType.SPIDER,(entity -> ReplacedSpider::new));
+            registry.put(EntityType.CAVE_SPIDER,entity -> ReplacedSpider::new);
+            registry.put(EntityType.RAVAGER,(entity -> ReplacedRavager::new));
+            registry.put(EntityType.VINDICATOR,(entity -> ReplacedVindicator::new));
+            registry.put(EntityType.ZOMBIE,(entity -> ReplacedZombie::new));
+            registry.put(EntityType.HUSK,(entity -> ReplacedZombie::new));
+            registry.put(EntityType.DROWNED,(entity -> ReplacedZombie::new));
+            registry.put(EntityType.IRON_GOLEM,entity -> ReplacedIronGolem::new);
 
-        registry.put(EntityType.SKELETON, entity -> ReplacedSkeleton::new);
-        registry.put(EntityType.STRAY, entity -> ReplacedSkeleton::new);
+            registry.put(EntityType.SKELETON, entity -> ReplacedSkeleton::new);
+            registry.put(EntityType.STRAY, entity -> ReplacedSkeleton::new);
 
-        registry.put(EntityType.ENDERMAN,entity -> ReplacedEnderMan::new);
-        registry.put(EntityType.WOLF,entity -> ReplacedWolf::new);
+            registry.put(EntityType.ENDERMAN,entity -> ReplacedEnderMan::new);
+            registry.put(EntityType.WOLF,entity -> ReplacedWolf::new);
 
-        registry.put(EntityType.EVOKER,entity -> ReplacedEvoker::new);
+            registry.put(EntityType.EVOKER,entity -> ReplacedEvoker::new);
 
-        registry.put(EntityType.WARDEN,entity -> ReplacedWarden::new);
-        if(BetterAnimationMob.isLoaded(Compati.SAVAGE_AND_RAVEGER)){
-            registry.put(SREntityTypes.EXECUTIONER.get(),entity -> ReplacedExecutioner::new);
-            registry.put(SREntityTypes.GRIEFER.get(),entity -> ReplacedGriefer::new);
-            registry.put(SREntityTypes.ICEOLOGER.get(),entity -> ReplacedIceologer::new);
-            registry.put(SREntityTypes.TRICKSTER.get(),entity -> ReplacedTrickster::new);
+            registry.put(EntityType.WARDEN,entity -> ReplacedWarden::new);
         }
-        if(BetterAnimationMob.isLoaded(Compati.BYGONE_NETHER)){
-            registry.put(ModEntityTypes.CORPOR.get(), entity -> ReplacedSkeleton::new);
-            registry.put(ModEntityTypes.PIGLIN_PRISONER.get(),entity -> ReplacedPiglin::new);
-            registry.put(ModEntityTypes.PIGLIN_HUNTER.get(),entity -> ReplacedPiglin::new);
-            registry.put(ModEntityTypes.WITHER_SKELETON_KNIGHT.get(),entity -> ReplacedSkeleton::new);
-            registry.put(ModEntityTypes.WARPED_ENDERMAN.get(),entity -> ReplacedEnderMan::new);
-            registry.put(ModEntityTypes.WEX.get(),entity -> ReplacedWex::new);
-            registry.put(ModEntityTypes.WRAITHER.get(),entity -> ReplacedSkeleton::new);
+
+        if(BKConfig.savageAndRavageAnimations){
+            if(BetterAnimationMob.isLoaded(Compati.SAVAGE_AND_RAVAGE)){
+                registry.put(SREntityTypes.EXECUTIONER.get(),entity -> ReplacedExecutioner::new);
+                registry.put(SREntityTypes.GRIEFER.get(),entity -> ReplacedGriefer::new);
+                registry.put(SREntityTypes.ICEOLOGER.get(),entity -> ReplacedIceologer::new);
+                registry.put(SREntityTypes.TRICKSTER.get(),entity -> ReplacedTrickster::new);
+            }
         }
-        if(BetterAnimationMob.isLoaded(Compati.DUNGEONS_MOBS)){
-            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.FROZEN_ZOMBIE.get(), entity -> ReplacedZombie::new);
-            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.JUNGLE_ZOMBIE.get(),entity -> ReplacedZombie::new);
-            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.MOSSY_SKELETON.get(),entity -> ReplacedSkeleton::new);
-            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.SUNKEN_SKELETON.get(),entity -> ReplacedSkeleton::new);
-            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.ZOMBIFIED_FUNGUS_THROWER.get(),entity -> ReplacedZombieFungusThrower::new);
-            registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.FUNGUS_THROWER.get(),entity -> ReplacedFungusThrower::new);
+
+
+        if(BKConfig.bygoneNetherAnimations){
+            if(BetterAnimationMob.isLoaded(Compati.BYGONE_NETHER)){
+                registry.put(ModEntityTypes.CORPOR.get(), entity -> ReplacedSkeleton::new);
+                registry.put(ModEntityTypes.PIGLIN_PRISONER.get(),entity -> ReplacedPiglin::new);
+                registry.put(ModEntityTypes.PIGLIN_HUNTER.get(),entity -> ReplacedPiglin::new);
+                registry.put(ModEntityTypes.WITHER_SKELETON_KNIGHT.get(),entity -> ReplacedSkeleton::new);
+                registry.put(ModEntityTypes.WARPED_ENDERMAN.get(),entity -> ReplacedEnderMan::new);
+                registry.put(ModEntityTypes.WEX.get(),entity -> ReplacedWex::new);
+                registry.put(ModEntityTypes.WRAITHER.get(),entity -> ReplacedSkeleton::new);
+            }
         }
-        if(BetterAnimationMob.isLoaded(Compati.QUARK)){
-            registry.put(FoxhoundModule.foxhoundType, entity-> ReplacedFoxhound::new);
-            registry.put(ForgottenModule.forgottenType, entity -> ReplacedForgotten::new);
-            registry.put(WraithModule.wraithType,entity ->  ReplacedWraith::new);
+
+        if(BKConfig.dungeonsMobsAnimations){
+            if(BetterAnimationMob.isLoaded(Compati.DUNGEONS_MOBS)){
+                registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.FROZEN_ZOMBIE.get(), entity -> ReplacedZombie::new);
+                registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.JUNGLE_ZOMBIE.get(),entity -> ReplacedZombie::new);
+                registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.MOSSY_SKELETON.get(),entity -> ReplacedSkeleton::new);
+                registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.SUNKEN_SKELETON.get(),entity -> ReplacedSkeleton::new);
+                registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.ZOMBIFIED_FUNGUS_THROWER.get(),entity -> ReplacedZombieFungusThrower::new);
+                registry.put(com.infamous.dungeons_mobs.mod.ModEntityTypes.FUNGUS_THROWER.get(),entity -> ReplacedFungusThrower::new);
+            }
         }
+
+        if(BKConfig.quarkAnimations){
+            if(BetterAnimationMob.isLoaded(Compati.QUARK)){
+                registry.put(FoxhoundModule.foxhoundType, entity-> ReplacedFoxhound::new);
+                registry.put(ForgottenModule.forgottenType, entity -> ReplacedForgotten::new);
+                registry.put(WraithModule.wraithType,entity ->  ReplacedWraith::new);
+            }
+        }
+
         CAPABILITIES.putAll(registry);
     }
 
