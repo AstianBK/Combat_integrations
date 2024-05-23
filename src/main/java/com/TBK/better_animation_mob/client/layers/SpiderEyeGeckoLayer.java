@@ -17,22 +17,26 @@ import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 @OnlyIn(Dist.CLIENT)
 public class SpiderEyeGeckoLayer<T extends Entity & IAnimatable> extends GeoLayerRenderer<T> {
+    private final ResourceLocation eyeLocation;
+    private final ResourceLocation modelLocation;
 
-    public SpiderEyeGeckoLayer(IGeoRenderer<T> entityRendererIn) {
+    public SpiderEyeGeckoLayer(IGeoRenderer<T> entityRendererIn,ResourceLocation eyeLocation,ResourceLocation modelLocation) {
         super(entityRendererIn);
+        this.eyeLocation=eyeLocation;
+        this.modelLocation=modelLocation;
     }
 
     @Override
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, T entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         getRenderer().render(
-                getEntityModel().getModel(new ResourceLocation(BetterAnimationMob.MODID, "geo/spider.geo.json")),
+                getEntityModel().getModel(this.modelLocation),
                 entityLivingBaseIn,partialTicks, RenderType.eyes(getTextureEye()),matrixStackIn,
                 bufferIn,bufferIn.getBuffer(RenderType.eyes(getTextureEye())),packedLightIn,
                 LivingEntityRenderer.getOverlayCoords((LivingEntity) entityLivingBaseIn,partialTicks),1.0F,1.0F,1.0F,1.0F);
     }
 
     public ResourceLocation getTextureEye(){
-        return new ResourceLocation("textures/entity/spider_eyes.png");
+        return this.eyeLocation;
     }
 }
 

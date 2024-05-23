@@ -1,14 +1,10 @@
 package com.TBK.better_animation_mob.client.renderers.compi.dm;
 
-import com.TBK.better_animation_mob.client.models.bgn.ReplacedPiglinHunterModel;
-import com.TBK.better_animation_mob.client.models.dm.ReplacedFungusThrowerModel;
+import com.TBK.better_animation_mob.client.models.compi.dm.ReplacedFungusThrowerModel;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinRenderer;
-import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedPiglin;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedFungusThrower;
 import com.infamous.dungeons_mobs.DungeonsMobs;
 import com.infamous.dungeons_mobs.entities.piglin.FungusThrowerEntity;
-import com.izofar.bygonenether.BygoneNetherMod;
-import com.izofar.bygonenether.entity.PiglinHunter;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 

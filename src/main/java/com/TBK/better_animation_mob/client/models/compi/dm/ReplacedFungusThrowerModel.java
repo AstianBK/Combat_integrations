@@ -1,8 +1,9 @@
-package com.TBK.better_animation_mob.client.models.bgn;
+package com.TBK.better_animation_mob.client.models.compi.dm;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.models.AnimationVanillaG;
 import com.TBK.better_animation_mob.client.models.piglin.ReplacedPiglinModel;
+import com.infamous.dungeons_mobs.DungeonsMobs;
 import com.izofar.bygonenether.BygoneNetherMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
@@ -12,15 +13,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
-public class ReplacedPiglinHunterModel<T extends IAnimatable> extends ReplacedPiglinModel<T> {
-    @Override
-    public ResourceLocation getModelResource(T object) {
-        return new ResourceLocation(BetterAnimationMob.MODID, "geo/bgn/piglin_hunter.geo.json");
-    }
-
+public class ReplacedFungusThrowerModel<T extends IAnimatable> extends ReplacedPiglinModel<T> {
     @Override
     public ResourceLocation getTextureResource(T object) {
-        return new ResourceLocation(BygoneNetherMod.MODID,"textures/entity/piglin/piglin_hunter.png");
+        return new ResourceLocation(DungeonsMobs.MODID,"textures/entity/piglin/fungus_thrower.png");
     }
 
     @Override

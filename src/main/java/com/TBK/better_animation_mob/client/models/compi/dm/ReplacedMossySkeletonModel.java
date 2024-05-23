@@ -1,4 +1,4 @@
-package com.TBK.better_animation_mob.client.models.dm;
+package com.TBK.better_animation_mob.client.models.compi.dm;
 
 import com.TBK.better_animation_mob.client.models.skeleton.ReplacedSkeletonModel;
 import com.infamous.dungeons_mobs.DungeonsMobs;

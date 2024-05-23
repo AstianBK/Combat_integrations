@@ -1,4 +1,4 @@
-package com.TBK.better_animation_mob.client.models.bgn;
+package com.TBK.better_animation_mob.client.models.compi.bgn;
 
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.models.ReplacedEntityModel;

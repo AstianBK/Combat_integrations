@@ -1,6 +1,6 @@
 package com.TBK.better_animation_mob.client.renderers.compi.bgn;
 
-import com.TBK.better_animation_mob.client.models.bgn.ReplacedPiglinPrisonerModel;
+import com.TBK.better_animation_mob.client.models.compi.bgn.ReplacedPiglinPrisonerModel;
 import com.TBK.better_animation_mob.client.renderers.piglin.ReplacedPiglinRenderer;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedPiglin;
 import com.izofar.bygonenether.BygoneNetherMod;
@@ -9,7 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 
