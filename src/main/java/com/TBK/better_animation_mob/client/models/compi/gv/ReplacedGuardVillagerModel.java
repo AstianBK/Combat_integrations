@@ -3,9 +3,13 @@ package com.TBK.better_animation_mob.client.models.compi.gv;
 import com.TBK.better_animation_mob.BetterAnimationMob;
 import com.TBK.better_animation_mob.client.models.AnimationVanillaG;
 import com.TBK.better_animation_mob.client.models.ReplacedHumanoidModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.AbstractIllager;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
@@ -37,7 +41,7 @@ public class ReplacedGuardVillagerModel<T extends IAnimatable> extends ReplacedH
         IBone head = this.getAnimationProcessor().getBone("Head");
         IBone rightArm = this.getAnimationProcessor().getBone("RightArm");
         IBone leftArm = this.getAnimationProcessor().getBone("LeftArm");
-        AbstractIllager abstractIllager=((AbstractIllager)this.getCurrentEntity().get());
+        Guard abstractIllager=((Guard)this.getCurrentEntity().get());
         float pLimbSwing = animationEvent.getLimbSwing();
         float pLimbSwingAmount = animationEvent.getLimbSwingAmount();
         float pAgeInTicks = abstractIllager.tickCount;
@@ -48,20 +52,13 @@ public class ReplacedGuardVillagerModel<T extends IAnimatable> extends ReplacedH
         head.setRotationY(pNetHeadYaw * ((float)Math.PI / 180F));
         head.setRotationX(pHeadPitch * ((float)Math.PI / 180F));
 
-        AbstractIllager.IllagerArmPose abstractillager$illagerarmpose = abstractIllager.getArmPose();
-        if (abstractillager$illagerarmpose == AbstractIllager.IllagerArmPose.CROSSBOW_CHARGE) {
+        ItemStack itemStackMain=abstractIllager.getMainHandItem();
+        ItemStack itemStackOff=abstractIllager.getOffhandItem();
+
+
+
+        if (abstractIllager.getUseItemRemainingTicks()>0) {
             AnimationVanillaG.animateCrossbowCharge(rightArm, leftArm, this.getCurrentEntity().get(), true);
-        } else if (abstractillager$illagerarmpose == AbstractIllager.IllagerArmPose.CELEBRATING) {
-            rightArm.setPositionZ(0.0F);
-            rightArm.setPositionX(-5.0F);
-            rightArm.setRotationX(Mth.cos(pAgeInTicks * 0.6662F) * 0.05F);
-            rightArm.setRotationZ(2.670354F);
-            rightArm.setRotationY(0.0F);
-            leftArm.setPositionZ(0.0F);
-            leftArm.setPositionX(5.0F);
-            leftArm.setRotationX( Mth.cos(pAgeInTicks * 0.6662F) * 0.05F);
-            leftArm.setRotationY(-2.3561945F);
-            leftArm.setRotationZ(0.0F);
         }
     }
 }

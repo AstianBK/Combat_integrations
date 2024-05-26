@@ -7,7 +7,7 @@
 		"guardvillager.legs2": {
 			"loop": true,
 			"bones": {
-				"right_leg": {
+				"RightLeg": {
 					"rotation": {
 						"vector": ["math.sin(query.anim_time*180)*20", "math.sin(query.anim_time*60)*4", 0]
 					},
@@ -15,7 +15,7 @@
 						"vector": [0, "math.clamp(-math.cos(query.anim_time*180)*1.2,-0.2,3)", 0]
 					}
 				},
-				"left_leg": {
+				"LeftLeg": {
 					"rotation": {
 						"vector": ["-math.sin(query.anim_time*180)*20", "-math.sin(query.anim_time*60)*4", 0]
 					},
@@ -28,7 +28,7 @@
 		"guardvillager.legs3": {
 			"loop": true,
 			"bones": {
-				"right_leg": {
+				"RightLeg": {
 					"rotation": {
 						"vector": ["math.sin(query.anim_time*200)*45", "math.sin(query.anim_time*70)*4", 0]
 					},
@@ -36,7 +36,7 @@
 						"vector": [0, "math.clamp(-math.cos(query.anim_time*200)*1.2,-0.2,3)", 0]
 					}
 				},
-				"left_leg": {
+				"LeftLeg": {
 					"rotation": {
 						"vector": ["-math.sin(query.anim_time*200)*45", "-math.sin(query.anim_time*70)*4", 0]
 					},
@@ -54,7 +54,7 @@
 		"guardvillager.walkmelee": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"Body": {
 					"rotation": {
 						"vector": ["1.5+math.cos(query.anim_time*180)*1.8", "math.sin(query.anim_time*180)*8", 0]
 					},
@@ -62,17 +62,17 @@
 						"vector": [1, 1, 1]
 					}
 				},
-				"head": {
+				"Head": {
 					"rotation": {
 						"vector": ["1.5+math.sin(query.anim_time*180)*2", "math.cos(query.anim_time*180)*5", 0]
 					}
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": {
 						"vector": ["-20+math.sin(query.anim_time*180)*5", "math.cos(query.anim_time*180)*1.2", 10]
 					}
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": {
 						"vector": ["math.sin(query.anim_time*180)*8", 0, -5]
 					}
@@ -87,7 +87,7 @@
 		"guardvillager.walkrangednoshield": {
 			"loop": true,
 			"bones": {
-				"body": {
+				"Body": {
 					"rotation": {
 						"vector": ["1.5+math.cos(query.anim_time*180)*2", "math.sin(query.anim_time*180)*8", 0]
 					},
@@ -95,17 +95,17 @@
 						"vector": [1, 1, 1]
 					}
 				},
-				"head": {
+				"Head": {
 					"rotation": {
 						"vector": ["1.5+math.sin(query.anim_time*180)*2", "math.cos(query.anim_time*180)*5", 0]
 					}
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": {
 						"vector": ["-32.5+math.sin(query.anim_time*180)*2.5", "math.cos(query.anim_time*180)*1.2", -20]
 					}
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": {
 						"vector": ["-30+math.sin(query.anim_time*180)*5", 12.5, 45]
 					}
@@ -128,7 +128,7 @@
 		"guardvillager.aim": {
 			"loop": true,
 			"bones": {
-				"head": {
+				"Head": {
 					"rotation": {
 						"vector": ["7.4455+math.sin(query.anim_time*180)*2.5", 1.29256, -4.83045]
 					},
@@ -136,7 +136,7 @@
 						"vector": [-0.75, -1, -1.5]
 					}
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": {
 						"vector": ["-92.0627-math.sin(query.anim_time*180)*2.5", 41.30316, -12.66028]
 					},
@@ -144,7 +144,7 @@
 						"vector": [0, -1, 0]
 					}
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": {
 						"vector": ["-79.2307-math.sin(query.anim_time*145)*2.5", -13.56626, -6.46066]
 					}
@@ -154,18 +154,18 @@
 		"guardvillager.attackmelee": {
 			"animation_length": 1,
 			"bones": {
-				"head": {
+				"Head": {
 					"rotation": ["math.sin(query.anim_time*180)*25", 0, "math.sin(query.anim_time*180)*5"],
 					"position": [0, 0, "math.sin(query.anim_time*180)*-5"]
 				},
-				"body": {
+				"Body": {
 					"rotation": ["math.sin(query.anim_time*180)*15", 0, 0]
 				},
-				"left_arm": {
+				"LeftArm": {
 					"rotation": ["math.sin(query.anim_time*180)*25", 0, 0],
 					"position": [0, 0, "math.sin(query.anim_time*180)*-3"]
 				},
-				"right_arm": {
+				"RightArm": {
 					"rotation": ["-155.3343+math.sin(query.anim_time*180)*150", 4.20854, -9.07947],
 					"position": [0, 0, "math.sin(query.anim_time*180)*-3"]
 				},

@@ -36,25 +36,25 @@ public class ReplacedWitherSkeletonKnightRenderer<T extends WitherSkeletonKnight
             boolean shield = item.getItem() instanceof ShieldItem;
             if (item == currentEntity.getMainHandItem()) {
                 if (trident) {
-                    //stack.mulPose(Vector3f.XP.rotationDegrees(180F));
-                    stack.translate(0.0D,-0.05D,0.0D);
+                    stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
+                    stack.translate(0.0D,0.15D,0.0D);
                 }else if(!shield){
-                    stack.mulPose(Vector3f.ZP.rotationDegrees(0F));
                     stack.mulPose(Vector3f.YP.rotationDegrees(180F));
-                    stack.mulPose(Vector3f.XP.rotationDegrees(180F));
-                    stack.translate(0.0D,-0.02D,-0.05D);
+                    stack.mulPose(Vector3f.XP.rotationDegrees(-225F));
+                    stack.translate(-0.07D,0.1D,-0.1D);
                 }
             }
             if(item == currentEntity.getOffhandItem()){
                 if(shield){
                     if(currentEntity.isUsingShield()){
-                        stack.mulPose(Vector3f.XP.rotationDegrees(-94F));
-                        stack.mulPose(Vector3f.YP.rotationDegrees(70F));
-                        stack.mulPose(Vector3f.ZP.rotationDegrees(18F));
-                        stack.translate(-1.0D,0.35D,-0.5D);
+                        stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
+                        stack.mulPose(Vector3f.YP.rotationDegrees(90F));
+                        stack.mulPose(Vector3f.ZP.rotationDegrees(-15F));
+                        stack.translate(-0.9D,0.5D,-0.85D);
                     }else {
+                        stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
                         stack.mulPose(Vector3f.YP.rotationDegrees(180F));
-                        stack.translate(0.01D,0.25D,-1.5D);
+                        stack.translate(0.05D,0.25D,-1.5D);
                     }
                 }
             }
