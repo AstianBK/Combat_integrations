@@ -12,18 +12,16 @@ import java.util.EnumSet;
 
 public class AttackAGoal< P extends Mob,T extends ReplacedEntity<P>> extends Goal {
     protected final P mob;
-    private final T patchMob;
+    protected final T patchMob;
     private final double speedModifier;
     private final boolean followingTargetEvenIfNotSeen;
-    private Path path;
+    public Path path;
     private double pathedTargetX;
     private double pathedTargetY;
     private double pathedTargetZ;
     private int ticksUntilNextPathRecalculation;
     protected int ticksUntilNextAttack;
-    private final int attackInterval = 20;
     private long lastCanUseCheck;
-    private static final long COOLDOWN_BETWEEN_CAN_USE_CHECKS = 20L;
     private int failedPathFindingPenalty = 0;
     private boolean canPenalize = false;
 

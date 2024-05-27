@@ -8,6 +8,7 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.*;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.bgn.ReplacedWex;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedFungusThrower;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedZombieFungusThrower;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.gv.ReplacedGuardVillager;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedForgotten;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedFoxhound;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedWraith;
@@ -27,6 +28,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.registries.ForgeRegistries;
+import tallestegg.guardvillagers.GuardEntityType;
+import tallestegg.guardvillagers.GuardVillagers;
 import vazkii.quark.content.mobs.module.ForgottenModule;
 import vazkii.quark.content.mobs.module.FoxhoundModule;
 import vazkii.quark.content.mobs.module.WraithModule;
@@ -104,6 +107,11 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
                 registry.put(FoxhoundModule.foxhoundType, entity-> ReplacedFoxhound::new);
                 registry.put(ForgottenModule.forgottenType, entity -> ReplacedForgotten::new);
                 registry.put(WraithModule.wraithType,entity ->  ReplacedWraith::new);
+            }
+        }
+        if(BKConfig.guardVillagersAnimations){
+            if (BetterAnimationMob.isLoaded(Compati.GUARD_VILLAGERS)){
+                registry.put(GuardEntityType.GUARD.get(),entity -> ReplacedGuardVillager::new);
             }
         }
 

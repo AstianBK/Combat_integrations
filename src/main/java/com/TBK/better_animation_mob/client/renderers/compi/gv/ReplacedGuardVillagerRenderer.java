@@ -7,8 +7,10 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.gv
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import tallestegg.guardvillagers.entities.Guard;
 
@@ -23,13 +25,25 @@ public class ReplacedGuardVillagerRenderer<T extends Guard,P extends ReplacedGua
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
             stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
             boolean shieldFlag = item.getItem() instanceof CrossbowItem;
+            boolean shield = item.getItem() instanceof ShieldItem;
             if (item == currentEntity.getMainHandItem()) {
                 if (shieldFlag) {
                     stack.translate(-0.05F,0.15D,0.0D);
+                }else if(!shield){
+                    stack.translate(0.0D,-0.02D,-0.05D);
                 }
-            } else {
-                if (shieldFlag) {
-                    stack.translate(0, 0.0, -15);
+            }
+            if(item == currentEntity.getOffhandItem()){
+                if(shield){
+                    if(currentEntity.isBlocking()){
+                        stack.mulPose(Vector3f.XP.rotationDegrees(-30F));
+                        stack.mulPose(Vector3f.YP.rotationDegrees(60F));
+                        stack.mulPose(Vector3f.ZP.rotationDegrees(15F));
+                        stack.translate(-0.6D,0.6D,-0.8D);
+                    }else {
+                        stack.mulPose(Vector3f.YP.rotationDegrees(180F));
+                        stack.translate(0.01D,0.0D,-1.5D);
+                    }
                 }
             }
         }
