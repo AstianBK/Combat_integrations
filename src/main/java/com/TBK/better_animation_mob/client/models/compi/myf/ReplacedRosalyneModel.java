@@ -17,6 +17,10 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class ReplacedRosalyneModel<T extends IAnimatable> extends ReplacedHumanoidModel<T> {
+    private static final ResourceLocation BASE = MeetYourFight.rl("textures/entity/rosalyne.png");
+    private static final ResourceLocation COFFIN = MeetYourFight.rl("textures/entity/rosalyne_coffin.png");
+    private static final ResourceLocation CRACKED = MeetYourFight.rl("textures/entity/rosalyne_cracked.png");
+
     @Override
     public ResourceLocation getModelResource(T object) {
         return new ResourceLocation(BetterAnimationMob.MODID,"geo/myf/rosalyne.geo.json");
@@ -24,7 +28,12 @@ public class ReplacedRosalyneModel<T extends IAnimatable> extends ReplacedHumano
 
     @Override
     public ResourceLocation getTextureResource(T object) {
-        return new ResourceLocation(MeetYourFight.MODID,"textures/entity/rosalyne.png");
+        int phase = ((RosalyneEntity)this.getCurrentEntity().get()).getPhase();
+        if (phase != 0 && phase != 1) {
+            return phase == 6 ? CRACKED : BASE;
+        } else {
+            return COFFIN;
+        }
     }
 
     @Override

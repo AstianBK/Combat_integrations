@@ -10,6 +10,7 @@ import com.TBK.better_animation_mob.client.renderers.ExtendedGeoReplacedEntityRe
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedFortuna;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedRosalyne;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import lykrast.meetyourfight.MeetYourFight;
 import lykrast.meetyourfight.entity.DameFortunaEntity;
@@ -32,6 +33,11 @@ public class ReplacedRosalyneRenderer<T extends RosalyneEntity,P extends Replace
         this.addLayer(new RosalyneGlowLayer<>(this));
         this.addLayer(new EnergySwirlGeckoLayer<>(this,TEXTURE,new ResourceLocation(BetterAnimationMob.MODID,"geo/myf/rosalyne.geo.json")));
         this.shadowRadius=0.5F;
+    }
+
+    @Override
+    public void renderChildBones(GeoBone bone, PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        super.renderChildBones(bone, poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override

@@ -78,7 +78,7 @@ public class ReplacedFungusThrower<T extends FungusThrowerEntity> extends Replac
         boolean isMove=!(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
         if (isMove && piglin.getAttackAnim(state.getPartialTick())==0) {
             state.getController().setAnimationSpeed(piglin.isAggressive()?5.0F : 2.0F);
-            state.getController().setAnimation(new AnimationBuilder().loop(piglin.isAggressive()?"piglin.move2":"piglin.move"));
+            state.getController().setAnimation(new AnimationBuilder().loop("piglin.move"));
         }else if(piglin.getAttackAnim(state.getPartialTick())>0) {
             state.getController().setAnimationSpeed(1.0D);
             state.getController().setAnimation(new AnimationBuilder().playAndHold("piglin.throw"));
