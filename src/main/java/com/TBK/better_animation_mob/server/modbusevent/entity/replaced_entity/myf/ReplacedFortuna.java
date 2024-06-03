@@ -1,15 +1,12 @@
 package com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf;
 
 import com.TBK.better_animation_mob.server.modbusevent.ModBusEvent;
-import com.TBK.better_animation_mob.server.modbusevent.api.ICombos;
 import com.TBK.better_animation_mob.server.modbusevent.entity.goals.AttackAGoal;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.ReplacedEntity;
-import lykrast.meetyourfight.entity.BellringerEntity;
+import lykrast.meetyourfight.entity.DameFortunaEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.item.Items;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
@@ -24,7 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ReplacedBellringer<T extends BellringerEntity> extends ReplacedEntity<T> {
+public class ReplacedFortuna<T extends DameFortunaEntity> extends ReplacedEntity<T> {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     @Override
@@ -44,22 +41,27 @@ public class ReplacedBellringer<T extends BellringerEntity> extends ReplacedEnti
     @Override
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController<>(this, "controller", 0, state -> {
-            BellringerEntity zombie = getZombieFromState(state);
-            ReplacedBellringer<?> replacedZombie = getPatch(zombie, ReplacedBellringer.class);
+            DameFortunaEntity zombie = getZombieFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
-            if (zombie == null) return PlayState.STOP;
-            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            if (zombie == null || zombie.getAttack()==0) return PlayState.STOP;
 
-            if (isMove && zombie.swingTime==0) {
-                state.getController().setAnimationSpeed(zombie.isAggressive()?1.5F : 1.4F);
-                state.getController().setAnimation(builder.loop( "bellringer.move"));
-            }else if(zombie.swingTime>0) {
+            if(zombie.getAttack()>0) {
                 state.getController().setAnimationSpeed(1F);
-                state.getController().setAnimation(builder.playOnce( "bellringer.attack"));
+                state.getController().setAnimation(builder.loop( "fortuna.attack"));
             }else {
                 state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(builder.addAnimation("bellringer.idle", ILoopType.EDefaultLoopTypes.LOOP));
+                state.getController().setAnimation(builder.addAnimation("fortuna.idle", ILoopType.EDefaultLoopTypes.LOOP));
             }
+            return PlayState.CONTINUE;
+        }));
+        data.addAnimationController(new AnimationController<>(this, "controller_head", 0, state -> {
+            DameFortunaEntity zombie = getZombieFromState(state);
+            AnimationBuilder builder=new AnimationBuilder();
+            if (zombie == null) return PlayState.STOP;
+
+            state.getController().setAnimationSpeed(1.0F);
+            state.getController().setAnimation(builder.addAnimation("fortuna.head1", ILoopType.EDefaultLoopTypes.LOOP));
+
             return PlayState.CONTINUE;
         }));
     }
@@ -70,11 +72,11 @@ public class ReplacedBellringer<T extends BellringerEntity> extends ReplacedEnti
     }
 
     @Nullable
-    private BellringerEntity getZombieFromState(AnimationEvent<ReplacedBellringer<T>> state) {
+    private DameFortunaEntity getZombieFromState(AnimationEvent<ReplacedFortuna<T>> state) {
         List<LivingEntity> list = state.getExtraDataOfType(LivingEntity.class);
         if (list.isEmpty()) return null;
         Entity entity = list.get(0);
-        if (!(entity instanceof BellringerEntity enderman)) return null;
+        if (!(entity instanceof DameFortunaEntity enderman)) return null;
         return enderman;
     }
 

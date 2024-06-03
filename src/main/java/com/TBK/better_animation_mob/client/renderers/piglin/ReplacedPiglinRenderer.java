@@ -50,7 +50,7 @@ public class ReplacedPiglinRenderer<T extends AbstractPiglin,P extends ReplacedP
                     case "HatLayer"->stack=animatable.getItemBySlot(EquipmentSlot.HEAD);
                     case "BodyLayer","RightArmLayer","LeftArmLayer"->stack=animatable.getItemBySlot(EquipmentSlot.CHEST);
                     case "LeftLegLayer", "RightLegLayer" ->stack=animatable.getItemBySlot(EquipmentSlot.LEGS);
-                    //case "LeftBootLayer","RightBootLayer" ->stack=animatable.getItemBySlot(EquipmentSlot.FEET);
+                    case "LeftBootLayer","RightBootLayer" ->stack=animatable.getItemBySlot(EquipmentSlot.FEET);
                 }
                 return stack;
             }
@@ -63,7 +63,7 @@ public class ReplacedPiglinRenderer<T extends AbstractPiglin,P extends ReplacedP
                     case "HatLayer"->slot=EquipmentSlot.HEAD;
                     case "BodyLayer","LeftArmLayer","RightArmLayer"-> slot=EquipmentSlot.CHEST;
                     case "LeftLegLayer", "RightLegLayer" ->slot=EquipmentSlot.LEGS;
-                    //case "LeftBootLayer","RightBootLayer" ->slot=EquipmentSlot.FEET;
+                    case "LeftBootLayer","RightBootLayer" ->slot=EquipmentSlot.FEET;
                 }
                 return slot;
             }

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -29,15 +30,6 @@ public class ReplacedWitherSkeleton<T extends WitherSkeleton> extends ReplacedSk
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     @Override
-    protected void replacedGoals() {
-        Set<Goal> goals = new HashSet<>();
-        ModBusEvent.removeMeleeGoal(this.replaced,goals);
-        goals.forEach(this.replaced.goalSelector::removeGoal);
-
-        this.replaced.goalSelector.addGoal(2,new AttackAGoal<>(this.replaced,1.0D,false,this));
-    }
-
-    @Override
     public int isMomentHurt() {
         return 5;
     }
@@ -54,16 +46,28 @@ public class ReplacedWitherSkeleton<T extends WitherSkeleton> extends ReplacedSk
             ReplacedEntity<?> replaced = Capabilities.getEntityPatch(zombie,ReplacedWitherSkeleton.class);
             if (zombie == null) return PlayState.STOP;
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
-            if (isMove && replaced.getAttackTimer()==0) {
-                state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);
-                state.getController().setAnimation(new AnimationBuilder().loop("skeleton.moveAlt"));
-            }else if(replaced.getAttackTimer()>0){
-                state.getController().setAnimationSpeed(2.5D);
-                state.getController().setAnimation(new AnimationBuilder().playAndHold("skeleton.attackAlt"+((ICombos)zombie).getCombo()));
+
+            if(zombie.getMainHandItem().getItem() instanceof BowItem){
+                if (isMove) {
+                    state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);
+                    state.getController().setAnimation(new AnimationBuilder().loop("skeleton.moveAim"));
+                }else {
+                    state.getController().setAnimationSpeed(1.0F);
+                    state.getController().setAnimation(new AnimationBuilder().loop(zombie.isAggressive() ? "skeleton.idleAim" : "skeleton.idleBow"));
+                }
             }else {
-                state.getController().setAnimationSpeed(1.0F);
-                state.getController().setAnimation(new AnimationBuilder().loop("skeleton.idleAlt"));
+                if (isMove && replaced.getAttackTimer()==0) {
+                    state.getController().setAnimationSpeed(zombie.isAggressive()?3.0F : 4.0F);
+                    state.getController().setAnimation(new AnimationBuilder().loop("skeleton.moveAlt"));
+                }else if(replaced.getAttackTimer()>0){
+                    state.getController().setAnimationSpeed(2.5D);
+                    state.getController().setAnimation(new AnimationBuilder().playAndHold("skeleton.attackAlt"+((ICombos)zombie).getCombo()));
+                }else {
+                    state.getController().setAnimationSpeed(1.0F);
+                    state.getController().setAnimation(new AnimationBuilder().loop("skeleton.idleAlt"));
+                }
             }
+
             return PlayState.CONTINUE;
         }));
     }

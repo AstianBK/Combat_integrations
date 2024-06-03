@@ -9,6 +9,9 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.bg
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedFungusThrower;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.dm.ReplacedZombieFungusThrower;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.gv.ReplacedGuardVillager;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedBellringer;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedFortuna;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedRosalyne;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedForgotten;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedFoxhound;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedWraith;
@@ -19,6 +22,7 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.sv
 import com.google.common.collect.Maps;
 import com.izofar.bygonenether.init.ModEntityTypes;
 import com.teamabnormals.savage_and_ravage.core.registry.SREntityTypes;
+import lykrast.meetyourfight.registry.ModEntities;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -112,6 +116,14 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
         if(BKConfig.guardVillagersAnimations){
             if (BetterAnimationMob.isLoaded(Compati.GUARD_VILLAGERS)){
                 registry.put(GuardEntityType.GUARD.get(),entity -> ReplacedGuardVillager::new);
+            }
+        }
+
+        if(BKConfig.meetYourFightAnimations){
+            if(BetterAnimationMob.isLoaded(Compati.MEET_YOUR_FIGHT)){
+                registry.put(ModEntities.BELLRINGER.get(),entity -> ReplacedBellringer::new);
+                registry.put(ModEntities.DAME_FORTUNA.get(),entity -> ReplacedFortuna::new);
+                registry.put(ModEntities.ROSALYNE.get(),entity -> ReplacedRosalyne::new);
             }
         }
 

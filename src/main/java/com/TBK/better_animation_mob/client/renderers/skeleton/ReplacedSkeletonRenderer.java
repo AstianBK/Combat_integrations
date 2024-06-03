@@ -78,16 +78,15 @@ public class ReplacedSkeletonRenderer<T extends AbstractSkeleton,P extends Repla
     protected void preRenderItem(PoseStack stack, ItemStack item, String name, T currentEntity, GeoBone bone, float currentPartialTicks) {
         if (item == currentEntity.getMainHandItem() || item == currentEntity.getOffhandItem()) {
             boolean trident = item.getItem() instanceof BowItem;
+            stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
             if (item == currentEntity.getMainHandItem()) {
                 if (trident) {
-                    stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
                     stack.translate(0.15D,-0.0D,0.05D);
                 }else {
-                    stack.translate(0.05,-0.25D,-0.5D);
+                    stack.translate(0.05D,0.1D,-0.1D);
                 }
             }
             if(item.getItem() instanceof ShieldItem){
-                stack.mulPose(Vector3f.XP.rotationDegrees(-90F));
                 stack.translate(0.05,-0.25D,-0.5D);
             }
         }
