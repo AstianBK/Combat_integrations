@@ -7,10 +7,7 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.gv
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.*;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import tallestegg.guardvillagers.entities.Guard;
 
@@ -35,7 +32,7 @@ public class ReplacedGuardVillagerRenderer<T extends Guard,P extends ReplacedGua
             }
             if(item == currentEntity.getOffhandItem()){
                 if(shield){
-                    if(currentEntity.isBlocking()){
+                    if(currentEntity.getUseItem().getUseAnimation()==UseAnim.BLOCK){
                         stack.mulPose(Vector3f.XP.rotationDegrees(-30F));
                         stack.mulPose(Vector3f.YP.rotationDegrees(60F));
                         stack.mulPose(Vector3f.ZP.rotationDegrees(15F));

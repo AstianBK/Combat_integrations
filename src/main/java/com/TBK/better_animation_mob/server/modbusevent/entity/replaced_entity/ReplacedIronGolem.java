@@ -98,8 +98,9 @@ public class ReplacedIronGolem<T extends IronGolem> extends ReplacedEntity<T> {
             IronGolem golem = getWardenFromState(state);
             AnimationBuilder builder=new AnimationBuilder();
             if (golem == null) return PlayState.STOP;
-            if(!state.isMoving() ){
-                state.getController().setAnimationSpeed(1.5D);
+            boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
+            if(!state.isMoving() || isMove){
+                state.getController().setAnimationSpeed(3D);
                 state.getController().setAnimation(builder.loop( "irongolem.legs1"));
             }else{
                 state.getController().setAnimationSpeed(0.5D);

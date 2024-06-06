@@ -132,7 +132,7 @@ public class ReplacedGuardVillager<T extends Guard> extends ReplacedEntity<T> {
             boolean isMove= !(state.getLimbSwingAmount() > -0.15F && state.getLimbSwingAmount() < 0.15F);
             state.getController().transitionLengthTicks=0.0f;
             if(isMove){
-                state.getController().setAnimationSpeed(2.0D);
+                state.getController().setAnimationSpeed(warden.isAggressive() ?4.0D :2.0D);
                 state.getController().setAnimation(builder.loop( warden.isAggressive() ? "guardvillager.legs2": "guardvillager.legs3"));
             }else{
                 state.getController().setAnimationSpeed(0.5D);
