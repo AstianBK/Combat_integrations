@@ -14,12 +14,13 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Evoker;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -148,7 +149,14 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
                     }
 
                     if (!boneItem.isEmpty()) {
-                        handleItemAndBlockBoneRendering(poseStack, bone, boneItem, packedLight, packedOverlay);
+                        handleItemAndBlockBoneRendering(poseStack, bone, boneItem,null, packedLight, packedOverlay);
+                        buffer = bufferSource.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(this.currentEntity)));
+                    }
+                }else if(bone.getName().equals("ItemSlot") && this.currentEntity instanceof EnderMan enderMan){
+                    BlockState boneBlock = enderMan.getCarriedBlock();
+
+                    if (boneBlock !=null) {
+                        handleItemAndBlockBoneRendering(poseStack, bone, null, boneBlock, packedLight, packedOverlay);
                         buffer = bufferSource.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(this.currentEntity)));
                     }
                 }
@@ -161,7 +169,7 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
         super.renderChildBones(bone, poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.popPose();
     }
-    protected void handleItemAndBlockBoneRendering(PoseStack poseStack, GeoBone bone, @Nullable ItemStack boneItem, int packedLight, int packedOverlay) {
+    protected void handleItemAndBlockBoneRendering(PoseStack poseStack, GeoBone bone, @Nullable ItemStack boneItem,@Nullable BlockState boneBlock, int packedLight, int packedOverlay) {
         RenderUtils.prepMatrixForBone(poseStack, bone);
         RenderUtils.translateAndRotateMatrixForBone(poseStack, bone);
 
@@ -170,6 +178,24 @@ public abstract class ExtendedGeoReplacedEntityRenderer<T extends LivingEntity,P
             renderItemStack(poseStack, getCurrentRTB(), packedLight, boneItem, bone.getName());
             //postRenderItem(poseStack, boneItem, bone.getName(), this.currentEntity, bone);
         }
+        if (boneBlock != null) {
+            //preRenderItem(poseStack, boneItem, bone.getName(), this.currentEntity, bone,this.currentPartialTicks);
+            renderBlock(poseStack, getCurrentRTB(), packedLight, boneBlock);
+            //postRenderItem(poseStack, boneItem, bone.getName(), this.currentEntity, bone);
+        }
+    }
+
+    protected void renderBlock(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight,
+                               BlockState state) {
+        if (state.getRenderShape() != RenderShape.MODEL)
+            return;
+
+        poseStack.pushPose();
+        poseStack.translate(-0.25f, -0.25f, -0.25f);
+        poseStack.scale(0.5F, 0.5F, 0.5F);
+        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(state, poseStack, bufferSource, packedLight,
+                OverlayTexture.NO_OVERLAY);
+        poseStack.popPose();
     }
 
     @Override

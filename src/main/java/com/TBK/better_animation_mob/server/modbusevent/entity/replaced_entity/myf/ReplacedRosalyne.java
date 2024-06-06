@@ -40,40 +40,33 @@ public class ReplacedRosalyne<T extends RosalyneEntity> extends ReplacedEntity<T
             AnimationBuilder builder=new AnimationBuilder();
             if (zombie == null) return PlayState.STOP;
 
-            if(zombie.getAnimation()==2) {
-                state.getController().setAnimationSpeed(2F);
+            if(zombie.clientAnim==3 && zombie.prevAnim!=1 && zombie.prevAnim!=4) {
+                state.getController().setAnimationSpeed(1F);
+                state.getController().setAnimation(builder.loop( "rosalyne.pose_attack2"));
+            }else if(zombie.getAnimation()==1 || (zombie.getAnimation()==3 && zombie.prevAnim==4)) {
+                state.getController().setAnimationSpeed(1F);
+                state.getController().setAnimation(builder.playOnce( "rosalyne.attack3"));
+            }else if(zombie.clientAnim!=1 && (zombie.prevAnim==2 || zombie.prevAnim==4)) {
+                state.getController().setAnimationSpeed(1F);
+                state.getController().setAnimation(builder.loop( "rosalyne.pose_attack3"));
+            }else if(zombie.getAnimation()==9) {
+                state.getController().setAnimationSpeed(1F);
+                state.getController().setAnimation(builder.loop( "rosalyne.pose_attack1"));
+            }else if(zombie.clientAnim==2 || zombie.clientAnim==4 || zombie.clientAnim==3) {
+                state.getController().setAnimationSpeed(1F);
                 state.getController().setAnimation(builder.playOnce( "rosalyne.attack2"));
             }else if(zombie.getAnimation()==10) {
-                state.getController().setAnimationSpeed(2F);
+                state.getController().setAnimationSpeed(3F);
                 state.getController().setAnimation(builder.playOnce( "rosalyne.attack1"));
             }else if(zombie.getAnimation()==7) {
                 state.getController().setAnimationSpeed(1F);
                 state.getController().setAnimation(builder.playOnce( "rosalyne.spell1"));
-            }else if(zombie.getAnimation()==1) {
-                state.getController().setAnimationSpeed(1F);
-                state.getController().setAnimation(builder.playOnce( "rosalyne.attack3"));
             }else {
-                state.getController().setAnimationSpeed(1.0F);
                 state.getController().setAnimation(builder.addAnimation("rosalyne.idle", ILoopType.EDefaultLoopTypes.LOOP));
             }
             return PlayState.CONTINUE;
         }));
-        data.addAnimationController(new AnimationController<>(this, "controller_pose", 10, state -> {
-            RosalyneEntity zombie = getZombieFromState(state);
-            AnimationBuilder builder=new AnimationBuilder();
-            if (zombie == null || zombie.getAnimation()==7 || zombie.getAnimation()==2 || zombie.getAnimation()==10){
-                state.getController().clearAnimationCache();
-                return PlayState.STOP;
-            }
-            if(zombie.getAnimation()==3) {
-                state.getController().setAnimationSpeed(1F);
-                state.getController().setAnimation(builder.loop( "rosalyne.pose_attack2"));
-            }else if(zombie.getAnimation()==9) {
-                state.getController().setAnimationSpeed(1F);
-                state.getController().setAnimation(builder.loop( "rosalyne.pose_attack1"));
-            }
-            return PlayState.CONTINUE;
-        }));
+
     }
 
     @Override

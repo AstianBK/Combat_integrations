@@ -12,6 +12,7 @@ import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.gv
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedBellringer;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedFortuna;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedRosalyne;
+import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.myf.ReplacedSwampJaw;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedForgotten;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedFoxhound;
 import com.TBK.better_animation_mob.server.modbusevent.entity.replaced_entity.qrk.ReplacedWraith;
@@ -121,6 +122,7 @@ public class PatchProvider implements ICapabilityProvider, NonNullSupplier<Repla
 
         if(BKConfig.meetYourFightAnimations){
             if(BetterAnimationMob.isLoaded(Compati.MEET_YOUR_FIGHT)){
+                registry.put(ModEntities.SWAMPJAW.get(),entity -> ReplacedSwampJaw::new);
                 registry.put(ModEntities.BELLRINGER.get(),entity -> ReplacedBellringer::new);
                 registry.put(ModEntities.DAME_FORTUNA.get(),entity -> ReplacedFortuna::new);
                 registry.put(ModEntities.ROSALYNE.get(),entity -> ReplacedRosalyne::new);

@@ -6,6 +6,7 @@ import com.TBK.better_animation_mob.client.renderers.compi.gv.ReplacedGuardVilla
 import com.TBK.better_animation_mob.client.renderers.compi.myf.ReplacedBellringerRenderer;
 import com.TBK.better_animation_mob.client.renderers.compi.myf.ReplacedFortunaRenderer;
 import com.TBK.better_animation_mob.client.renderers.compi.myf.ReplacedRosalyneRenderer;
+import com.TBK.better_animation_mob.client.renderers.compi.myf.ReplacedSwampJawRenderer;
 import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedForgottenRenderer;
 import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedFoxhoundRenderer;
 import com.TBK.better_animation_mob.client.renderers.compi.qrk.ReplacedWraithRenderer;
@@ -168,6 +169,7 @@ public class BetterAnimationMob {
 
         if(BKConfig.meetYourFightAnimations){
             if(isLoaded(Compati.MEET_YOUR_FIGHT)){
+                register(ModEntities.SWAMPJAW.get(), ReplacedSwampJawRenderer::new);
                 register(ModEntities.BELLRINGER.get(), ReplacedBellringerRenderer::new);
                 register(ModEntities.DAME_FORTUNA.get(), ReplacedFortunaRenderer::new);
                 register(ModEntities.ROSALYNE.get(), ReplacedRosalyneRenderer::new);
