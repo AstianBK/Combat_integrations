@@ -4,7 +4,7 @@ license="All rights reserved"
 
 [[mods]]
 
-modId="better_animation_mob"
+modId="combat_integration"
 version="${file.jarVersion}"
 displayName="Expasion"
 logoFile="Expasionmod.png"
@@ -13,13 +13,13 @@ authors="Love, Cheese and small house plants"
 
 description='''
 '''
-[[dependencies.better_animation_mob]]
+[[dependencies.combat_integration]]
     modId="forge"
     mandatory=true
     versionRange="[40,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.better_animation_mob]]
+[[dependencies.combat_integration]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.19.2,1.20)"

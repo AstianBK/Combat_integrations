@@ -19,13 +19,13 @@ apply plugin: 'maven-publish'
 
 
 mixin{
-    add sourceSets.main, 'better_animation_mob.refmap.json'
+    add sourceSets.main, 'combat_integration.refmap.json'
 }
 
 
 version = '1.19.2'
-group = 'com.TBK.better_animation_mob'
-archivesBaseName = 'better_animation_mob'
+group = 'com.TBK.combat_integration'
+archivesBaseName = 'combat_integration'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -41,11 +41,11 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'better_animation_mob'
+            property 'forge.enabledGameTestNamespaces', 'combat_integration'
 
             property "mixin.env.remapRefMap", "true"
 
-            arg "-mixin.config=better_animation_mob.mixins.json"
+            arg "-mixin.config=combat_integration.mixins.json"
 
 
             mods {
@@ -62,11 +62,11 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'better_animation_mob'
+            property 'forge.enabledGameTestNamespaces', 'combat_integration'
 
             property "mixin.env.remapRefMap", "true"
 
-            arg "-mixin.config=better_animation_mob.mixins.json"
+            arg "-mixin.config=combat_integration.mixins.json"
 
 
             mods {
@@ -83,7 +83,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            property 'forge.enabledGameTestNamespaces', 'better_animation_mob'
+            property 'forge.enabledGameTestNamespaces', 'combat_integration'
 
             mods {
                 better_animation_mob {
@@ -99,7 +99,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'better_animation_mob', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'combat_integration', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 better_animation_mob {
@@ -144,14 +144,14 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "better_animation_mob",
-                "Specification-Vendor"    : "better_animation_mob",
+                "Specification-Title"     : "combat_integration",
+                "Specification-Vendor"    : "combat_integration",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "better_animation_mob",
+                "Implementation-Vendor"   : "combat_integration",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "better_animation_mob.mixins.json"
+                "MixinConfigs"            : "combat_integration.mixins.json"
         ])
     }
 }
