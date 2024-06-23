@@ -8,6 +8,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import vazkii.quark.base.Quark;
 
 @OnlyIn(Dist.CLIENT)
 public class ReplacedWraithModel<T extends IAnimatable> extends ReplacedEntityModel<T> {
@@ -18,7 +19,7 @@ public class ReplacedWraithModel<T extends IAnimatable> extends ReplacedEntityMo
 
     @Override
     public ResourceLocation getTextureResource(T object) {
-        return new ResourceLocation("textures/model/entity/wraith.png");
+        return new ResourceLocation(Quark.MOD_ID,"textures/model/entity/wraith.png");
     }
 
     @Override
