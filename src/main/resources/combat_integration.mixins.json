@@ -3,7 +3,7 @@
   "package": "com.TBK.combat_integration.server.modbusevent.mixins",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "refmap": "better_animation_mob.refmap.json",
+  "refmap": "combat_integration.refmap.json",
   "mixins": [
     "LivingEntityMixin"
   ],
