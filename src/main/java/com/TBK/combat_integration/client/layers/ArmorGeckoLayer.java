@@ -252,7 +252,9 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
      */
     protected <I extends Item & IGeoRenderer> void renderVanillaArmorPiece(PoseStack poseStack, T animatable, GeoBone bone, EquipmentSlot slot, ItemStack armorStack,
                                                                            ModelPart modelPart, MultiBufferSource bufferSource, float partialTick, int packedLight, int packedOverlay) {
-        bufferSource=getRenderer().getCurrentRTB();
+        if(bufferSource==null){
+            bufferSource=getRenderer().getCurrentRTB();
+        }
         ResourceLocation texture = getVanillaArmorResource(animatable, armorStack, slot, "");
         VertexConsumer buffer = getArmorBuffer(bufferSource, null, texture, armorStack.hasFoil());
 

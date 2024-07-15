@@ -46,7 +46,6 @@ public class ModBusEvent {
     @OnlyIn(Dist.CLIENT)
     public static <T extends LivingEntity,M extends EntityModel<T>> void renderEvent(RenderLivingEvent.Pre<T,M> event){
         EntityType<?> type = event.getEntity().getType();
-
         if(CombatIntegration.getProviders().containsKey(type)){
             Minecraft mc = Minecraft.getInstance();
             EntityRendererProvider.Context context = new EntityRendererProvider.Context(mc.getEntityRenderDispatcher(),
