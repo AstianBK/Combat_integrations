@@ -255,18 +255,20 @@ public class ArmorGeckoLayer<T extends LivingEntity & IAnimatable> extends GeoLa
         if(bufferSource==null){
             bufferSource=getRenderer().getCurrentRTB();
         }
-        ResourceLocation texture = getVanillaArmorResource(animatable, armorStack, slot, "");
-        VertexConsumer buffer = getArmorBuffer(bufferSource, null, texture, armorStack.hasFoil());
+        if(bufferSource!=null){
+            ResourceLocation texture = getVanillaArmorResource(animatable, armorStack, slot, "");
+            VertexConsumer buffer = getArmorBuffer(bufferSource, null, texture, armorStack.hasFoil());
+            if (armorStack.getItem() instanceof DyeableArmorItem dyable) {
+                int color = dyable.getColor(armorStack);
 
-        if (armorStack.getItem() instanceof DyeableArmorItem dyable) {
-            int color = dyable.getColor(armorStack);
+                modelPart.render(poseStack, buffer, packedLight, packedOverlay, (color >> 16 & 255) / 255f, (color >> 8 & 255) / 255f, (color & 255) / 255f, 1);
 
-            modelPart.render(poseStack, buffer, packedLight, packedOverlay, (color >> 16 & 255) / 255f, (color >> 8 & 255) / 255f, (color & 255) / 255f, 1);
+                texture = getVanillaArmorResource(animatable, armorStack, slot, "overlay");
+                buffer = getArmorBuffer(bufferSource, null, texture, false);
+            }
+            modelPart.render(poseStack, buffer, packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
 
-            texture = getVanillaArmorResource(animatable, armorStack, slot, "overlay");
-            buffer = getArmorBuffer(bufferSource, null, texture, false);
         }
-        modelPart.render(poseStack, buffer, packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 
     /**
