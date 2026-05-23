@@ -30,7 +30,7 @@ public class ReplacedHumanoidModel <T extends IAnimatable> extends ReplacedEntit
                 head.setScale(f,f,f);
                 head.addPosition(0.0F,-12,0.0F);
                 body.setScale(f1,f1,f1);
-                body.addPosition(0.0F,-12,0.0F);
+                body.addPosition(0.0F,-6,0.0F);
                 rightArm.setScale(f1,f1,f1);
                 rightArm.addPosition(2.3F,-11f,0.0F);
                 leftArm.setScale(f1,f1,f1);

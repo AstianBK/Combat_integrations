@@ -20,11 +20,13 @@ import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import org.jetbrains.annotations.NotNull;
 public class ReplacedZombie<T extends Zombie> extends ReplacedEntity<T> {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     @Override
+
+
     protected void replacedGoals() {
         Set<Goal> goals = new HashSet<>();
         ModBusEvent.removeMeleeGoal(this.replaced,goals);

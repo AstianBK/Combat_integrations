@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
+
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 
 @OnlyIn(Dist.CLIENT)
@@ -30,7 +30,6 @@ public class ReplacedZombieRenderer<T extends Zombie ,P extends ReplacedZombie> 
     public ReplacedZombieRenderer(EntityRendererProvider.Context renderManager,ResourceLocation texture,ReplacedZombieModel model) {
         super(renderManager, model, (P) new ReplacedZombie());
         this.addLayer(new ArmorGeckoLayer<>(this,getGeoModelProvider(),texture,new ResourceLocation(CombatIntegration.MODID,"geo/zombie.geo.json")){
-            @NotNull
             @Override
             protected ModelPart getModelPartForBone(GeoBone bone, EquipmentSlot slot, ItemStack stack, LivingEntity animatable, HumanoidModel armorModel) {
                 ModelPart part=null;
@@ -45,7 +44,6 @@ public class ReplacedZombieRenderer<T extends Zombie ,P extends ReplacedZombie> 
                 return part;
             }
 
-            @org.jetbrains.annotations.Nullable
             @Override
             protected ItemStack getArmorItemForBone(GeoBone bone, LivingEntity animatable) {
                 ItemStack stack=null;
@@ -58,7 +56,6 @@ public class ReplacedZombieRenderer<T extends Zombie ,P extends ReplacedZombie> 
                 return stack;
             }
 
-            @NotNull
             @Override
             protected EquipmentSlot getEquipmentSlotForBone(GeoBone bone, ItemStack stack, LivingEntity animatable) {
                 EquipmentSlot slot=null;
